@@ -1,3 +1,6 @@
+const Definitions = require('./units.js');
+const User = require('./user.js');
+
 class Vehicle {
     constructor(licensePlate, mileage, distanceSinceMaintenance, availableForRent,
                 MAX_MAINTENANCE_DISTANCE, PRICE_PER_DAY) {

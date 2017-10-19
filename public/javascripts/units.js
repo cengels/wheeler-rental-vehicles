@@ -1,31 +1,28 @@
-const UNITS = {
-    CURRENCY: {
-        DE: 'EURO',
-        GB: 'POUNDS',
-        US: 'USD',
+module.exports = {
+    UNITS: {
+        CURRENCY: {
+            DE: 'EURO',
+            GB: 'POUNDS',
+            US: 'USD',
+        },
+        METRIC: {
+            DISTANCE: 'KM',
+            WEIGHT: 'KG',
+        },
+        IMPERIAL: {
+            DISTANCE: 'MILES',
+            WEIGHT: 'TONS',
+        }
     },
-    METRIC: {
-        DISTANCE: 'KM',
-        WEIGHT: 'KG',
+
+    COUNTRIES: {
+        DE: 'DE',
+        GB: 'GB',
+        US: 'US',
     },
-    IMPERIAL: {
-        DISTANCE: 'MILES',
-        WEIGHT: 'TONS',
-    }
-};
 
-const COUNTRIES = {
-    DE: 'DE',
-    GB: 'GB',
-    US: 'US',
-};
-
-const SYSTEMS = {
-    METRIC: 'METRIC',
-    IMPERIAL: 'IMPERIAL',
-};
-
-let user = {
-    country: COUNTRIES.DE,
-    system: SYSTEMS.METRIC,
+    SYSTEMS: {
+        METRIC: 'METRIC',
+        IMPERIAL: 'IMPERIAL',
+    },
 };
