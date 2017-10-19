@@ -54,9 +54,7 @@ class Vehicle {
     }
 
     getMaintenancePrice(clockedDistance) {
-        const newDistanceSinceMaintenance = this._distanceSinceMaintenance + clockedDistance;
-
-        if (newDistanceSinceMaintenance > this._MAX_MAINTENANCE_DISTANCE) {
+        if (this._distanceSinceMaintenance + clockedDistance > this._MAX_MAINTENANCE_DISTANCE) {
             return this._PRICE_PER_MAINTENANCE;
         } else {
             return 0;
