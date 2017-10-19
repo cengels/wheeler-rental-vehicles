@@ -10,8 +10,21 @@ class Vehicle {
         this._availableForRent = availableForRent;
         this._MAX_MAINTENANCE_DISTANCE = MAX_MAINTENANCE_DISTANCE;
         this._PRICE_PER_DAY = PRICE_PER_DAY;
-        this._PRICE_PER_MILE = 0.58;
-        this._PRICE_PER_MAINTENANCE = 500;
+
+        switch (User.country) {
+            case Definitions.COUNTRIES.US:
+                this._PRICE_PER_MILE = 0.69;
+                this._PRICE_PER_MAINTENANCE = 600;
+                break;
+            case Definitions.COUNTRIES.GB:
+                this._PRICE_PER_MILE = 0.52;
+                this._PRICE_PER_MAINTENANCE = 450;
+                break;
+            case Definitions.COUNTRIES.DE:
+            default:
+                this._PRICE_PER_MILE = 0.58;
+                this._PRICE_PER_MAINTENANCE = 500;
+        }
     }
 
     get licensePlate() {
