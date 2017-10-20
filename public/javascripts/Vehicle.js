@@ -47,7 +47,7 @@ class Vehicle {
 
     getRentPrice(days, clockedDistance) {
         if (!this.availableForRent) {
-            throw new Error("Vehicle isn't available for rent.");
+            throw new Error('Vehicle isn\'t available for rent.');
         }
 
         return days * this._PRICE_PER_DAY
