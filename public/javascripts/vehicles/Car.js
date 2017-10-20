@@ -1,6 +1,4 @@
 const Vehicle = require('../Vehicle.js');
-const Units = require('../definitions/units.js');
-const User = require('../user.js');
 const Numbers = require('../definitions/numbers.js');
 
 class Car extends Vehicle {
