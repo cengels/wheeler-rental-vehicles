@@ -1,5 +1,4 @@
-const Units = require('./units.js');
-const User = require('./user.js');
+const Numbers = require('./definitions/numbers.js');
 
 class Vehicle {
     constructor(licensePlate, mileage, distanceSinceMaintenance, availableForRent,
@@ -10,21 +9,8 @@ class Vehicle {
         this._availableForRent = availableForRent;
         this._MAX_MAINTENANCE_DISTANCE = MAX_MAINTENANCE_DISTANCE;
         this._PRICE_PER_DAY = PRICE_PER_DAY;
-
-        switch (User.country) {
-            case Units.COUNTRIES.US:
-                this._PRICE_PER_MILE = 0.69;
-                this._PRICE_PER_MAINTENANCE = 600;
-                break;
-            case Units.COUNTRIES.GB:
-                this._PRICE_PER_MILE = 0.52;
-                this._PRICE_PER_MAINTENANCE = 450;
-                break;
-            case Units.COUNTRIES.DE:
-            default:
-                this._PRICE_PER_MILE = 0.58;
-                this._PRICE_PER_MAINTENANCE = 500;
-        }
+        this._PRICE_PER_MILE = Numbers.PRICE_PER_MILE_DEFAULT;
+        this._PRICE_PER_MAINTENANCE = Numbers.PRICE_PER_MAINTENANCE;
     }
 
     get licensePlate() {

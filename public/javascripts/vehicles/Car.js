@@ -1,34 +1,12 @@
 const Vehicle = require('../Vehicle.js');
-const Units = require('../units.js');
+const Units = require('../definitions/units.js');
 const User = require('../user.js');
+const Numbers = require('../definitions/numbers.js');
 
 class Car extends Vehicle {
     constructor(licensePlate, mileage, distanceSinceMaintenance, availableForRent) {
-
-        let _MAX_MAINTENANCE_DISTANCE;
-        switch (User.system) {
-            case Units.SYSTEMS.IMPERIAL:
-                _MAX_MAINTENANCE_DISTANCE = 18640;
-                break;
-            case Units.SYSTEMS.METRIC:
-            default:
-                _MAX_MAINTENANCE_DISTANCE = 30000;
-        }
-
-        let _PRICE_PER_DAY;
-        switch (User.country) {
-            case Units.COUNTRIES.US:
-                _PRICE_PER_DAY = 35.53;
-                break;
-            case Units.COUNTRIES.GB:
-                _PRICE_PER_DAY = 26.93;
-                break;
-            case Units.COUNTRIES.DE:
-            default:
-                _PRICE_PER_DAY = 30;
-        }
-
-        super(licensePlate, mileage, distanceSinceMaintenance, availableForRent, _MAX_MAINTENANCE_DISTANCE, _PRICE_PER_DAY);
+        super(licensePlate, mileage, distanceSinceMaintenance, availableForRent,
+            Numbers.CAR.MAX_MAINTENANCE_DISTANCE, Numbers.CAR.PRICE_PER_DAY);
     }
 }
 
