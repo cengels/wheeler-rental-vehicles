@@ -1,5 +1,5 @@
 const Vehicle = require('../Vehicle.js');
-const Definitions = require('../units.js');
+const Units = require('../units.js');
 const User = require('../user.js');
 
 class Truck extends Vehicle {
@@ -7,11 +7,11 @@ class Truck extends Vehicle {
         let _CARGO_LOAD_THRESHOLD;
         let _MAX_MAINTENANCE_DISTANCE;
         switch (User.system) {
-            case Definitions.UNITS.IMPERIAL:
+            case Units.SYSTEMS.IMPERIAL:
                 _MAX_MAINTENANCE_DISTANCE = 12430;
                 _CARGO_LOAD_THRESHOLD = 1.98;
                 break;
-            case Definitions.UNITS.METRIC:
+            case Units.SYSTEMS.METRIC:
             default:
                 _MAX_MAINTENANCE_DISTANCE = 20000;
                 _CARGO_LOAD_THRESHOLD = 1800;
@@ -21,15 +21,15 @@ class Truck extends Vehicle {
         let _PRICE_PER_DAY_REGULAR;
 
         switch (User.country) {
-            case Definitions.COUNTRIES.US:
+            case Units.COUNTRIES.US:
                 _PRICE_PER_DAY_HEAVY = 95;
                 _PRICE_PER_DAY_REGULAR = 60;
                 break;
-            case Definitions.COUNTRIES.GB:
+            case Units.COUNTRIES.GB:
                 _PRICE_PER_DAY_HEAVY = 72;
                 _PRICE_PER_DAY_REGULAR = 45;
                 break;
-            case Definitions.COUNTRIES.DE:
+            case Units.COUNTRIES.DE:
             default:
                 _PRICE_PER_DAY_HEAVY = 80;
                 _PRICE_PER_DAY_REGULAR = 50;

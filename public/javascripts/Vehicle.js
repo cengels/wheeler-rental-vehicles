@@ -1,4 +1,4 @@
-const Definitions = require('./units.js');
+const Units = require('./units.js');
 const User = require('./user.js');
 
 class Vehicle {
@@ -12,15 +12,15 @@ class Vehicle {
         this._PRICE_PER_DAY = PRICE_PER_DAY;
 
         switch (User.country) {
-            case Definitions.COUNTRIES.US:
+            case Units.COUNTRIES.US:
                 this._PRICE_PER_MILE = 0.69;
                 this._PRICE_PER_MAINTENANCE = 600;
                 break;
-            case Definitions.COUNTRIES.GB:
+            case Units.COUNTRIES.GB:
                 this._PRICE_PER_MILE = 0.52;
                 this._PRICE_PER_MAINTENANCE = 450;
                 break;
-            case Definitions.COUNTRIES.DE:
+            case Units.COUNTRIES.DE:
             default:
                 this._PRICE_PER_MILE = 0.58;
                 this._PRICE_PER_MAINTENANCE = 500;

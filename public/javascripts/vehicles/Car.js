@@ -1,5 +1,5 @@
 const Vehicle = require('../Vehicle.js');
-const Definitions = require('../units.js');
+const Units = require('../units.js');
 const User = require('../user.js');
 
 class Car extends Vehicle {
@@ -7,23 +7,23 @@ class Car extends Vehicle {
 
         let _MAX_MAINTENANCE_DISTANCE;
         switch (User.system) {
-            case Definitions.UNITS.IMPERIAL:
+            case Units.SYSTEMS.IMPERIAL:
                 _MAX_MAINTENANCE_DISTANCE = 18640;
                 break;
-            case Definitions.UNITS.METRIC:
+            case Units.SYSTEMS.METRIC:
             default:
                 _MAX_MAINTENANCE_DISTANCE = 30000;
         }
 
         let _PRICE_PER_DAY;
         switch (User.country) {
-            case Definitions.COUNTRIES.US:
+            case Units.COUNTRIES.US:
                 _PRICE_PER_DAY = 35.53;
                 break;
-            case Definitions.COUNTRIES.GB:
+            case Units.COUNTRIES.GB:
                 _PRICE_PER_DAY = 26.93;
                 break;
-            case Definitions.COUNTRIES.DE:
+            case Units.COUNTRIES.DE:
             default:
                 _PRICE_PER_DAY = 30;
         }
