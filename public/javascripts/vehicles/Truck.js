@@ -8,6 +8,8 @@ class Truck extends Vehicle {
                 ? Numbers.TRUCK.PRICE_PER_DAY_HEAVY
                 : Numbers.TRUCK.PRICE_PER_DAY_REGULAR
         );
+
+        this._cargoLoad = cargoLoad;
     }
 
     get cargoLoad() {

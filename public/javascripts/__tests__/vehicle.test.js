@@ -31,6 +31,9 @@ describe('Vehicle Tests', () => {
         it('asserts availableForRent getter', () => {
             expect(car.availableForRent).toBeTruthy();
         });
+        it('asserts cargoLoad getter', () => {
+            expect(truck.cargoLoad).toBe(1500);
+        });
     });
     describe('Setter Tests', () => {
         it('asserts that car will obtain new license plate', () => {
@@ -48,6 +51,10 @@ describe('Vehicle Tests', () => {
         it('asserts that car will be set to unavailable for rent', () => {
             car.availableForRent = false;
             expect(car.availableForRent).toBeFalsy();
+        });
+        it('asserts that car will be set to unavailable for rent', () => {
+            truck.cargoLoad = 1600;
+            expect(truck.cargoLoad).toBe(1600);
         });
     });
     describe('Other Tests', () => {
