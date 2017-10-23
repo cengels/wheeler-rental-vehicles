@@ -18,6 +18,38 @@ describe('Vehicle Tests', () => {
             expect(truckTooHeavy.getRentPrice(20, 3000)).toBe(3840);
         });
     });
+    describe('Getter Tests', () => {
+        it('asserts license plate getter', () => {
+            expect(car.licensePlate).toBe('WHO-CARES-420');
+        });
+        it('asserts mileage getter', () => {
+            expect(car.mileage).toBe(60000);
+        });
+        it('asserts distanceSinceMaintenance getter', () => {
+            expect(car.distanceSinceMaintenance).toBe(27222);
+        });
+        it('asserts availableForRent getter', () => {
+            expect(car.availableForRent).toBeTruthy();
+        });
+    });
+    describe('Setter Tests', () => {
+        it('asserts that car will obtain new license plate', () => {
+            car.licensePlate = '123-FOOBAR';
+            expect(car.licensePlate).toBe('123-FOOBAR');
+        });
+        it('asserts that car will obtain new mileage', () => {
+            car.mileage = 62000;
+            expect(car.mileage).toBe(62000);
+        });
+        it('asserts that car will obtain new distanceSinceMaintenance', () => {
+            car.distanceSinceMaintenance = 30000;
+            expect(car.distanceSinceMaintenance).toBe(30000);
+        });
+        it('asserts that car will be set to unavailable for rent', () => {
+            car.availableForRent = false;
+            expect(car.availableForRent).toBeFalsy();
+        });
+    });
     describe('Other Tests', () => {
         it('asserts that renting a car that is not available for rent throws an exception', () => {
             expect(() => {
