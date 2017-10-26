@@ -1,5 +1,5 @@
-const Car = require('../vehicles/Car');
-const Truck = require('../vehicles/Truck');
+const Car = require('../app/vehicles/Car');
+const Truck = require('../app/vehicles/Truck');
 
 describe('Vehicle Tests', () => {
     const car = new Car('WHO-CARES-420', 60000, 27222, true);
