@@ -1,5 +1,5 @@
-const Vehicle = require('../Vehicle.js');
-const Numbers = require('../definitions/numbers.js');
+const Vehicle = require('../Vehicle');
+const Numbers = require('../definitions/numbers');
 
 class Truck extends Vehicle {
     constructor(licensePlate, mileage, milesSinceMaintenance, cargoLoad, availableForRent) {

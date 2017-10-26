@@ -1,5 +1,5 @@
-const Units = require('./units.js');
-const User = require('../user.js');
+const Units = require('./units');
+const User = require('../user');
 
 const ALL_NUMBERS = {
     CAR: {},

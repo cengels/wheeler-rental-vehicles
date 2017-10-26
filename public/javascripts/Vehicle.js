@@ -1,4 +1,4 @@
-const Numbers = require('./definitions/numbers.js');
+const Numbers = require('./definitions/numbers');
 
 class Vehicle {
     constructor(licensePlate, mileage, distanceSinceMaintenance, availableForRent,
