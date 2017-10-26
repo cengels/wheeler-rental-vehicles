@@ -1,0 +1,10 @@
+module.exports = {
+    dev: {
+        db: {
+            user: process.env.USERNAME || "YOURUSERNAME",
+            password: process.env.PASSWORD || "YOURPASSWORD",
+            host: process.env.HOST || "localhost",
+            port: process.env.PORT || 5432
+        }
+    }
+};
