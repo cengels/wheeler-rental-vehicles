@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "watch": "jest --watch"
+    "watch": "jest --watch",
+    "start": "node public/javascripts/scripts/start.js"
   },
   "dependencies": {
     "pg": "^6.1.0"
