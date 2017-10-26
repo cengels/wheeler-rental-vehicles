@@ -1,5 +1,5 @@
 const Vehicle = require('../Vehicle');
-const Numbers = require('../definitions/numbers');
+const Numbers = require('../../definitions/numbers');
 
 class Car extends Vehicle {
     constructor(licensePlate, mileage, distanceSinceMaintenance, availableForRent) {

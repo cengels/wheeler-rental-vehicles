@@ -1,4 +1,4 @@
-const Definitions = require('./app/definitions/units');
+const Definitions = require('./definitions/units');
 
 module.exports = {
     country: Definitions.COUNTRIES.DE,

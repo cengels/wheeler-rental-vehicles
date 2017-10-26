@@ -1,5 +1,5 @@
 const pg = require('pg');
-const config = require('./config');
+const config = require('../../config/config');
 
 const client = new pg.Client({
     user: config.dev.db.user,

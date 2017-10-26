@@ -1,5 +1,5 @@
 const http = require('http');
-const config = require('../config');
+const config = require('../config/config');
 
 const server = http.createServer((req, res) => {
     res.writeHead(200);
