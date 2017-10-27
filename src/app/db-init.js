@@ -59,11 +59,10 @@ client.connect((err) => {
                 MaximumCargoLoad INTEGER,
                 Available BOOLEAN NOT NULL DEFAULT TRUE
             )
-        `)).then(() => {
-            client.end();
-        }).catch(err => {
+        `)).catch(err => {
             console.error(err);
-            client.end();
         });
     }
 });
+
+module.exports = client;
