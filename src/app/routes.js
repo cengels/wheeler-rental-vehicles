@@ -9,11 +9,10 @@ HTTP = {
     GET: 'GET',
     POST: 'POST',
     PUT: 'PUT',
-    PATCH: 'PATCH',
     DELETE: 'DELETE'
 };
 
-function newRoute(httpVerb, route, columns) {
+function newStandardRoute(httpVerb, route, columns) {
     const table = route.split('/')[1];
     const dbColumns = columns ? columns.join(', ') : '*';
 
@@ -60,27 +59,27 @@ function newRoute(httpVerb, route, columns) {
     }
 }
 
-newRoute(HTTP.GET, '/vehicles');
-newRoute(HTTP.GET, '/vehicles/:vehicleId');
-newRoute(HTTP.GET, '/customers');
-newRoute(HTTP.GET, '/customers/:customerId');
-newRoute(HTTP.GET, '/rentals');
-newRoute(HTTP.GET, '/rentals/:vehicleId');
-newRoute(HTTP.GET, '/rentals/:customerId');
-newRoute(HTTP.GET, '/colors');
-newRoute(HTTP.GET, '/colors/:colorId');
-newRoute(HTTP.GET, '/makes');
-newRoute(HTTP.GET, '/makes/:makeId');
-newRoute(HTTP.GET, '/models');
-newRoute(HTTP.GET, '/models/:modelId');
+newStandardRoute(HTTP.GET, '/vehicles');
+newStandardRoute(HTTP.GET, '/vehicles/:vehicleId');
+newStandardRoute(HTTP.GET, '/customers');
+newStandardRoute(HTTP.GET, '/customers/:customerId');
+newStandardRoute(HTTP.GET, '/rentals');
+newStandardRoute(HTTP.GET, '/rentals/:vehicleId');
+newStandardRoute(HTTP.GET, '/rentals/:customerId');
+newStandardRoute(HTTP.GET, '/colors');
+newStandardRoute(HTTP.GET, '/colors/:colorId');
+newStandardRoute(HTTP.GET, '/makes');
+newStandardRoute(HTTP.GET, '/makes/:makeId');
+newStandardRoute(HTTP.GET, '/models');
+newStandardRoute(HTTP.GET, '/models/:modelId');
 
 // Sample Curl: curl --data "MakeID=0&ModelID=0&ColorID=0&LicensePlate='FooBar'&Year=1996&Mileage=555&MilesSinceMaintenance=1200&MaximumCargoLoad=50&Available=True" -X POST localhost:8080/vehicles
 
-newRoute(HTTP.POST, '/vehicles', ['MakeID', 'ModelID', 'ColorID', 'LicensePlate', 'Year', 'Mileage',
+newStandardRoute(HTTP.POST, '/vehicles', ['MakeID', 'ModelID', 'ColorID', 'LicensePlate', 'Year', 'Mileage',
     'MilesSinceMaintenance', 'MaximumCargoLoad', 'Available']);
 
 // Sample Curl: curl --data "Name=Toyota" -X POST localhost:8080/makes
 
-newRoute(HTTP.POST, '/makes', ['Name']);
+newStandardRoute(HTTP.POST, '/makes', ['Name']);
 
 module.exports = app;
