@@ -20,15 +20,21 @@ function newRoute(httpVerb, route, columns) {
     switch (httpVerb) {
         case HTTP.GET:
             app.get(route, function (req, res) {
+                let whereConditions;
 
                 if (Object.keys(req.params).length > 0) {
-                    const key = Object.keys(req.params)[0];
-                    const value = Object.values(req.params)[0];
-
-                    res.send(dbClient.query(`SELECT ${dbColumns} FROM ${table} WHERE ${key}=${value}`).rows);
-                } else {
-                    res.send(dbClient.query(`SELECT ${dbColumns} FROM ${table}`).rows);
+                    const keys = Object.keys(req.params);
+                    const values = Object.values(req.params);
+                    whereConditions = 'WHERE ' + keys.map((key, i) => `${key} = ${values[i]}`).join(' AND ');
                 }
+
+                dbClient.query(`SELECT ${dbColumns} FROM ${table} ${whereConditions}`, (err, result) => {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        res.send(result.rows);
+                    }
+                });
             });
             break;
         case HTTP.POST:
