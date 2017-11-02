@@ -34,17 +34,20 @@ function newRoute(httpVerb, route, columns) {
         case HTTP.POST:
             app.post(route, function (req, res) {
                 const values = Object.values(req.body)
-                    .map(value => typeof value === 'string' ? `'${value}'` : value)
+                    .map(value => typeof value === 'string' && value !== '' ? `'${value}'` : value)
                     .join(', ');
 
                 if (!columns) {
                     res.send('Please supply the columns to fill.');
-                } else {
+                } else if (values === '') {
+                    res.send('Please supply a value.');
+                }
+                else {
                     dbClient.query(`INSERT INTO ${table} (${dbColumns})
                         VALUES (${values})
                     `)
-                        .then(res.send('Operation succeeded.'))
-                        .catch(res.send('Operation failed.'));
+                        .then(() => res.send('Operation succeeded.'))
+                        .catch(() => res.send('Operation failed.'));
                 }
             });
             break;
@@ -53,6 +56,17 @@ function newRoute(httpVerb, route, columns) {
 
 newRoute(HTTP.GET, '/vehicles');
 newRoute(HTTP.GET, '/vehicles/:vehicleId');
+newRoute(HTTP.GET, '/customers');
+newRoute(HTTP.GET, '/customers/:customerId');
+newRoute(HTTP.GET, '/rentals');
+newRoute(HTTP.GET, '/rentals/:vehicleId');
+newRoute(HTTP.GET, '/rentals/:customerId');
+newRoute(HTTP.GET, '/colors');
+newRoute(HTTP.GET, '/colors/:colorId');
+newRoute(HTTP.GET, '/makes');
+newRoute(HTTP.GET, '/makes/:makeId');
+newRoute(HTTP.GET, '/models');
+newRoute(HTTP.GET, '/models/:modelId');
 
 // Sample Curl: curl --data "MakeID=0&ModelID=0&ColorID=0&LicensePlate='FooBar'&Year=1996&Mileage=555&MilesSinceMaintenance=1200&MaximumCargoLoad=50&Available=True" -X POST localhost:8080/vehicles
 
