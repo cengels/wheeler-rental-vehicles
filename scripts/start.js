@@ -1,4 +1,5 @@
 const config = require('../config/config');
 const app = require('../src/app/routes');
 
-app.listen(config.dev.port);
+// TODO: Register a webserver
+// app.listen(config.prod.port);
