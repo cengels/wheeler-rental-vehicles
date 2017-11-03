@@ -9,15 +9,15 @@ class Truck extends Vehicle {
                 : Numbers.TRUCK.PRICE_PER_DAY_REGULAR
         );
 
-        this._cargoLoad = cargoLoad;
+        this._maxCargoLoad = cargoLoad;
     }
 
-    get cargoLoad() {
-        return this._cargoLoad;
+    get maxCargoLoad() {
+        return this._maxCargoLoad;
     }
 
-    set cargoLoad(value) {
-        this._cargoLoad = value;
+    set maxCargoLoad(value) {
+        this._maxCargoLoad = value;
     }
 }
 

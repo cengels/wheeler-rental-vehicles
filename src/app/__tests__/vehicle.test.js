@@ -31,8 +31,8 @@ describe('Vehicle Tests', () => {
         it('asserts availableForRent getter', () => {
             expect(car.availableForRent).toBeTruthy();
         });
-        it('asserts cargoLoad getter', () => {
-            expect(truck.cargoLoad).toBe(1500);
+        it('asserts maxCargoLoad getter', () => {
+            expect(truck.maxCargoLoad).toBe(1500);
         });
     });
     describe('Setter Tests', () => {
@@ -53,8 +53,8 @@ describe('Vehicle Tests', () => {
             expect(car.availableForRent).toBeFalsy();
         });
         it('asserts that car will be set to unavailable for rent', () => {
-            truck.cargoLoad = 1600;
-            expect(truck.cargoLoad).toBe(1600);
+            truck.maxCargoLoad = 1600;
+            expect(truck.maxCargoLoad).toBe(1600);
         });
     });
     describe('Other Tests', () => {
