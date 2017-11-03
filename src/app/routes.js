@@ -1,9 +1,9 @@
-const app = require('express')();
-const dbClient = require('./db-init');
+const router = require('express')();
+const dbClient = require('./modules/db/initialize');
 const bodyParser = require('body-parser');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
 HTTP = {
     GET: 'GET',
@@ -18,7 +18,7 @@ function newStandardRoute(httpVerb, route, columns) {
 
     switch (httpVerb) {
         case HTTP.GET:
-            app.get(route, function (req, res) {
+            router.get(route, function (req, res) {
                 let whereConditions;
 
                 if (Object.keys(req.params).length > 0 || Object.keys(req.query).length > 0) {
@@ -37,7 +37,7 @@ function newStandardRoute(httpVerb, route, columns) {
             });
             break;
         case HTTP.POST:
-            app.post(route, function (req, res) {
+            router.post(route, function (req, res) {
                 const values = Object.values(req.body)
                     .map(value => typeof value === 'string' && value !== '' ? `'${value}'` : value)
                     .join(', ');
@@ -83,4 +83,4 @@ newStandardRoute(HTTP.POST, '/vehicles', ['MakeID', 'ModelID', 'ColorID', 'Licen
 
 newStandardRoute(HTTP.POST, '/makes', ['Name']);
 
-module.exports = app;
+module.exports = router;
