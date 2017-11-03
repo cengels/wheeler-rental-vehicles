@@ -21,9 +21,9 @@ function newStandardRoute(httpVerb, route, columns) {
             app.get(route, function (req, res) {
                 let whereConditions;
 
-                if (Object.keys(req.params).length > 0) {
-                    const keys = Object.keys(req.params);
-                    const values = Object.values(req.params);
+                if (Object.keys(req.params).length > 0 || Object.keys(req.query).length > 0) {
+                    const keys = Object.keys(req.params).concat(Object.keys(req.query));
+                    const values = Object.values(req.params).concat(Object.values(req.query));
                     whereConditions = 'WHERE ' + keys.map((key, i) => `${key} = ${values[i]}`).join(' AND ');
                 }
 
@@ -64,8 +64,7 @@ newStandardRoute(HTTP.GET, '/vehicles/:vehicleId');
 newStandardRoute(HTTP.GET, '/customers');
 newStandardRoute(HTTP.GET, '/customers/:customerId');
 newStandardRoute(HTTP.GET, '/rentals');
-newStandardRoute(HTTP.GET, '/rentals/:vehicleId');
-newStandardRoute(HTTP.GET, '/rentals/:customerId');
+newStandardRoute(HTTP.GET, '/rentals/:customerId/:vehicleId');
 newStandardRoute(HTTP.GET, '/colors');
 newStandardRoute(HTTP.GET, '/colors/:colorId');
 newStandardRoute(HTTP.GET, '/types');
