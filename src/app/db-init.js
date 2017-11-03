@@ -1,5 +1,6 @@
 const client = require('./modules/db/client');
 const createTables = require('./modules/db/initialize');
+const insertMockData = require('./modules/db/mock-data');
 
 const environment = 'dev';  // TODO: This thing should come from an environment variable/the start scripts
 
@@ -13,6 +14,7 @@ client.connect((err) => {
                 .then(() => client.query('GRANT ALL ON SCHEMA public TO public'))
                 .then(() => client.query('GRANT ALL ON SCHEMA public TO postgres'))
                 .then(createTables)
+                .then(insertMockData)
                 .catch((err) => console.error(err.stack));
         } else {
             createTables();
