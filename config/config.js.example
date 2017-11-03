@@ -1,12 +1,23 @@
 module.exports = {
-    dev: {
-        db: {
-            user: process.env.USERNAME || "YOURUSERNAME",
-            password: process.env.PASSWORD || "YOURPASSWORD",
-            host: process.env.HOST || "localhost",
-            port: process.env.DBPORT || 5432
+        prod: {
+            db: {
+                user: process.env.USERNAME || "YOURUSERNAME",
+                password: process.env.PASSWORD || "YOURPASSWORD",
+                host: process.env.HOST || "YOURHOSTNAME",
+                port: process.env.DBPORT || 1234
+            },
+
+            port: process.env.PORT || 4321
         },
 
-        port: process.env.PORT || 8080
-    }
+        dev: {
+            db: {
+                user: process.env.USERNAME || "YOURUSERNAME",
+                password: process.env.PASSWORD || "YOURPASSWORD",
+                host: process.env.HOST || "localhost",
+                port: process.env.DBPORT || 5432
+            },
+
+            port: process.env.PORT || 8080
+        }
 };
