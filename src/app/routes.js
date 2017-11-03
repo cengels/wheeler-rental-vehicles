@@ -75,12 +75,16 @@ newStandardRoute(HTTP.GET, '/models');
 newStandardRoute(HTTP.GET, '/models/:modelId');
 
 // Sample Curl: curl --data "MakeID=0&ModelID=0&ColorID=0&LicensePlate='FooBar'&Year=1996&Mileage=555&MilesSinceMaintenance=1200&MaximumCargoLoad=50&Available=True" -X POST localhost:8080/vehicles
+// Sample Curl: curl --data "Name=Toyota" -X POST localhost:8080/makes
 
 newStandardRoute(HTTP.POST, '/vehicles', ['MakeID', 'ModelID', 'ColorID', 'LicensePlate', 'Year', 'Mileage',
     'MilesSinceMaintenance', 'MaximumCargoLoad', 'Available']);
-
-// Sample Curl: curl --data "Name=Toyota" -X POST localhost:8080/makes
-
+newStandardRoute(HTTP.POST, '/customers', ['FirstName', 'LastName', 'PostalCode', 'Address', 'City', 'PhoneNumber',
+    'CustomerSince']);
+newStandardRoute(HTTP.POST, '/rentals', ['CustomerID', 'VehicleID', 'RentedSince']);
+newStandardRoute(HTTP.POST, '/colors', ['Name']);
+newStandardRoute(HTTP.POST, '/types', ['Name']);
 newStandardRoute(HTTP.POST, '/makes', ['Name']);
+newStandardRoute(HTTP.POST, '/models', ['Name', 'MakeID', 'TypeID', 'MaximumCargoLoad']);
 
 module.exports = router;
