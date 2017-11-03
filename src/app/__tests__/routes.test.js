@@ -5,7 +5,10 @@ const setMethod = (method) => (path) => {
         port: 8080,
         host: 'localhost',
         method: method,
-        path: path
+        path: path,
+        headers: {
+            "Content-Type": "application/json"
+        }
     }
 };
 
@@ -14,7 +17,11 @@ const parseResponse = (res, callback) => {
     res.on('data', data => { body.push(data.toString()) } );
 
     res.on('end', () => {
-        body = JSON.parse(body);
+        try {
+            body = JSON.parse(body);
+        } catch (e) {
+            // JUST USE THE UNCHANGED body
+        }
         callback(body);
     });
 };
@@ -155,6 +162,83 @@ describe('Integration Tests', () => {
                     { "customerid":1,"vehicleid":3,"rentedsince":"2017-05-10T22:00:00.000Z" },
                     { "customerid":1,"vehicleid":1,"rentedsince":"2017-09-04T22:00:00.000Z" }
                 ]);
+            }))
+        });
+    });
+    describe('GET Tests', () => {
+        const getOptions = setMethod('GET');
+        const postOptions = setMethod('POST');
+
+        it('POST: adding a new color', () => {
+            const req = http.request(postOptions('/colors'));
+            req.write('{"name": "turquoise"}');
+            req.end();
+
+            http.get(getOptions('/colors/13'), res => parseResponse(res, (body) => {
+                expect(body).toEqual([ { "colorid":13, "name":"turquoise" } ]);
+            }))
+        });
+        it('POST: adding a new make', () => {
+            const req = http.request(postOptions('/makes'));
+            req.write('{"name": "Citroen"}');
+            req.end();
+
+            http.get(getOptions('/makes/17'), res => parseResponse(res, (body) => {
+                expect(body).toEqual([ { "makeid":17, "name":"Citroen" } ]);
+            }))
+        });
+        it('POST: adding a new type', () => {
+            const req = http.request(postOptions('/types'));
+            req.write('{"name": "scooter"}');
+            req.end();
+
+            http.get(getOptions('/types/4'), res => parseResponse(res, (body) => {
+                expect(body).toEqual([ { "typeid":4, "name":"scooter" } ]);
+            }))
+        });
+        it('POST: adding a new model', () => {
+            const req = http.request(postOptions('/models'));
+            req.write('{"name": "C4", "makeid": 17, "typeid": 1}');
+            req.end();
+
+            http.get(getOptions('/models/11'), res => parseResponse(res, (body) => {
+                expect(body).toEqual([ { "modelid":11,"name": "C4","makeid": 17,"typeid": 1,"maximumcargoload":null}]);
+            }))
+        });
+        it('POST: adding a new customer', () => {
+            const req = http.request(postOptions('/customers'));
+            req.write(`{"firstname":"Markus","lastname":"Mustermann","postalcode":"41224",
+                    "address":"42 S Solling Str.","city":"Sollingen","phonenumber":"214-552-1233",
+                    "customersince":"2004-12-11"}`);
+            req.end();
+
+            http.get(getOptions('/customers/5'), res => parseResponse(res, (body) => {
+                expect(body).toEqual([{"customerid":5,"firstname":"Markus","lastname":"Mustermann","postalcode":"41224",
+                    "address":"42 S Solling Str.","city":"Sollingen","phonenumber":"214-552-1233",
+                    // TODO: Find out why the heck DB returns date-1 instead of date (time zone?)
+                    "customersince":"2004-12-10T23:00:00.000Z"}
+                ]);
+            }))
+        });
+        it('POST: adding a new vehicle', () => {
+            const req = http.request(postOptions('/vehicles'));
+            req.write(`{"modelid":6,"colorid":7,"licenseplate":"Y-U-MAD","year":2015,
+                    "mileage":22121, "milessincemaintenance":8512,"available":false}`);
+            req.end();
+
+            http.get(getOptions('/vehicles/6'), res => parseResponse(res, (body) => {
+                expect(body).toEqual([{"vehicleid":6,"modelid":6,"colorid":7,"licenseplate":"Y-U-MAD","year":2015,
+                    "mileage":22121, "milessincemaintenance":8512,"available":false}
+                ]);
+            }))
+        });
+        it('POST: adding a new rental', () => {
+            const req = http.request(postOptions('/rentals'));
+            req.write(`{"customerid":4,"vehicleid":6,"rentedsince":"2017-11-02"}`);
+            req.end();
+
+            http.get(getOptions('/rentals/4/6'), res => parseResponse(res, (body) => {
+                expect(body).toEqual([{"customerid":4,"vehicleid":6,"rentedsince":"2017-11-01T23:00:00.000Z"}]);
             }))
         });
     });

@@ -41,6 +41,8 @@ function newStandardRoute(httpVerb, route, columns) {
                 const values = Object.values(req.body)
                     .map(value => typeof value === 'string' && value !== '' ? `'${value}'` : value)
                     .join(', ');
+                const keys = Object.keys(req.body)
+                    .join(', ');
 
                 if (!columns) {
                     res.send('Please supply the columns to fill.');
@@ -48,11 +50,11 @@ function newStandardRoute(httpVerb, route, columns) {
                     res.send('Please supply a value.');
                 }
                 else {
-                    dbClient.query(`INSERT INTO ${table} (${dbColumns})
+                    dbClient.query(`INSERT INTO ${table} (${keys})
                         VALUES (${values})
                     `)
                         .then(() => res.send('Operation succeeded.'))
-                        .catch(() => res.send('Operation failed.'));
+                        .catch((err) => res.send('Operation failed.' + err.stack));
                 }
             });
             break;
