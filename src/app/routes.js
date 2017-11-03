@@ -68,6 +68,8 @@ newStandardRoute(HTTP.GET, '/rentals/:vehicleId');
 newStandardRoute(HTTP.GET, '/rentals/:customerId');
 newStandardRoute(HTTP.GET, '/colors');
 newStandardRoute(HTTP.GET, '/colors/:colorId');
+newStandardRoute(HTTP.GET, '/types');
+newStandardRoute(HTTP.GET, '/types/:typeId');
 newStandardRoute(HTTP.GET, '/makes');
 newStandardRoute(HTTP.GET, '/makes/:makeId');
 newStandardRoute(HTTP.GET, '/models');
