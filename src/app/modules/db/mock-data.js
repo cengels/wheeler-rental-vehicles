@@ -23,6 +23,6 @@ module.exports = () => {
         (5, 1, 'ADD 09', 2009, 1521, 1521, true), (8, 7, 'SDU-582', 2000, 27003, 19000, true),
         (10, 5, 'DSU-285', 2014, 52021, 14999, true)`
     )).then(() => client.query(`INSERT INTO rentals (customerid, vehicleid, rentedsince) VALUES
-        (1, 3, '2017-05-11'), (3, 4, '2017-09-22'), (4, 5, '2017-11-01')`
+        (1, 3, '2017-05-11'), (3, 4, '2017-09-22'), (4, 5, '2017-11-01'), (1, 1, '2017-09-05')`
     )).catch((err) => console.error(err.stack));
 };
