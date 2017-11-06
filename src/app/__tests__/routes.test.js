@@ -165,7 +165,7 @@ describe('Integration Tests', () => {
             }))
         });
     });
-    describe('GET Tests', () => {
+    describe('POST Tests', () => {
         const getOptions = setMethod('GET');
         const postOptions = setMethod('POST');
 
