@@ -97,80 +97,71 @@ const originalTables = {
 describe('Integration Tests', () => {
     const getOptions = setMethod('GET');
 
+    function getTest(done, tableName, id) {
+        let route = `/${tableName}`;
+
+        if (id) {
+            route = route.concat(`/${id}`);
+        }
+
+        http.get(getOptions(route), res => parseResponse(res, (body) => {
+            const table = originalTables[tableName];
+
+            expect(body).toEqual(id ? [ table[id - 1] ] : table);
+            done();
+        }))
+    }
+
     describe('GET Tests', () => {
-        it('GET: all colors', () => {
-            http.get(getOptions('/colors'), res => parseResponse(res, (body) => {
-                expect(body).toEqual(originalTables.colors);
-            }))
+        it('GET: all colors', done => {
+            getTest(done, 'colors');
         });
-        it('GET: single color', () => {
-            http.get(getOptions('/colors/5'), res => parseResponse(res, (body) => {
-                expect(body).toEqual([ originalTables.colors[4] ]);
-            }))
+        it('GET: single color', done => {
+            getTest(done, 'colors', 5);
         });
-        it('GET: all makes', () => {
-            http.get(getOptions('/makes'), res => parseResponse(res, (body) => {
-                expect(body).toEqual(originalTables.makes);
-            }))
+        it('GET: all makes', done => {
+            getTest(done, 'makes');
         });
-        it('GET: single make', () => {
-            http.get(getOptions('/makes/3'), res => parseResponse(res, (body) => {
-                expect(body).toEqual([ originalTables.makes[2] ]);
-            }))
+        it('GET: single make', done => {
+            getTest(done, 'makes', 3);
         });
-        it('GET: all types', () => {
-            http.get(getOptions('/types'), res => parseResponse(res, (body) => {
-                expect(body).toEqual(originalTables.types);
-            }))
+        it('GET: all types', done => {
+            getTest(done, 'types');
         });
-        it('GET: single type', () => {
-            http.get(getOptions('/types/2'), res => parseResponse(res, (body) => {
-                expect(body).toEqual([ originalTables.types[1] ]);
-            }))
+        it('GET: single type', done => {
+            getTest(done, 'types', 2);
         });
-        it('GET: all models', () => {
-            http.get(getOptions('/models'), res => parseResponse(res, (body) => {
-                expect(body).toEqual(originalTables.models);
-            }))
+        it('GET: all models', done => {
+            getTest(done, 'models');
         });
-        it('GET: single model', () => {
-            http.get(getOptions('/models/4'), res => parseResponse(res, (body) => {
-                expect(body).toEqual([ originalTables.models[3] ]);
-            }))
+        it('GET: single model', done => {
+            getTest(done, 'models', 5);
         });
-        it('GET: all customers', () => {
-            http.get(getOptions('/customers'), res => parseResponse(res, (body) => {
-                expect(body).toEqual(originalTables.customers);
-            }))
+        it('GET: all customers', done => {
+            getTest(done, 'customers');
         });
-        it('GET: single customer', () => {
-            http.get(getOptions('/customers/3'), res => parseResponse(res, (body) => {
-                expect(body).toEqual([ originalTables.customers[2] ]);
-            }))
+        it('GET: single customer', done => {
+            getTest(done, 'customers', 3);
         });
-        it('GET: all vehicles', () => {
-            http.get(getOptions('/vehicles'), res => parseResponse(res, (body) => {
-                expect(body).toEqual(originalTables.vehicles);
-            }))
+        it('GET: all vehicles', done => {
+            getTest(done, 'vehicles');
         });
-        it('GET: single vehicle', () => {
-            http.get(getOptions('/vehicles/1'), res => parseResponse(res, (body) => {
-                expect(body).toEqual([ originalTables.vehicles[0] ]);
-            }))
+        it('GET: single vehicle', done => {
+            getTest(done, 'vehicles', 1);
         });
-        it('GET: all rentals', () => {
-            http.get(getOptions('/rentals'), res => parseResponse(res, (body) => {
-                expect(body).toEqual(originalTables.rentals);
-            }))
+        it('GET: all rentals', done => {
+            getTest(done, 'rentals');
         });
-        it('GET: single rental through both customerId and vehicleId', () => {
+        it('GET: single rental through both customerId and vehicleId', done => {
             http.get(getOptions('/rentals/1/3'), res => parseResponse(res, (body) => {
                 expect(body).toEqual([ originalTables.rentals[0] ]);
+                done();
             }))
         });
-        it('GET: all rentals from one customer', () => {
+        it('GET: all rentals from one customer', done => {
             http.get(getOptions('/rentals?customerid=1'), res => parseResponse(res, (body) => {
                 expect(body).toEqual([ originalTables.rentals[0], originalTables.rentals[3] ]);
+                done();
             }))
         });
     });
@@ -178,76 +169,56 @@ describe('Integration Tests', () => {
     describe('POST Tests', () => {
         const postOptions = setMethod('POST');
 
-        it('POST: adding a new color', () => {
-            const req = http.request(postOptions('/colors'));
-            req.write('{"name": "turquoise"}');
+        function postTest(table, id, dataObject, done) {
+            const req = http.request(postOptions(`/${table}`));
+            const idKey = table.slice(0, -1) + 'id';
+            req.write(JSON.stringify(dataObject));
             req.end();
 
-            http.get(getOptions('/colors/13'), res => parseResponse(res, (body) => {
-                expect(body).toEqual([ { "colorid":13, "name":"turquoise" } ]);
-            }))
-        });
-        it('POST: adding a new make', () => {
-            const req = http.request(postOptions('/makes'));
-            req.write('{"name": "Citroen"}');
-            req.end();
+            dataObject[idKey] = id;
 
-            http.get(getOptions('/makes/17'), res => parseResponse(res, (body) => {
-                expect(body).toEqual([ { "makeid":17, "name":"Citroen" } ]);
-            }))
-        });
-        it('POST: adding a new type', () => {
-            const req = http.request(postOptions('/types'));
-            req.write('{"name": "scooter"}');
-            req.end();
+            http.get(getOptions(`/${table}/${id}`), res => parseResponse(res, (body) => {
+                 expect(body).toEqual([ dataObject ]);
+                 done();
+            }));
+        }
 
-            http.get(getOptions('/types/4'), res => parseResponse(res, (body) => {
-                expect(body).toEqual([ { "typeid":4, "name":"scooter" } ]);
-            }))
+        it('POST: adding a new color', done => {
+            postTest('colors', 13, {"name": "turquoise"}, done);
         });
-        it('POST: adding a new model', () => {
+        it('POST: adding a new make', done => {
+            postTest('makes', 17, {"name": "Citroen"}, done);
+        });
+        it('POST: adding a new type', done => {
+            postTest('types', 4, {"name": "scooter"}, done);
+        });
+        it('POST: adding a new model', done => {
             const req = http.request(postOptions('/models'));
             req.write('{"name": "C4", "makeid": 17, "typeid": 1}');
             req.end();
 
             http.get(getOptions('/models/11'), res => parseResponse(res, (body) => {
                 expect(body).toEqual([ { "modelid":11,"name": "C4","makeid": 17,"typeid": 1,"maximumcargoload":null}]);
+                done();
             }))
         });
-        it('POST: adding a new customer', () => {
-            const req = http.request(postOptions('/customers'));
-            req.write(`{"firstname":"Markus","lastname":"Mustermann","postalcode":"41224",
-                    "address":"42 S Solling Str.","city":"Sollingen","phonenumber":"214-552-1233",
-                    "customersince":"2004-12-11"}`);
-            req.end();
-
-            http.get(getOptions('/customers/5'), res => parseResponse(res, (body) => {
-                expect(body).toEqual([{"customerid":5,"firstname":"Markus","lastname":"Mustermann","postalcode":"41224",
-                    "address":"42 S Solling Str.","city":"Sollingen","phonenumber":"214-552-1233",
-                    // TODO: Find out why the heck DB returns date-1 instead of date (time zone?)
-                    "customersince":"2004-12-10T23:00:00.000Z"}
-                ]);
-            }))
+        it('POST: adding a new customer', done => {
+            postTest('customers', 5, {"firstname":"Markus","lastname":"Mustermann","postalcode":"41224",
+                "address":"42 S Solling Str.","city":"Sollingen","phonenumber":"214-552-1233",
+                "customersince":"2004-12-11"}, done);
         });
-        it('POST: adding a new vehicle', () => {
-            const req = http.request(postOptions('/vehicles'));
-            req.write(`{"modelid":6,"colorid":7,"licenseplate":"Y-U-MAD","year":2015,
-                    "mileage":22121, "milessincemaintenance":8512,"available":false}`);
-            req.end();
-
-            http.get(getOptions('/vehicles/6'), res => parseResponse(res, (body) => {
-                expect(body).toEqual([{"vehicleid":6,"modelid":6,"colorid":7,"licenseplate":"Y-U-MAD","year":2015,
-                    "mileage":22121, "milessincemaintenance":8512,"available":false}
-                ]);
-            }))
+        it('POST: adding a new vehicle', done => {
+            postTest('vehicles', 6, {"modelid":6,"colorid":7,"licenseplate":"Y-U-MAD","year":2015,
+                "mileage":22121, "milessincemaintenance":8512,"available":false}, done);
         });
-        it('POST: adding a new rental', () => {
+        it('POST: adding a new rental', done => {
             const req = http.request(postOptions('/rentals'));
             req.write(`{"customerid":4,"vehicleid":6,"rentedsince":"2017-11-02"}`);
             req.end();
 
             http.get(getOptions('/rentals/4/6'), res => parseResponse(res, (body) => {
                 expect(body).toEqual([{"customerid":4,"vehicleid":6,"rentedsince":"2017-11-01T23:00:00.000Z"}]);
+                done();
             }))
         });
     });
