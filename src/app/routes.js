@@ -19,13 +19,7 @@ function newStandardRoute(httpVerb, route, columns) {
     switch (httpVerb) {
         case HTTP.GET:
             router.get(route, function (req, res) {
-                let whereConditions;
-
-                if (Object.keys(req.params).length > 0 || Object.keys(req.query).length > 0) {
-                    const keys = Object.keys(req.params).concat(Object.keys(req.query));
-                    const values = Object.values(req.params).concat(Object.values(req.query));
-                    whereConditions = 'WHERE ' + keys.map((key, i) => `${key} = ${values[i]}`).join(' AND ');
-                }
+                const whereConditions = getWhereConditions(req.params, req.query);
 
                 dbClient.query(`SELECT ${dbColumns} FROM ${table} ${whereConditions}`, (err, result) => {
                     if (err) {
@@ -59,6 +53,16 @@ function newStandardRoute(httpVerb, route, columns) {
             });
             break;
     }
+}
+
+function getWhereConditions(params, query) {
+    if (Object.keys(params).length > 0 || Object.keys(query).length > 0) {
+        const keys = Object.keys(params).concat(Object.keys(query));
+        const values = Object.values(params).concat(Object.values(query));
+        return 'WHERE ' + keys.map((key, i) => `${key} = ${values[i]}`).join(' AND ');
+    }
+
+    return '';
 }
 
 newStandardRoute(HTTP.GET, '/vehicles');
