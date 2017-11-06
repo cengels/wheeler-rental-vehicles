@@ -1,4 +1,6 @@
 const http = require('http');
+const client = require('../modules/db/initialize');
+const restoreMockData = require('../modules/db/restore-mock-data');
 
 const setMethod = (method) => (path) => {
     return {
@@ -237,25 +239,27 @@ describe('Integration Tests', () => {
         }
 
         it('DELETE: deleting a color', done => {
-            deleteTest('colors', 13, done);
+            deleteTest('colors', 10, done);
         });
         it('DELETE: deleting a make', done => {
-            deleteTest('makes', 17, done);
+            deleteTest('makes', 12, done);
         });
         it('DELETE: deleting a type', done => {
-            deleteTest('types', 4, done);
+            deleteTest('types', 2, done);
         });
         it('DELETE: deleting a model', done => {
-            deleteTest('models', 11, done);
+            deleteTest('models', 8, done);
         });
         it('DELETE: deleting a customer', done => {
-            deleteTest('customers', 5, done);
+            deleteTest('customers', 3, done);
         });
         it('DELETE: deleting a vehicle', done => {
-            deleteTest('vehicles', 6, done);
+            deleteTest('vehicles', 4, done);
         });
         it('DELETE: deleting a rental', done => {
-            deleteTest('colors', '4/6', done);
+            deleteTest('colors', '1/3', done);
         });
     });
 });
+
+afterAll(() => restoreMockData(client));

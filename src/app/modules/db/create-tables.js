@@ -1,6 +1,4 @@
-const client = require('./client');
-
-module.exports = () => {
+module.exports = (client) => {
     return client.query(`
             CREATE TABLE IF NOT EXISTS Customers(
                 CustomerID SERIAL PRIMARY KEY,

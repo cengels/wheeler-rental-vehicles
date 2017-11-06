@@ -1,6 +1,4 @@
-const client = require('./client');
-
-module.exports = () => {
+module.exports = client => {
     return client.query(`INSERT INTO makes (name) VALUES ('Audi'), ('BMW'), ('Ferrari'), ('Ford'),
         ('Harley Davidson'), ('Honda'), ('Hyundai'), ('Lamborghini'), ('Mercedes-Benz'), ('Mini'), ('Nissan'),
         ('Opel'), ('Porsche'), ('Tesla'), ('Toyota'), ('Volkswagen')`
