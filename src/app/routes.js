@@ -47,8 +47,8 @@ function newStandardRoute(httpVerb, route, columns) {
                     dbClient.query(`INSERT INTO ${table} (${keys})
                         VALUES (${values})
                     `)
-                        .then(() => res.send('Operation succeeded.'))
-                        .catch((err) => res.send('Operation failed.' + err.stack));
+                        .then(() => res.send('POST operation succeeded.'))
+                        .catch((err) => res.send('POST operation failed.' + err.stack));
                 }
             });
             break;
