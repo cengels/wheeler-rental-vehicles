@@ -12,42 +12,41 @@ HTTP = {
     DELETE: 'DELETE'
 };
 
-function newStandardRoute(httpVerb, route) {
+function newStandardRoute(route, ...httpVerbs) {
     const table = route.split('/')[1];
 
-    switch (httpVerb) {
-        case HTTP.GET:
-            router.get(route, function (req, res) {
-                const whereConditions = getWhereConditions(req.params, req.query);
+    if (httpVerbs.indexOf(HTTP.GET) >= 0) {
+        router.get(route, function (req, res) {
+            const whereConditions = getWhereConditions(req.params, req.query);
 
-                dbClient.query(`SELECT * FROM ${table} ${whereConditions}`, (err, result) => {
-                    if (err) {
-                        res.send(err);
-                    } else {
-                        res.send(result.rows);
-                    }
-                });
-            });
-            break;
-        case HTTP.POST:
-            router.post(route, function (req, res) {
-                const values = Object.values(req.body)
-                    .map(value => typeof value === 'string' && value !== '' ? `'${value}'` : value)
-                    .join(', ');
-                const keys = Object.keys(req.body)
-                    .join(', ');
-
-                if (values === '') {
-                    res.send('Please supply a value.');
+            dbClient.query(`SELECT * FROM ${table} ${whereConditions}`, (err, result) => {
+                if (err) {
+                    res.send(err);
                 } else {
-                    dbClient.query(`INSERT INTO ${table} (${keys})
-                        VALUES (${values})
-                    `)
-                        .then(() => res.send('POST operation succeeded.'))
-                        .catch((err) => res.send('POST operation failed.' + err.stack));
+                    res.send(result.rows);
                 }
             });
-            break;
+        });
+    }
+
+    if (httpVerbs.indexOf(HTTP.POST) >= 0) {
+        router.post(route, function (req, res) {
+            const values = Object.values(req.body)
+                .map(value => typeof value === 'string' && value !== '' ? `'${value}'` : value)
+                .join(', ');
+            const keys = Object.keys(req.body)
+                .join(', ');
+
+            if (values === '') {
+                res.send('Please supply a value.');
+            } else {
+                dbClient.query(`INSERT INTO ${table} (${keys})
+                    VALUES (${values})
+                `)
+                    .then(() => res.send('POST operation succeeded.'))
+                    .catch((err) => res.send('POST operation failed.' + err.stack));
+            }
+        });
     }
 }
 
@@ -61,32 +60,19 @@ function getWhereConditions(params, query) {
     return '';
 }
 
-newStandardRoute(HTTP.GET, '/vehicles');
-newStandardRoute(HTTP.GET, '/vehicles/:vehicleId');
-newStandardRoute(HTTP.GET, '/customers');
-newStandardRoute(HTTP.GET, '/customers/:customerId');
-newStandardRoute(HTTP.GET, '/rentals');
-newStandardRoute(HTTP.GET, '/rentals/:customerId/:vehicleId');
-newStandardRoute(HTTP.GET, '/colors');
-newStandardRoute(HTTP.GET, '/colors/:colorId');
-newStandardRoute(HTTP.GET, '/types');
-newStandardRoute(HTTP.GET, '/types/:typeId');
-newStandardRoute(HTTP.GET, '/makes');
-newStandardRoute(HTTP.GET, '/makes/:makeId');
-newStandardRoute(HTTP.GET, '/models');
-newStandardRoute(HTTP.GET, '/models/:modelId');
-
-// Sample Curl: curl --data "MakeID=0&ModelID=0&ColorID=0&LicensePlate='FooBar'&Year=1996&Mileage=555&MilesSinceMaintenance=1200&MaximumCargoLoad=50&Available=True" -X POST localhost:8080/vehicles
-// Sample Curl: curl --data "Name=Toyota" -X POST localhost:8080/makes
-
-newStandardRoute(HTTP.POST, '/vehicles', ['MakeID', 'ModelID', 'ColorID', 'LicensePlate', 'Year', 'Mileage',
-    'MilesSinceMaintenance', 'MaximumCargoLoad', 'Available']);
-newStandardRoute(HTTP.POST, '/customers', ['FirstName', 'LastName', 'PostalCode', 'Address', 'City', 'PhoneNumber',
-    'CustomerSince']);
-newStandardRoute(HTTP.POST, '/rentals', ['CustomerID', 'VehicleID', 'RentedSince']);
-newStandardRoute(HTTP.POST, '/colors', ['Name']);
-newStandardRoute(HTTP.POST, '/types', ['Name']);
-newStandardRoute(HTTP.POST, '/makes', ['Name']);
-newStandardRoute(HTTP.POST, '/models', ['Name', 'MakeID', 'TypeID', 'MaximumCargoLoad']);
+newStandardRoute('/vehicles', HTTP.GET, HTTP.POST);
+newStandardRoute('/vehicles/:vehicleId', HTTP.GET);
+newStandardRoute('/customers', HTTP.GET, HTTP.POST);
+newStandardRoute('/customers/:customerId', HTTP.GET);
+newStandardRoute('/rentals', HTTP.GET, HTTP.POST);
+newStandardRoute('/rentals/:customerId/:vehicleId', HTTP.GET);
+newStandardRoute('/colors', HTTP.GET, HTTP.POST);
+newStandardRoute('/colors/:colorId', HTTP.GET);
+newStandardRoute('/types', HTTP.GET, HTTP.POST);
+newStandardRoute('/types/:typeId', HTTP.GET);
+newStandardRoute('/makes', HTTP.GET, HTTP.POST);
+newStandardRoute('/makes/:makeId', HTTP.GET);
+newStandardRoute('/models', HTTP.GET, HTTP.POST);
+newStandardRoute('/models/:modelId', HTTP.GET);
 
 module.exports = router;
