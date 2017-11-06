@@ -12,16 +12,15 @@ HTTP = {
     DELETE: 'DELETE'
 };
 
-function newStandardRoute(httpVerb, route, columns) {
+function newStandardRoute(httpVerb, route) {
     const table = route.split('/')[1];
-    const dbColumns = columns ? columns.join(', ') : '*';
 
     switch (httpVerb) {
         case HTTP.GET:
             router.get(route, function (req, res) {
                 const whereConditions = getWhereConditions(req.params, req.query);
 
-                dbClient.query(`SELECT ${dbColumns} FROM ${table} ${whereConditions}`, (err, result) => {
+                dbClient.query(`SELECT * FROM ${table} ${whereConditions}`, (err, result) => {
                     if (err) {
                         res.send(err);
                     } else {
@@ -38,12 +37,9 @@ function newStandardRoute(httpVerb, route, columns) {
                 const keys = Object.keys(req.body)
                     .join(', ');
 
-                if (!columns) {
-                    res.send('Please supply the columns to fill.');
-                } else if (values === '') {
+                if (values === '') {
                     res.send('Please supply a value.');
-                }
-                else {
+                } else {
                     dbClient.query(`INSERT INTO ${table} (${keys})
                         VALUES (${values})
                     `)
