@@ -48,6 +48,16 @@ function newStandardRoute(route, ...httpVerbs) {
             }
         });
     }
+
+    if (httpVerbs.indexOf(HTTP.DELETE) >= 0) {
+        router.delete(route, function (req, res) {
+            const whereConditions = getWhereConditions(req.params, req.query);
+
+            dbClient.query(`DELETE FROM ${table} ${whereConditions}`)
+                .then(() => res.send('DELETE operation succeeded.'))
+                .catch((err) => res.send('DELETE operation failed.' + err.stack));
+        });
+    }
 }
 
 function getWhereConditions(params, query) {
@@ -60,19 +70,19 @@ function getWhereConditions(params, query) {
     return '';
 }
 
-newStandardRoute('/vehicles', HTTP.GET, HTTP.POST);
-newStandardRoute('/vehicles/:vehicleId', HTTP.GET);
-newStandardRoute('/customers', HTTP.GET, HTTP.POST);
-newStandardRoute('/customers/:customerId', HTTP.GET);
-newStandardRoute('/rentals', HTTP.GET, HTTP.POST);
-newStandardRoute('/rentals/:customerId/:vehicleId', HTTP.GET);
-newStandardRoute('/colors', HTTP.GET, HTTP.POST);
-newStandardRoute('/colors/:colorId', HTTP.GET);
-newStandardRoute('/types', HTTP.GET, HTTP.POST);
-newStandardRoute('/types/:typeId', HTTP.GET);
-newStandardRoute('/makes', HTTP.GET, HTTP.POST);
-newStandardRoute('/makes/:makeId', HTTP.GET);
-newStandardRoute('/models', HTTP.GET, HTTP.POST);
-newStandardRoute('/models/:modelId', HTTP.GET);
+newStandardRoute('/vehicles', HTTP.GET, HTTP.POST, HTTP.DELETE);
+newStandardRoute('/vehicles/:vehicleId', HTTP.GET, HTTP.DELETE);
+newStandardRoute('/customers', HTTP.GET, HTTP.POST, HTTP.DELETE);
+newStandardRoute('/customers/:customerId', HTTP.GET, HTTP.DELETE);
+newStandardRoute('/rentals', HTTP.GET, HTTP.POST), HTTP.DELETE;
+newStandardRoute('/rentals/:customerId/:vehicleId', HTTP.GET, HTTP.DELETE);
+newStandardRoute('/colors', HTTP.GET, HTTP.POST, HTTP.DELETE);
+newStandardRoute('/colors/:colorId', HTTP.GET, HTTP.DELETE);
+newStandardRoute('/types', HTTP.GET, HTTP.POST, HTTP.DELETE);
+newStandardRoute('/types/:typeId', HTTP.GET, HTTP.DELETE);
+newStandardRoute('/makes', HTTP.GET, HTTP.POST, HTTP.DELETE);
+newStandardRoute('/makes/:makeId', HTTP.GET, HTTP.DELETE);
+newStandardRoute('/models', HTTP.GET, HTTP.POST, HTTP.DELETE);
+newStandardRoute('/models/:modelId', HTTP.GET, HTTP.DELETE);
 
 module.exports = router;
