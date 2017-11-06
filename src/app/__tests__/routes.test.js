@@ -222,4 +222,40 @@ describe('Integration Tests', () => {
             }))
         });
     });
+
+    describe('DELETE Tests', () => {
+        const deleteOptions = setMethod('DELETE');
+
+        function deleteTest(table, id, done) {
+            const req = http.request(deleteOptions(`/${table}/${id}`));
+            req.end();
+
+            http.get(getOptions(`/${table}`), res => parseResponse(res, (body) => {
+                expect(body).toEqual(originalTables[table]);
+                done();
+            }))
+        }
+
+        it('DELETE: deleting a color', done => {
+            deleteTest('colors', 13, done);
+        });
+        it('DELETE: deleting a make', done => {
+            deleteTest('makes', 17, done);
+        });
+        it('DELETE: deleting a type', done => {
+            deleteTest('types', 4, done);
+        });
+        it('DELETE: deleting a model', done => {
+            deleteTest('models', 11, done);
+        });
+        it('DELETE: deleting a customer', done => {
+            deleteTest('customers', 5, done);
+        });
+        it('DELETE: deleting a vehicle', done => {
+            deleteTest('vehicles', 6, done);
+        });
+        it('DELETE: deleting a rental', done => {
+            deleteTest('colors', '4/6', done);
+        });
+    });
 });
