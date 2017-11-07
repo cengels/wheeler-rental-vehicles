@@ -1,16 +1,10 @@
 const router = require('express')();
 const dbClient = require('./modules/db/initialize');
 const bodyParser = require('body-parser');
+const HTTP = require('./definitions/http-verbs');
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
-
-HTTP = {
-    GET: 'GET',
-    POST: 'POST',
-    PUT: 'PUT',
-    DELETE: 'DELETE'
-};
 
 function newStandardRoute(route, ...httpVerbs) {
     const table = route.split('/')[1];
