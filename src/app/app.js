@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const HTTP = require('./definitions/http-verbs');
 const newStandardRoute = require('./modules/routes/new-route')(router);
 const renderView = require('./modules/routes/render-view')(router);
+const dbQuery = require('./modules/db/queries');
 
 const handlebarsConfig = {
     layoutsDir: __dirname + '/views/layouts',
@@ -32,6 +33,14 @@ newStandardRoute('/makes/:makeId', HTTP.GET, HTTP.DELETE);
 newStandardRoute('/models', HTTP.GET, HTTP.POST, HTTP.DELETE);
 newStandardRoute('/models/:modelId', HTTP.GET, HTTP.DELETE);
 
-renderView('/', 'home');
+renderView('/', 'home', {
+    data: {
+        vehicles: dbQuery.get.allVehicles(),
+        customers: dbQuery.get.allCustomers()
+    },
+    helpers: {
+        postRental: dbQuery.post.newRental
+    }
+});
 
 module.exports = router;

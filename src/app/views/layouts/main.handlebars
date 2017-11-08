@@ -1,1 +1,18 @@
-<h1>Example App: Home</h1>
+<h1>Rental Vehicles Web-App</h1>
+
+<div id="main-text">
+    Welcome to the Genesis™ Rental Vehicles Web-App. Please select the vehicle you'd like to rent out along
+    with the customer you'd like to rent it to.
+</div>
+
+<form id="rental-form">
+    <div class="selection">
+        <label for="vehicle-dropdown">Vehicle</label>
+        <select id="vehicle-dropdown">
+            <option>Select a car</option>
+            {{#each @vehicles}}
+                <option value="{{vehicleid}}">{{licenseplate}}</option>
+            {{/each}}
+        </select>
+    </div>
+</form>
