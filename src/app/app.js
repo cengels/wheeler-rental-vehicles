@@ -3,6 +3,8 @@ const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const HTTP = require('./definitions/http-verbs');
 const newApiRoute = require('./modules/routes/api-routes')(router);
+const newStandardRoute = require('./modules/routes/standard-routes')(router);
+const expressValidator = require('express-validator');
 
 const handlebarsConfig = {
     layoutsDir: __dirname + '/views/layouts',
@@ -12,6 +14,7 @@ const handlebarsConfig = {
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
+router.use(expressValidator());
 router.engine('handlebars', handlebars(handlebarsConfig));
 router.set('view engine', 'handlebars');
 router.set('views', __dirname + '/views');
@@ -30,5 +33,7 @@ newApiRoute('/makes', HTTP.GET, HTTP.POST, HTTP.DELETE);
 newApiRoute('/makes/:makeId', HTTP.GET, HTTP.DELETE);
 newApiRoute('/models', HTTP.GET, HTTP.POST, HTTP.DELETE);
 newApiRoute('/models/:modelId', HTTP.GET, HTTP.DELETE);
+
+newStandardRoute.rentalForm('/');
 
 module.exports = router;

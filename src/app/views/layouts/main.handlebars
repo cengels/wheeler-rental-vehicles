@@ -1,28 +1,12 @@
-<h1>Rental Vehicles Web-App</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rental Vehicles Web-App</title>
+</head>
+<body>
 
-<div id="main-text">
-    Welcome to the Genesis™ Rental Vehicles Web-App. Please select the vehicle you'd like to rent out along
-    with the customer you'd like to rent it to.
-</div>
+{{{body}}}
 
-<form id="rental-form">
-    <div class="selection">
-        <label for="vehicle-dropdown">Vehicle</label>
-        <select id="vehicle-dropdown">
-            <option>Select a vehicle</option>
-            {{#each @vehicles}}
-                <option value="{{vehicleid}}">{{vehicleid}} ({{licenseplate}})</option>
-            {{/each}}
-        </select>
-
-        <label for="customer-dropdown">Customer</label>
-        <select id="customer-dropdown">
-            <option>Select a customer</option>
-            {{#each @customers}}
-                <option value="{{customerid}}">{{customerid}} ({{firstname}} {{lastname}})</option>
-            {{/each}}
-        </select>
-
-        <input type="submit" id="submit-rental" value="Submit"/>
-    </div>
-</form>
+</body>
+</html>

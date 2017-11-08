@@ -2,21 +2,24 @@ const client = require('./initialize');
 
 module.exports = {
     get: {
-        allVehicles: () => {
-            return client.query('SELECT * FROM vehicles')._result.rows;
+        availableVehicles: () => {
+            return client.query(`
+                SELECT VehicleID, LicensePlate FROM Vehicles WHERE Available=TRUE AND NOT EXISTS
+                    (SELECT 1 FROM Rentals WHERE VehicleID=Vehicles.VehicleID)
+            `)._result.rows;
         },
 
         allCustomers: () => {
-            return client.query('SELECT * FROM customers')._result.rows;
+            return client.query('SELECT CustomerID, FirstName, LastName FROM Customers')._result.rows;
         }
     },
 
     post: {
         newRental: (customerId, vehicleId, rentedSince) => {
-            return client.query(
-                `INSERT INTO rentals (customerid, vehicleid, rentedsince)
-                VALUES (${customerId}, ${vehicleId}, '${rentedSince}')`
-            );
+            return client.query(`
+                INSERT INTO Rentals (CustomerID, VehicleID, RentedSince)
+                    VALUES (${customerId}, ${vehicleId}, '${rentedSince}')
+            `);
         }
     }
 };
