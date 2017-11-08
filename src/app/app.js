@@ -2,9 +2,7 @@ const router = require('express')();
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const HTTP = require('./definitions/http-verbs');
-const newStandardRoute = require('./modules/routes/new-route')(router);
-const renderView = require('./modules/routes/render-view')(router);
-const dbQuery = require('./modules/db/queries');
+const newApiRoute = require('./modules/routes/api-routes')(router);
 
 const handlebarsConfig = {
     layoutsDir: __dirname + '/views/layouts',
@@ -18,29 +16,19 @@ router.engine('handlebars', handlebars(handlebarsConfig));
 router.set('view engine', 'handlebars');
 router.set('views', __dirname + '/views');
 
-newStandardRoute('/vehicles', HTTP.GET, HTTP.POST, HTTP.DELETE);
-newStandardRoute('/vehicles/:vehicleId', HTTP.GET, HTTP.DELETE);
-newStandardRoute('/customers', HTTP.GET, HTTP.POST, HTTP.DELETE);
-newStandardRoute('/customers/:customerId', HTTP.GET, HTTP.DELETE);
-newStandardRoute('/rentals', HTTP.GET, HTTP.POST), HTTP.DELETE;
-newStandardRoute('/rentals/:customerId/:vehicleId', HTTP.GET, HTTP.DELETE);
-newStandardRoute('/colors', HTTP.GET, HTTP.POST, HTTP.DELETE);
-newStandardRoute('/colors/:colorId', HTTP.GET, HTTP.DELETE);
-newStandardRoute('/types', HTTP.GET, HTTP.POST, HTTP.DELETE);
-newStandardRoute('/types/:typeId', HTTP.GET, HTTP.DELETE);
-newStandardRoute('/makes', HTTP.GET, HTTP.POST, HTTP.DELETE);
-newStandardRoute('/makes/:makeId', HTTP.GET, HTTP.DELETE);
-newStandardRoute('/models', HTTP.GET, HTTP.POST, HTTP.DELETE);
-newStandardRoute('/models/:modelId', HTTP.GET, HTTP.DELETE);
-
-renderView('/', 'home', {
-    data: {
-        vehicles: dbQuery.get.allVehicles(),
-        customers: dbQuery.get.allCustomers()
-    },
-    helpers: {
-        postRental: dbQuery.post.newRental
-    }
-});
+newApiRoute('/vehicles', HTTP.GET, HTTP.POST, HTTP.DELETE);
+newApiRoute('/vehicles/:vehicleId', HTTP.GET, HTTP.DELETE);
+newApiRoute('/customers', HTTP.GET, HTTP.POST, HTTP.DELETE);
+newApiRoute('/customers/:customerId', HTTP.GET, HTTP.DELETE);
+newApiRoute('/rentals', HTTP.GET, HTTP.POST), HTTP.DELETE;
+newApiRoute('/rentals/:customerId/:vehicleId', HTTP.GET, HTTP.DELETE);
+newApiRoute('/colors', HTTP.GET, HTTP.POST, HTTP.DELETE);
+newApiRoute('/colors/:colorId', HTTP.GET, HTTP.DELETE);
+newApiRoute('/types', HTTP.GET, HTTP.POST, HTTP.DELETE);
+newApiRoute('/types/:typeId', HTTP.GET, HTTP.DELETE);
+newApiRoute('/makes', HTTP.GET, HTTP.POST, HTTP.DELETE);
+newApiRoute('/makes/:makeId', HTTP.GET, HTTP.DELETE);
+newApiRoute('/models', HTTP.GET, HTTP.POST, HTTP.DELETE);
+newApiRoute('/models/:modelId', HTTP.GET, HTTP.DELETE);
 
 module.exports = router;
