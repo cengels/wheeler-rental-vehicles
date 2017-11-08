@@ -1,5 +1,5 @@
-const HTTP = require('../definitions/http-verbs');
-const dbClient = require('./db/initialize');
+const HTTP = require('../../definitions/http-verbs');
+const dbClient = require('../db/initialize');
 
 function getWhereConditions(params, query) {
     if (Object.keys(params).length > 0 || Object.keys(query).length > 0) {
