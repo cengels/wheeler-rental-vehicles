@@ -58,6 +58,10 @@ const originalTables = {
         {"vehicleid":4,"modelid":8,"colorid":7,"licenseplate":"SDU-582","year":2000,"mileage":27003,
             "milessincemaintenance":19000,"available":true},
         {"vehicleid":5,"modelid":10,"colorid":5,"licenseplate":"DSU-285","year":2014,"mileage":52021,
+            "milessincemaintenance":14999,"available":true},
+        {"vehicleid":6,"modelid":3,"colorid":2,"licenseplate":"AVG-512","year":1999,"mileage":27003,
+            "milessincemaintenance":19000,"available":true},
+        {"vehicleid":7,"modelid":4,"colorid":6,"licenseplate":"DTS-G32","year":1998,"mileage":52021,
             "milessincemaintenance":14999,"available":true}
     ],
 
@@ -199,10 +203,10 @@ describe('Integration Tests', () => {
         it('POST: adding a new vehicle', () => {
             const dataObject = {"modelid":6,"colorid":7,"licenseplate":"Y-U-MAD","year":2015,
                 "mileage":22121, "milessincemaintenance":8512,"available":false};
-            const expectedDataObject = Object.assign({}, {"vehicleid": 6}, dataObject);
+            const expectedDataObject = Object.assign({}, {"vehicleid": 8}, dataObject);
             expect.assertions(1);
             return httpRequest(HTTP.POST, '/vehicles', dataObject)
-                .then(() => expect(httpRequest(HTTP.GET, '/vehicles/6')).resolves.toEqual([expectedDataObject]));
+                .then(() => expect(httpRequest(HTTP.GET, '/vehicles/8')).resolves.toEqual([expectedDataObject]));
         });
         it.skip('POST: adding a new rental', () => {
             // TODO: Fix date subtracting one day for some reason. (timezone?)
