@@ -1,4 +1,5 @@
 const dbQuery = require('../db/queries');
+const Status = require('../../definitions/status');
 
 const showRentalForm = (req, res, hint) => {
     const options = {
@@ -20,15 +21,12 @@ module.exports = (router) => {
             router.get(route, (req, res) => showRentalForm(req, res));
 
             router.post(route, (req, res) => {
-                console.log(req.body.customerid);
-                console.log(req.body.vehicleid);
-
                 if (req.body.customerid === 'default' || req.body.vehicleid === 'default') {
-                    showRentalForm(req, res, '<div class="hint-error">Please select both a customer and a vehicle.</div>');
+                    showRentalForm(req, res, `<div class="hint-error">${Status.Errors.RentalForm.EMPTY_FIELDS}</div>`);
                 } else {
                     dbQuery.post.newRental(req.body.customerid, req.body.vehicleid, new Date().toISOString())
-                        .then(() => showRentalForm(req, res, '<div class="hint-success">Successfully booked!</div>'))
-                        .catch(() => showRentalForm(req, res, '<div class="hint-error">Oh no! An unknown error occurred. Please contact the administrator.</div>'));
+                        .then(() => showRentalForm(req, res, `<div class="hint-success">${Status.Success.RENTAL_FORM}</div>`))
+                        .catch(() => showRentalForm(req, res, `<div class="hint-error">${Status.Errors.UNKNOWN}</div>`));
                 }
             })
         }
