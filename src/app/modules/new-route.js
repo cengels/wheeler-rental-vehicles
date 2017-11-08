@@ -1,6 +1,16 @@
 const HTTP = require('../definitions/http-verbs');
 const dbClient = require('./db/initialize');
 
+function getWhereConditions(params, query) {
+    if (Object.keys(params).length > 0 || Object.keys(query).length > 0) {
+        const keys = Object.keys(params).concat(Object.keys(query));
+        const values = Object.values(params).concat(Object.values(query));
+        return 'WHERE ' + keys.map((key, i) => `${key} = ${values[i]}`).join(' AND ');
+    }
+
+    return '';
+}
+
 module.exports = (router) => (route, ...httpVerbs) => {
     const table = route.split('/')[1];
 
@@ -47,14 +57,4 @@ module.exports = (router) => (route, ...httpVerbs) => {
                 .catch((err) => res.send('DELETE operation failed.' + err.stack));
         });
     }
-}
-
-function getWhereConditions(params, query) {
-    if (Object.keys(params).length > 0 || Object.keys(query).length > 0) {
-        const keys = Object.keys(params).concat(Object.keys(query));
-        const values = Object.values(params).concat(Object.values(query));
-        return 'WHERE ' + keys.map((key, i) => `${key} = ${values[i]}`).join(' AND ');
-    }
-
-    return '';
-}
+};
