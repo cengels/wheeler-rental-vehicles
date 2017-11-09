@@ -3,7 +3,6 @@ const Truck = require('../modules/vehicles/Truck');
 
 describe('Vehicle Tests', () => {
     const car = new Car('WHO-CARES-420', 60000, 27222, true);
-    const carUnavailable = new Car('WHO-CARES-420', 60000, 27222, false);
     const truck = new Truck('WHO-CARES-420', 60000, 27222, 1500, true);
     const truckTooHeavy = new Truck('WHO-CARES-420', 60000, 27222, 2000, true);
 
@@ -55,13 +54,6 @@ describe('Vehicle Tests', () => {
         it('asserts that car will be set to unavailable for rent', () => {
             truck.maxCargoLoad = 1600;
             expect(truck.maxCargoLoad).toBe(1600);
-        });
-    });
-    describe('Other Tests', () => {
-        it('asserts that renting a car that is not available for rent throws an exception', () => {
-            expect(() => {
-                carUnavailable.getRentPrice(20, 3000)
-            }).toThrow(Error);
         });
     });
 });

@@ -7,7 +7,7 @@ const Truck = require('../../vehicles/Truck');
 const showCalcForm = (req, res, route, price, hint) => {
     const options = {
         data: {
-            vehicles: dbQuery.get.allVehicles()
+            vehicles: dbQuery.get.all.vehicles()._result.rows
         },
         partials: {
             hint: hint || '',
@@ -16,32 +16,44 @@ const showCalcForm = (req, res, route, price, hint) => {
         }
     };
 
-    res.render('rental-calc', options);
+    res.render('calc-form', options);
 };
 
 const newVehicleInstance = (vehicle) => {
-    const { typeid, licenseplate, mileage, milessincemaintenance, maximumcargoload, available } = vehicle;
+    const { modelid, licenseplate, mileage, milessincemaintenance, maximumcargoload, available } = vehicle;
 
-    if (dbQuery.get.vehicleType(typeid) === 'Truck') {
-        return new Truck(licenseplate, mileage, milessincemaintenance, maximumcargoload, available);
-    } else {
-        return new Car(licenseplate, mileage, milessincemaintenance, available);
-    }
+    return dbQuery.get.only.model(modelid)
+        .then((res) => dbQuery.get.only.type(res.rows[0].typeid))
+        .then((res) => {
+            if (res.rows[0].name === 'Truck') {
+                return new Truck(licenseplate, mileage, milessincemaintenance, maximumcargoload, available);
+            } else {
+                return new Car(licenseplate, mileage, milessincemaintenance, available);
+            }
+        }).catch((err) => {
+            logger.serverError('Error constructing vehicle object.', err);
+        });
 };
 
 module.exports = (router, route) => {
     router.get(route, (req, res) => showCalcForm(req, res, route));
 
     router.post(route, (req, res) => {
-        try {
-            const { vehicle, days, distance } = req.body;
-            const vehicleInstance = newVehicleInstance(vehicle);
-            const rentPrice = vehicleInstance.getRentPrice(days, distance);
-
-            showCalcForm(req, res, route, rentPrice);
-        } catch (err) {
-            logger.serverError('Error getting and posting calcPriceView result.', err, req.body);
-            showCalcForm(req, res, route, '', `<div class="hint-error">${Status.Errors.UNKNOWN}</div>`);
+        if (req.body.vehicleid === 'default' || req.body.days === '' || req.body.distance === '') {
+            logger.userError('Error calculating price. Invalid parameters.', req.body);
+            showCalcForm(req, res, route, '', `<div class="hint-error">${Status.Errors.CalcForm.EMPTY_FIELDS}</div>`);
+        } else {
+            const { vehicleid, days, distance } = req.body;
+            dbQuery.get.only.vehicle(vehicleid)
+                .then((res) => newVehicleInstance(res.rows[0]))
+                .then((vehicleInstance) => {
+                    const rentPrice = vehicleInstance.getRentPrice(days, distance);
+                    showCalcForm(req, res, route, rentPrice.toString())
+                })
+                .catch((err) => {
+                    logger.serverError('Error calculating price.', err, req.body);
+                    showCalcForm(req, res, route, '', `<div class="hint-error">${Status.Errors.UNKNOWN}</div>`);
+                })
         }
     });
 };

@@ -1,4 +1,4 @@
-const logger = require('../Logger');
+const logger = require('../Logger')(module.id);
 
 module.exports = (client) => {
     return client.query(`

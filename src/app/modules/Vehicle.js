@@ -1,5 +1,5 @@
 const Numbers = require('../definitions/numbers');
-const logger = require('./modules/Logger');
+const logger = require('./Logger')(module.id);
 
 class Vehicle {
     constructor(licensePlate, mileage, distanceSinceMaintenance, availableForRent,
@@ -47,10 +47,6 @@ class Vehicle {
     }
 
     getRentPrice(days, clockedDistance) {
-        if (!this.availableForRent) {
-            logger.userError('Vehicle isn\'t available for rent.', this);
-        }
-
         return days * this._PRICE_PER_DAY
             + clockedDistance * this._PRICE_PER_MILE
             + this.getMaintenancePrice(clockedDistance);

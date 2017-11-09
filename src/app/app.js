@@ -34,6 +34,7 @@ newApiRoute('/makes/:makeId', HTTP.GET, HTTP.DELETE);
 newApiRoute('/models', HTTP.GET, HTTP.POST, HTTP.DELETE);
 newApiRoute('/models/:modelId', HTTP.GET, HTTP.DELETE);
 
-newStandardRoute.rentalForm('/');
+newStandardRoute.rentalFormView('/');
+newStandardRoute.calcPriceView('/calc');
 
 module.exports = router;

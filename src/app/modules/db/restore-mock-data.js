@@ -1,6 +1,6 @@
 const createTables = require('./create-tables');
 const insertMockData = require('./fill-tables-mock');
-const logger = require('../Logger');
+const logger = require('../Logger')(module.id);
 
 module.exports = (client) => {
     client.query('DROP SCHEMA IF EXISTS public CASCADE')

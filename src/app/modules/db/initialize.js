@@ -1,7 +1,7 @@
 const client = require('./client');
 const createTables = require('./create-tables');
 const restoreMockData = require('./restore-mock-data');
-const logger = require('../Logger');
+const logger = require('../Logger')(module.id);
 
 const environment = 'dev';  // TODO: This thing should come from an environment variable/the start scripts
 
