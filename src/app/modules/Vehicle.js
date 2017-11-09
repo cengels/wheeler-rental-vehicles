@@ -49,7 +49,7 @@ class Vehicle {
     getRentPrice(days, clockedDistance) {
         return days * this._PRICE_PER_DAY
             + clockedDistance * this._PRICE_PER_MILE
-            + this.getMaintenancePrice(clockedDistance);
+            - this.getMaintenancePrice(clockedDistance);
     }
 
     getMaintenancePrice(clockedDistance) {

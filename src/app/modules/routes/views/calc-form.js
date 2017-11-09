@@ -48,7 +48,7 @@ module.exports = (router, route) => {
                 .then((res) => newVehicleInstance(res.rows[0]))
                 .then((vehicleInstance) => {
                     const rentPrice = vehicleInstance.getRentPrice(days, distance);
-                    showCalcForm(req, res, route, rentPrice.toString())
+                    showCalcForm(req, res, route, rentPrice.toFixed(2).toString())
                 })
                 .catch((err) => {
                     logger.serverError('Error calculating price.', err, req.body);
