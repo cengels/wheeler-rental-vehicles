@@ -23,10 +23,10 @@ const logger = winston.createLogger({
         error: 6
     },
     transports: [
-        new winston.transports.File({ filename: 'winston.log', maxsize: 1000 })
+        new winston.transports.File({ filename: '../logs/winston.log', maxsize: 1000 })
     ],
     exceptionHandlers: [
-        new winston.transports.File({ filename: 'uncaught.log', maxsize: 1000 })
+        new winston.transports.File({ filename: '../logs/uncaught.log', maxsize: 1000 })
     ]
 });
 
