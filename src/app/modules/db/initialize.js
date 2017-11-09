@@ -3,13 +3,11 @@ const createTables = require('./create-tables');
 const restoreMockData = require('./restore-mock-data');
 const logger = require('../Logger')(module.id);
 
-const environment = 'dev';  // TODO: This thing should come from an environment variable/the start scripts
-
 client.connect((err) => {
     if (err) {
         logger.serverError('Error connecting to database.', err);
     } else {
-        if (environment === 'dev') {
+        if (process.env.NODE_ENV === 'development') {
             restoreMockData(client);
         } else {
             createTables(client);
