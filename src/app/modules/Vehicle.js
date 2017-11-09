@@ -1,5 +1,4 @@
 const Numbers = require('../definitions/numbers');
-const logger = require('./Logger')(module.id);
 
 class Vehicle {
     constructor(licensePlate, mileage, distanceSinceMaintenance, availableForRent,
