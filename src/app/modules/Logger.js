@@ -19,7 +19,8 @@ const logger = winston.createLogger({
         userError: 2,
         warn: 3,
         info: 4,
-        debug: 5
+        debug: 5,
+        error: 6
     },
     transports: [
         new winston.transports.File({ filename: 'winston.log', maxsize: 1000 })
@@ -38,9 +39,22 @@ module.exports = (filename) => {
     filename = filename.split('/');
     filename = filename[filename.length - 1];
 
-    return levels.reduce((o, key) => ({ ...o, [key]: (msg, vars) => {
-        if (typeof vars === 'object') {
-            vars = JSON.stringify(vars);
+    return levels.reduce((o, key) => ({ ...o, [key]: (msg, ...vars) => {
+        switch (vars.constructor) {
+            case Object:
+                vars = JSON.stringify(vars);
+                break;
+            case Array:
+                vars = vars.map(item => {
+                    if (item.constructor === Object) {
+                        return JSON.stringify(item);
+                    } else {
+                        return item;
+                    }
+                }).join(', ');
+                break;
+            default:
+                // Do nothing
         }
 
         return logger[key]({

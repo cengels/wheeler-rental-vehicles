@@ -1,0 +1,29 @@
+<h2>Price Calculations</h2>
+
+<div id="main-text">
+    Calculate your price by entering your data here.
+    This will not automatically rent a vehicle, just give you the price.
+</div>
+
+<div id="calc-form">
+    <div class="selection">
+        <label for="vehicle-dropdown">Vehicle</label>
+        <select id="vehicle-dropdown" name="vehicleid">
+            <option value="default">Select a vehicle</option>
+            {{#each @vehicles}}
+                <option value="{{vehicleid}}">{{vehicleid}} ({{licenseplate}})</option>
+            {{/each}}
+        </select>
+
+        <label for="customer-dropdown">Customer</label>
+        <select id="customer-dropdown" name="customerid">
+            <option value="default">Select a customer</option>
+            {{#each @customers}}
+                <option value="{{customerid}}">{{customerid}} ({{firstname}} {{lastname}})</option>
+            {{/each}}
+        </select>
+
+        <button id="submit-rental" onclick="{{calc}}">Submit</button>
+        {{>hint}}
+    </div>
+</div>
