@@ -7,6 +7,7 @@ module.exports = (client) => {
         .then(() => client.query('CREATE SCHEMA IF NOT EXISTS public'))
         .then(() => client.query('GRANT ALL ON SCHEMA public TO public'))
         .then(() => client.query('GRANT ALL ON SCHEMA public TO postgres'))
+        .then(() => logger.info('Dropped and recreated schema.'))
         .then(() => createTables(client))
         .then(() => insertMockData(client))
         .catch((err) => logger.serverError('Error restoring mock data.', err));

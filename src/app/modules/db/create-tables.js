@@ -53,5 +53,6 @@ module.exports = (client) => {
                 MilesSinceMaintenance INTEGER NOT NULL,
                 Available BOOLEAN NOT NULL DEFAULT TRUE
             )
-        `)).catch(err => logger.serverError('Error creating default tables.', err));
+        `)).then(() => logger.info('Created (missing) tables.'))
+        .catch(err => logger.serverError('Error creating default tables.', err));
 };
