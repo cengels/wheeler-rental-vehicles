@@ -1,5 +1,6 @@
 const createTables = require('./create-tables');
 const insertMockData = require('./fill-tables-mock');
+const logger = require('../Logger');
 
 module.exports = (client) => {
     client.query('DROP SCHEMA IF EXISTS public CASCADE')
@@ -8,5 +9,5 @@ module.exports = (client) => {
         .then(() => client.query('GRANT ALL ON SCHEMA public TO postgres'))
         .then(() => createTables(client))
         .then(() => insertMockData(client))
-        .catch((err) => console.error(err.stack));
+        .catch((err) => logger.serverError('Error restoring mock data.', err));
 };

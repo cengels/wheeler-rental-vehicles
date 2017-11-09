@@ -1,3 +1,5 @@
+const logger = require('../Logger');
+
 module.exports = (client) => {
     return client.query(`
             CREATE TABLE IF NOT EXISTS Customers(
@@ -51,7 +53,5 @@ module.exports = (client) => {
                 MilesSinceMaintenance INTEGER NOT NULL,
                 Available BOOLEAN NOT NULL DEFAULT TRUE
             )
-        `)).catch(err => {
-        console.error(err);
-    });
+        `)).catch(err => logger.serverError('Error creating default tables.', err));
 };

@@ -1,3 +1,5 @@
+const logger = require('../Logger');
+
 module.exports = client => {
     return client.query(`INSERT INTO makes (name) VALUES ('Audi'), ('BMW'), ('Ferrari'), ('Ford'),
         ('Harley Davidson'), ('Honda'), ('Hyundai'), ('Lamborghini'), ('Mercedes-Benz'), ('Mini'), ('Nissan'),
@@ -23,5 +25,5 @@ module.exports = client => {
         (4, 6, 'DTS-G32', 1998, 52021, 14999, true)`
     )).then(() => client.query(`INSERT INTO rentals (customerid, vehicleid, rentedsince) VALUES
         (1, 3, '2017-05-11'), (3, 4, '2017-09-22'), (4, 5, '2017-11-01'), (1, 1, '2017-09-05')`
-    )).catch((err) => console.error(err.stack));
+    )).catch((err) => logger.serverError('Error writing mock database.', err));
 };
