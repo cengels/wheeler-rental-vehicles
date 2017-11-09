@@ -46,7 +46,7 @@ module.exports = (filename) => {
                 break;
             case Array:
                 vars = vars.map(item => {
-                    if (item.constructor === Object) {
+                    if (typeof item === 'object' && item.constructor !== Array) {
                         return JSON.stringify(item);
                     } else {
                         return item;
