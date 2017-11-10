@@ -7,7 +7,7 @@
     "watch": "jest --watch",
     "start": "node scripts/start.js",
     "start-dev": "node scripts/start-dev.js",
-    "build": "babel src -d dist --presets es2015,stage-2"
+    "build": "scripts/deploy.sh"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
