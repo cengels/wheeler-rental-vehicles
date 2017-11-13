@@ -1,5 +1,5 @@
-const rentalForm = require('./views/rental-form');
-const calc = require('./views/calc-form');
+const rentalForm = require('../views/rental-form');
+const calc = require('../views/calc-form');
 
 module.exports = (router) => {
 	return {

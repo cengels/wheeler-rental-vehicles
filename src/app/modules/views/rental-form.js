@@ -1,7 +1,7 @@
-const dbQuery = require('../../db/queries');
-const Status = require('../../../definitions/status');
-const logger = require('../../Logger')(module.id);
-const pool = require('../../db/pool');
+const dbQuery = require('../db/queries');
+const Status = require('../../definitions/status');
+const logger = require('../Logger')(module.id);
+const pool = require('../db/pool');
 
 const showRentalForm = (req, res, route, hint) => {
 	return dbQuery.getAll.availableVehicles(pool)

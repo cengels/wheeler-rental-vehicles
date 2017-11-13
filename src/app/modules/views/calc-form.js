@@ -1,9 +1,9 @@
-const dbQuery = require('../../db/queries');
-const Status = require('../../../definitions/status');
-const logger = require('../../Logger')(module.id);
-const pool = require('../../db/pool');
-const Car = require('../../vehicles/Car');
-const Truck = require('../../vehicles/Truck');
+const dbQuery = require('../db/queries');
+const Status = require('../../definitions/status');
+const logger = require('../Logger')(module.id);
+const pool = require('../db/pool');
+const Car = require('../vehicles/Car');
+const Truck = require('../vehicles/Truck');
 
 const showCalcForm = (req, res, route, price, hint) => {
 	return dbQuery.getAll.vehicles(pool)
