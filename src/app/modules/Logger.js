@@ -1,5 +1,6 @@
 const winston = require('winston');
 const moment = require('moment');
+const config = require('config');
 
 const pyFormat = winston.format.printf(info => {
 	const vars = info.parameters ? `  ${info.parameters}` : '';
@@ -23,10 +24,10 @@ const logger = winston.createLogger({
 		error: 6
 	},
 	transports: [
-		new winston.transports.File({ filename: '../logs/winston.log', maxsize: 1000 })
+		new winston.transports.File({ filename: config.get('log.file_winston'), maxsize: 1000 })
 	],
 	exceptionHandlers: [
-		new winston.transports.File({ filename: '../logs/uncaught.log', maxsize: 1000 })
+		new winston.transports.File({ filename: config.get('log.file_uncaught'), maxsize: 1000 })
 	]
 });
 
