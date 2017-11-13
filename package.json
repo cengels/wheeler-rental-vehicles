@@ -7,7 +7,8 @@
     "watch": "jest --watch",
     "start": "node scripts/start.js",
     "start-dev": "node scripts/start-dev.js",
-    "build": "scripts/deploy.sh"
+    "build": "scripts/build.sh",
+    "deploy": "scripts/build.sh && scripts/deploy.sh"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
