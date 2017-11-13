@@ -1,0 +1,11 @@
+{
+	"app": {
+		"port": 8080
+	},
+	"db": {
+		"user": "USERNAME",
+		"password": "PASSWORD",
+		"host": "localhost",
+		"port": 1234
+	}
+}

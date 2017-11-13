@@ -1,0 +1,11 @@
+{
+	"app": {
+		"port": "PORT"
+	},
+	"db": {
+		"user": "USERNAME",
+		"password": "PASSWORD",
+		"host": "HOST",
+		"port": "DBPORT"
+	}
+}

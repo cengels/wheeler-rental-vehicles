@@ -1,22 +1,14 @@
-const config = require('../../../../config/config');
+const config = require('config');
 const { Pool } = require('pg');
 const logger = require('../Logger')(module.id);
 
-const options = process.env.NODE_ENV === 'production'
-	? {
-		user: config.prod.db.user,
-		host: config.prod.db.host,
-		database: 'rentaldb',
-		password: config.prod.db.password,
-		port: config.prod.db.port,
-	}
-	: {
-		user: config.dev.db.user,
-		host: config.dev.db.host,
-		database: 'rentaldb',
-		password: config.dev.db.password,
-		port: config.dev.db.port,
-	};
+const options = {
+	user: config.get('db.user'),
+	host: config.get('db.host'),
+	database: 'rentaldb',
+	password: config.get('db.password'),
+	port: config.get('db.port'),
+};
 
 const pool = new Pool(options);
 
