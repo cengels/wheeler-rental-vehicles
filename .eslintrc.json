@@ -1,37 +1,37 @@
 {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "node": true,
-        "jest": true
-    },
-    "plugins": ["node"],
-    "extends": ["eslint:recommended", "plugin:node/recommended"],
-    "parserOptions": {
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true
-        }
-    },
-    "rules": {
-        "indent": [
-            "error",
-            4,
-            { "SwitchCase": 1 }
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single",
-            { "allowTemplateLiterals": true }
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "node/exports-style": ["error", "module.exports"]
-    }
+	"env": {
+		"browser": true,
+		"es6": true,
+		"node": true,
+		"jest": true
+	},
+	"plugins": ["node"],
+	"extends": ["eslint:recommended", "plugin:node/recommended"],
+	"parserOptions": {
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"experimentalObjectRestSpread": true
+		}
+	},
+	"rules": {
+		"indent": [
+			"error",
+			"tab",
+			{ "SwitchCase": 1 }
+		],
+		"linebreak-style": [
+			"error",
+			"unix"
+		],
+		"quotes": [
+			"error",
+			"single",
+			{ "allowTemplateLiterals": true }
+		],
+		"semi": [
+			"error",
+			"always"
+		],
+		"node/exports-style": ["error", "module.exports"]
+	}
 }

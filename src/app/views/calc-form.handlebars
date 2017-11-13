@@ -1,37 +1,37 @@
 <h2>Price Calculations</h2>
 
 <div id="main-text">
-    Calculate your price by entering your data here.
-    This will not automatically rent a vehicle, just give you the price.
+	Calculate your price by entering your data here.
+	This will not automatically rent a vehicle, just give you the price.
 </div>
 
 <form id="calc-form" method="post" action="{{>route}}">
-    <div class="selection">
-        <label for="vehicle-dropdown">Vehicle</label>
-        <select id="vehicle-dropdown" name="vehicleid">
-            <option value="default">Select a vehicle</option>
-            {{#each @vehicles}}
-                <option value="{{vehicleid}}">{{vehicleid}} ({{licenseplate}})</option>
-            {{/each}}
-        </select>
-    </div>
+	<div class="selection">
+		<label for="vehicle-dropdown">Vehicle</label>
+		<select id="vehicle-dropdown" name="vehicleid">
+			<option value="default">Select a vehicle</option>
+			{{#each @vehicles}}
+				<option value="{{vehicleid}}">{{vehicleid}} ({{licenseplate}})</option>
+			{{/each}}
+		</select>
+	</div>
 
-    <div class="input-field">
-        <label for="days-input">Days</label>
-        <input id="days-input" name="days" type="number"/>
-    </div>
+	<div class="input-field">
+		<label for="days-input">Days</label>
+		<input id="days-input" name="days" type="number"/>
+	</div>
 
-    <div class="input-field">
-        <label for="distance-input">Distance (km)</label>
-        <input id="distance-input" name="distance" type="number"/>
-    </div>
+	<div class="input-field">
+		<label for="distance-input">Distance (km)</label>
+		<input id="distance-input" name="distance" type="number"/>
+	</div>
 
-    <div class="submit">
-        <input type="submit" id="submit-calc" value="Calculate Price"/>
-    </div>
-    {{>hint}}
+	<div class="submit">
+		<input type="submit" id="submit-calc" value="Calculate Price"/>
+	</div>
+	{{>hint}}
 </form>
 
 <div id="price-output">
-    <input type="text" value="{{>price}} €" disabled/>
+	<input type="text" value="{{>price}} €" disabled/>
 </div>

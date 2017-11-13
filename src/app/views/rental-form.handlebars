@@ -1,33 +1,33 @@
 <h2>Rent-A-Car</h2>
 
 <div id="main-text">
-    Welcome to the Genesis™ Rental Vehicles Web-App. Please select the vehicle you'd like to rent out along
-    with the customer you'd like to rent it to.
+	Welcome to the Genesis™ Rental Vehicles Web-App. Please select the vehicle you'd like to rent out along
+	with the customer you'd like to rent it to.
 </div>
 
 <form id="rental-form" method="post" action="{{>route}}">
-    <div class="selection">
-        <label for="vehicle-dropdown">Vehicle</label>
-        <select id="vehicle-dropdown" name="vehicleid">
-            <option value="default">Select a vehicle</option>
-            {{#each @vehicles}}
-                <option value="{{vehicleid}}">{{vehicleid}} ({{licenseplate}})</option>
-            {{/each}}
-        </select>
-    </div>
+	<div class="selection">
+		<label for="vehicle-dropdown">Vehicle</label>
+		<select id="vehicle-dropdown" name="vehicleid">
+			<option value="default">Select a vehicle</option>
+			{{#each @vehicles}}
+				<option value="{{vehicleid}}">{{vehicleid}} ({{licenseplate}})</option>
+			{{/each}}
+		</select>
+	</div>
 
-    <div class="selection">
-        <label for="customer-dropdown">Customer</label>
-        <select id="customer-dropdown" name="customerid">
-            <option value="default">Select a customer</option>
-            {{#each @customers}}
-                <option value="{{customerid}}">{{customerid}} ({{firstname}} {{lastname}})</option>
-            {{/each}}
-        </select>
-    </div>
+	<div class="selection">
+		<label for="customer-dropdown">Customer</label>
+		<select id="customer-dropdown" name="customerid">
+			<option value="default">Select a customer</option>
+			{{#each @customers}}
+				<option value="{{customerid}}">{{customerid}} ({{firstname}} {{lastname}})</option>
+			{{/each}}
+		</select>
+	</div>
 
-    <div class="submit">
-        <input type="submit" id="submit-rental" value="Submit"/>
-    </div>
-    {{>hint}}
+	<div class="submit">
+		<input type="submit" id="submit-rental" value="Submit"/>
+	</div>
+	{{>hint}}
 </form>

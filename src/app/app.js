@@ -8,9 +8,9 @@ const expressValidator = require('express-validator');
 require('./modules/db/initialize');
 
 const handlebarsConfig = {
-    layoutsDir: __dirname + '/views/layouts',
-    partialsDir: __dirname + '/views/partials',
-    defaultLayout: 'main'
+	layoutsDir: __dirname + '/views/layouts',
+	partialsDir: __dirname + '/views/partials',
+	defaultLayout: 'main'
 };
 
 router.use(bodyParser.json());
