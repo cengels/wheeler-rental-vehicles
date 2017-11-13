@@ -34,12 +34,12 @@ module.exports = (router, route) => {
             dbQuery.post.newRental(pool, req.body.customerid, req.body.vehicleid, new Date().toISOString())
                 .then(() => {
                     logger.info('Successfully posted new rental from rental-form.', req.body);
-                    showRentalForm(req, res, route, `<div class="hint-success">${Status.Success.RENTAL_FORM}</div>`)
+                    showRentalForm(req, res, route, `<div class="hint-success">${Status.Success.RENTAL_FORM}</div>`);
                 })
                 .catch((err) => {
                     logger.serverError('Error posting new rental from rental-form.', err, req.body);
                     showRentalForm(req, res, route, `<div class="hint-error">${Status.Errors.UNKNOWN}</div>`);
                 });
         }
-    })
+    });
 };

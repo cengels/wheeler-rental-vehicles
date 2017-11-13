@@ -57,7 +57,7 @@ module.exports = (router, route) => {
                 .catch((err) => {
                     logger.serverError('Error calculating price.', err, req.body);
                     showCalcForm(req, res, route, '', `<div class="hint-error">${Status.Errors.UNKNOWN}</div>`);
-                })
+                });
         }
     });
 };

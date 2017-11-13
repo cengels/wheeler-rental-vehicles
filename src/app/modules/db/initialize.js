@@ -11,13 +11,13 @@ pool.connect()
                 .catch((err) => {
                     logger.serverError('Unexpected error filling database with mock data', err.stack);
                     client.release();
-                })
+                });
         } else {
             return createTables(client)
                 .then(() => client.release())
                 .catch((err) => {
                     logger.serverError('Unexpected error creating tables', err.stack);
                     client.release();
-                })
+                });
         }
     }).catch((err) => logger.serverError('Failed to connect to database', err.stack));

@@ -2,7 +2,7 @@ const Numbers = require('../definitions/numbers');
 
 class Vehicle {
     constructor(licensePlate, mileage, distanceSinceMaintenance, availableForRent,
-                MAX_MAINTENANCE_DISTANCE, PRICE_PER_DAY) {
+        MAX_MAINTENANCE_DISTANCE, PRICE_PER_DAY) {
         this._licensePlate = licensePlate;
         this._mileage = mileage;
         this._distanceSinceMaintenance = distanceSinceMaintenance;
