@@ -5,7 +5,8 @@
         "node": true,
         "jest": true
     },
-    "extends": "eslint:recommended",
+    "plugins": ["node"],
+    "extends": ["eslint:recommended", "plugin:node/recommended"],
     "parserOptions": {
         "sourceType": "module",
         "ecmaFeatures": {
@@ -30,6 +31,7 @@
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "node/exports-style": ["error", "module.exports"]
     }
 }
