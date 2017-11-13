@@ -1,5 +1,6 @@
 const config = require('../../../../config/config');
-const pg = require('pg');
+const { Pool } = require('pg');
+const logger = require('../Logger')(module.id);
 
 const options = process.env.NODE_ENV === 'production'
     ? {
@@ -17,4 +18,11 @@ const options = process.env.NODE_ENV === 'production'
         port: config.dev.db.port,
     };
 
-module.exports = new pg.Client(options);
+const pool = new Pool(options);
+
+pool.on('error', (err, client) => {
+    logger.serverError('Unexpected error on idle client', err.stack, client);
+    process.exit(-1);
+});
+
+module.exports = pool;

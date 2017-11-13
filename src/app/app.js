@@ -3,8 +3,9 @@ const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const HTTP = require('./definitions/http-verbs');
 const newApiRoute = require('./modules/routes/api-routes')(router);
-const newStandardRoute = require('./modules/routes/standard-routes')(router);
+const newStandardRoute = require('./modules/routes/view-routes')(router);
 const expressValidator = require('express-validator');
+require('./modules/db/initialize');
 
 const handlebarsConfig = {
     layoutsDir: __dirname + '/views/layouts',

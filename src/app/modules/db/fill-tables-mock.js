@@ -26,5 +26,5 @@ module.exports = client => {
     )).then(() => client.query(`INSERT INTO rentals (customerid, vehicleid, rentedsince) VALUES
         (1, 3, '2017-05-11'), (3, 4, '2017-09-22'), (4, 5, '2017-11-01'), (1, 1, '2017-09-05')`
     )).then(() => logger.info('Filled database with mock data.'))
-        .catch((err) => logger.serverError('Error writing mock database.', err));
+        .catch((err) => logger.serverError('Error writing mock database.', err.stack));
 };

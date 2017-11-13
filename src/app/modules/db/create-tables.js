@@ -54,5 +54,5 @@ module.exports = (client) => {
                 Available BOOLEAN NOT NULL DEFAULT TRUE
             )
         `)).then(() => logger.info('Created (missing) tables.'))
-        .catch(err => logger.serverError('Error creating default tables.', err));
+        .catch(err => logger.serverError('Error creating default tables.', err.stack));
 };

@@ -1,7 +1,5 @@
 const HTTP = require('../../definitions/http-verbs');
-const getCallback = require('./operations/get');
-const postCallback = require('./operations/post');
-const deleteCallback = require('./operations/delete');
+const { getCallback, postCallback, deleteCallback } = require('./operations');
 
 module.exports = (router) => (route, ...httpVerbs) => {
     const table = route.split('/')[1];

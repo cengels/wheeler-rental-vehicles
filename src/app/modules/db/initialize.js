@@ -1,18 +1,23 @@
-const client = require('./client');
+const pool = require('./pool');
 const createTables = require('./create-tables');
 const restoreMockData = require('./restore-mock-data');
 const logger = require('../Logger')(module.id);
 
-client.connect((err) => {
-    if (err) {
-        logger.serverError('Error connecting to database.', err);
-    } else {
+pool.connect()
+    .then(client => {
         if (process.env.NODE_ENV === 'development') {
-            restoreMockData(client);
+            return restoreMockData(client)
+                .then(() => client.release())
+                .catch((err) => {
+                    logger.serverError('Unexpected error filling database with mock data', err.stack);
+                    client.release();
+                })
         } else {
-            createTables(client);
+            return createTables(client)
+                .then(() => client.release())
+                .catch((err) => {
+                    logger.serverError('Unexpected error creating tables', err.stack);
+                    client.release();
+                })
         }
-    }
-});
-
-module.exports = client;
+    }).catch((err) => logger.serverError('Failed to connect to database', err.stack));
