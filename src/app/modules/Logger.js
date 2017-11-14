@@ -23,6 +23,8 @@ const logger = winston.createLogger({
 		debug: 5,
 		error: 6
 	},
+
+	// log files do not need to exist, but the directory *must exist*, else winston will not log to file
 	transports: [
 		new winston.transports.File({ filename: config.get('log.file_winston'), maxsize: 1000 })
 	],
