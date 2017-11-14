@@ -1,0 +1,42 @@
+<h2>Register a new vehicle</h2>
+
+<div id="main-text">
+	Bought a new vehicle for your awesome customers to rent out? Enter its data to register it with the system!
+</div>
+
+<form id="rental-form" method="post" action="{{>route}}">
+	<div class="selection">
+		<label for="model-dropdown">Model</label>
+		<select id="model-dropdown" name="modelid">
+			<option value="default">Select a model</option>
+			{{#each @models}}
+				<option value="{{modelid}}">{{name}}</option>
+			{{/each}}
+		</select>
+	</div>
+
+	<div class="selection">
+		<label for="color-dropdown">Color</label>
+		<select id="color-dropdown" name="colorid">
+			<option value="default">Select a color</option>
+			{{#each @colors}}
+				<option value="{{colorid}}">{{name}}</option>
+			{{/each}}
+		</select>
+	</div>
+
+    <div class="input-field">
+        <label for="license-plate-input">License plate</label>
+        <input id="license-plate-input" name="licenseplate" type="text"/>
+    </div>
+
+    <div class="input-field">
+        <label for="year-input">Year</label>
+        <input id="year-input" name="year" type="number"/>
+    </div>
+
+	<div class="submit">
+		<input type="submit" id="submit-vehicle" value="Submit"/>
+	</div>
+	{{>hint}}
+</form>

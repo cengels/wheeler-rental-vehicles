@@ -46,7 +46,7 @@ module.exports = (router, route) => {
 	router.post(route, (req, res) => {
 		if (req.body.vehicleid === 'default' || req.body.days === '' || req.body.distance === '') {
 			logger.userError('Error calculating price. Invalid parameters.', req.body);
-			showCalcForm(req, res, route, '', `<div class="hint-error">${Status.Errors.CalcForm.EMPTY_FIELDS}</div>`);
+			showCalcForm(req, res, route, '', `<div class="hint-error">${Status.Errors.EMPTY_FIELDS}</div>`);
 		} else {
 			const { vehicleid, days, distance } = req.body;
 			httpRequest(HTTP.GET, '/vehicles/' + vehicleid)
