@@ -2,13 +2,7 @@ const config = require('config');
 const { Pool } = require('pg');
 const logger = require('../Logger')(module.id);
 
-const options = {
-	user: config.get('db.user'),
-	host: config.get('db.host'),
-	database: 'rentaldb',
-	password: config.get('db.password'),
-	port: config.get('db.port'),
-};
+const options = config.get('db');
 
 const pool = new Pool(options);
 

@@ -7,6 +7,7 @@
 		"file_uncaught" : "../logs/uncaught.log"
 	},
 	"db": {
+		"database": "rentaldb",
 		"user": "USERNAME",
 		"password": "PASSWORD",
 		"host": "localhost",
