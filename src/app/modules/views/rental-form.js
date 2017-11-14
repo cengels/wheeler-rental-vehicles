@@ -5,22 +5,27 @@ const logger = require('../Logger')(module.id);
 
 const showRentalForm = (req, res, route, hint) => {
 	return httpRequest(HTTP.GET, '/vehicles?available=true')
-		.then((result) => httpRequest(HTTP.GET, '/customers')
-			.then((customers) => {
-				const options = {
-					data: {
-						vehicles: result,
-						customers: customers
-					},
-					partials: {
-						hint: hint || '',
-						route: route
-					}
-				};
+		.then((availableVehicles) => httpRequest(HTTP.GET, '/rentals')
+			.then((rentals) => httpRequest(HTTP.GET, '/customers')
+				.then((customers) => {
+					const rentedVehicleIDs = rentals.map(rental => rental.vehicleid);
+					const vehicles = availableVehicles
+						.filter(vehicle => rentedVehicleIDs.indexOf(vehicle.vehicleid) < 0);
 
-				res.render('rental-form', options);
-			}).catch((err) => logger.serverError('Failed to render rental form', err.stack))
-		).catch((err) => logger.serverError('Failed to fetch', err.stack));
+					const options = {
+						data: {
+							vehicles: vehicles,
+							customers: customers
+						},
+						partials: {
+							hint: hint || '',
+							route: route
+						}
+					};
+
+					res.render('rental-form', options);
+				}).catch((err) => logger.serverError('Failed to render rental form', err.stack))
+		)).catch((err) => logger.serverError('Failed to fetch', err.stack));
 };
 
 module.exports = (router, route) => {
