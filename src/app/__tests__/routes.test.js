@@ -1,5 +1,6 @@
 const request = require('request-promise-native');
 const HTTP = require('../definitions/http-verbs');
+const Status = require('../definitions/status');
 
 const originalTables = {
 	colors: [
@@ -236,8 +237,8 @@ describe('Integration Tests', () => {
 		});
 		it('DELETE: deleting a model', () => {
 			expect.assertions(1);
-			return httpRequest(HTTP.DELETE, '/models/4')
-				.then(() => expect(httpRequest(HTTP.GET, '/models/4')).resolves.toEqual([]));
+			return httpRequest(HTTP.DELETE, '/models/7')
+				.then(() => expect(httpRequest(HTTP.GET, '/models/7')).resolves.toEqual([]));
 		});
 		it('DELETE: deleting a customer', () => {
 			expect.assertions(1);
@@ -253,6 +254,13 @@ describe('Integration Tests', () => {
 			expect.assertions(1);
 			return httpRequest(HTTP.DELETE, '/rentals/1/2')
 				.then(() => expect(httpRequest(HTTP.GET, '/rentals/1/2')).resolves.toEqual([]));
+		});
+	});
+	describe('Error Handling', () => {
+		it('DELETE: returns error when attempting to delete key still in use', () => {
+			expect.assertions(1);
+			return httpRequest(HTTP.DELETE, '/models/8')
+				.catch((err) => expect(err.statusCode).toEqual(Status.BAD_REQUEST));
 		});
 	});
 });
