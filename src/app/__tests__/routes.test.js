@@ -36,16 +36,16 @@ const originalTables = {
 	customers: [
 		{'customerid':1,'firstname':'James','lastname':'Butt','postalcode':'70116',
 			'address':'6649 N Blue Gum St','city':'New Orleans','phonenumber':'504-621-8927',
-			'customersince':'1999-01-07T23:00:00.000Z'},
+			'customersince':'1999-01-08'},
 		{'customerid':2,'firstname':'Josephine','lastname':'Darakjy','postalcode':'48116',
 			'address':'4 B Blue Ridge Blvd','city':'Brighton','phonenumber':'810-292-9388',
-			'customersince':'2003-03-24T23:00:00.000Z'},
+			'customersince':'2003-03-25'},
 		{'customerid':3,'firstname':'Art','lastname':'Venere','postalcode':'08014',
 			'address':'8 W Cerritos Ave #54','city':'Bridgeport','phonenumber':'856-636-8749',
-			'customersince':'2004-12-10T23:00:00.000Z'},
+			'customersince':'2004-12-11'},
 		{'customerid':4,'firstname':'Lenna','lastname':'Paprocki','postalcode':'99501',
 			'address':'639 Main St','city':'Anchorage','phonenumber':'907-385-4412',
-			'customersince':'1998-05-04T22:00:00.000Z'}
+			'customersince':'1998-05-05'}
 	],
 
 	vehicles: [
@@ -66,10 +66,10 @@ const originalTables = {
 	],
 
 	rentals: [
-		{'customerid':1,'vehicleid':3,'rentedsince':'2017-05-10T22:00:00.000Z'},
-		{'customerid':3,'vehicleid':4,'rentedsince':'2017-09-21T22:00:00.000Z'},
-		{'customerid':4,'vehicleid':5,'rentedsince':'2017-10-31T23:00:00.000Z'},
-		{'customerid':1,'vehicleid':1,'rentedsince':'2017-09-04T22:00:00.000Z'}
+		{'customerid':1,'vehicleid':3,'rentedsince':'2017-05-11'},
+		{'customerid':3,'vehicleid':4,'rentedsince':'2017-09-22'},
+		{'customerid':4,'vehicleid':5,'rentedsince':'2017-11-01'},
+		{'customerid':1,'vehicleid':1,'rentedsince':'2017-09-05'}
 	]
 };
 
@@ -189,7 +189,7 @@ describe('Integration Tests', () => {
 			return httpRequest(HTTP.POST, '/models', dataObject)
 				.then(() => expect(httpRequest(HTTP.GET, '/models/11')).resolves.toEqual([expectedDataObject]));
 		});
-		it.skip('POST: adding a new customer', () => {
+		it('POST: adding a new customer', () => {
 			// TODO: Fix date subtracting one day for some reason. (timezone?)
 
 			const dataObject = {'firstname':'Markus','lastname':'Mustermann','postalcode':'41224',
@@ -208,7 +208,7 @@ describe('Integration Tests', () => {
 			return httpRequest(HTTP.POST, '/vehicles', dataObject)
 				.then(() => expect(httpRequest(HTTP.GET, '/vehicles/8')).resolves.toEqual([expectedDataObject]));
 		});
-		it.skip('POST: adding a new rental', () => {
+		it('POST: adding a new rental', () => {
 			// TODO: Fix date subtracting one day for some reason. (timezone?)
 
 			const dataObject = {'customerid':4,'vehicleid':6,'rentedsince':'2017-11-02'};

@@ -1,8 +1,13 @@
 const config = require('config');
-const { Pool } = require('pg');
+const moment = require('moment');
+const { Pool, types } = require('pg');
 const logger = require('../Logger')(module.id);
 
 const options = config.get('db');
+
+const DATE_OID = 1082;
+
+types.setTypeParser(DATE_OID, (val) => val === null ? null : val);
 
 const pool = new Pool(options);
 
