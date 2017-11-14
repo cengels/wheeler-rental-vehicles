@@ -1,5 +1,4 @@
 const config = require('config');
-const moment = require('moment');
 const { Pool, types } = require('pg');
 const logger = require('../Logger')(module.id);
 
