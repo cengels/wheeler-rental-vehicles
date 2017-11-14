@@ -1,5 +1,6 @@
 const dbPool = require('../db/pool');
-const logger = require('../Logger');
+const logger = require('../Logger')(module.id);
+const Status = require('../../definitions/status');
 
 const getWhereConditions = (params, query) => {
 	if (Object.keys(params).length > 0 || Object.keys(query).length > 0) {
@@ -16,10 +17,10 @@ module.exports = {
 		const whereConditions = getWhereConditions(req.params, req.query);
 
 		dbPool.query(`SELECT * FROM ${table} ${whereConditions}`)
-			.then((result) => res.send(result.rows))
+			.then((result) => res.status(Status.OK).send(result.rows))
 			.catch((err) => {
-				logger.serverError('GET operation failed.', err);
-				res.send('GET operation failed.', err);
+				logger.serverError('GET operation failed.', err.detail);
+				res.status(Status.INTERNAL_SERVER_ERROR).send('GET operation failed. ' + err.detail);
 			});
 	},
 
@@ -31,15 +32,15 @@ module.exports = {
 			.join(', ');
 
 		if (values === '') {
-			res.send('Please supply a value.');
+			res.status(Status.BAD_REQUEST).send('Please supply a value.');
 		} else {
 			dbPool.query(`INSERT INTO ${table} (${keys})
 					VALUES (${values})
 				`)
-				.then(() => res.send('POST operation succeeded.'))
+				.then(() => res.status(Status.OK).send('POST operation succeeded.'))
 				.catch((err) => {
-					logger.serverError('POST operation failed.', err);
-					res.send('POST operation failed.', err);
+					logger.serverError('POST operation failed.', err.detail);
+					res.status(Status.INTERNAL_SERVER_ERROR).send('POST operation failed. ' + err.detail);
 				});
 		}
 	},
@@ -48,10 +49,16 @@ module.exports = {
 		const whereConditions = getWhereConditions(req.params, req.query);
 
 		dbPool.query(`DELETE FROM ${table} ${whereConditions}`)
-			.then(() => res.send('DELETE operation succeeded.'))
+			.then(() => res.status(Status.OK).send('DELETE operation succeeded.'))
 			.catch((err) => {
-				logger.serverError('DELETE operation failed.', err);
-				res.send('DELETE operation failed.', err);
+				if (err.code === '23503') {
+					const match = err.detail.match(/^Key \(([A-z]+)\)=\((\d)\)/);
+					logger.userError(err.detail);
+					res.status(Status.BAD_REQUEST).send(`DELETE operation failed. ${match[1]} ${match[2]} is still in use by table ${err.table}.`);
+				} else {
+					logger.serverError('DELETE operation failed.', err.detail);
+					res.status(Status.INTERNAL_SERVER_ERROR).send('DELETE operation failed. ' + err.detail);
+				}
 			});
 	}
 };

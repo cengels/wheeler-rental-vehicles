@@ -236,23 +236,23 @@ describe('Integration Tests', () => {
 		});
 		it('DELETE: deleting a model', () => {
 			expect.assertions(1);
-			return httpRequest(HTTP.DELETE, '/models/7')
-				.then(() => expect(httpRequest(HTTP.GET, '/models/7')).resolves.toEqual([]));
+			return httpRequest(HTTP.DELETE, '/models/4')
+				.then(() => expect(httpRequest(HTTP.GET, '/models/4')).resolves.toEqual([]));
 		});
 		it('DELETE: deleting a customer', () => {
 			expect.assertions(1);
-			return httpRequest(HTTP.DELETE, '/customers/3')
-				.then(() => expect(httpRequest(HTTP.GET, '/customers/3')).resolves.toEqual([]));
+			return httpRequest(HTTP.DELETE, '/customers/1')
+				.then(() => expect(httpRequest(HTTP.GET, '/customers/1')).resolves.toEqual([]));
 		});
 		it('DELETE: deleting a vehicle', () => {
 			expect.assertions(1);
-			return httpRequest(HTTP.DELETE, '/vehicles/4')
-				.then(() => expect(httpRequest(HTTP.GET, '/vehicles/4')).resolves.toEqual([]));
+			return httpRequest(HTTP.DELETE, '/vehicles/3')
+				.then(() => expect(httpRequest(HTTP.GET, '/vehicles/3')).resolves.toEqual([]));
 		});
 		it('DELETE: deleting a rental', () => {
 			expect.assertions(1);
-			return httpRequest(HTTP.DELETE, '/rentals/1/3')
-				.then(() => expect(httpRequest(HTTP.GET, '/rentals/1/3')).resolves.toEqual([]));
+			return httpRequest(HTTP.DELETE, '/rentals/1/2')
+				.then(() => expect(httpRequest(HTTP.GET, '/rentals/1/2')).resolves.toEqual([]));
 		});
 	});
 });

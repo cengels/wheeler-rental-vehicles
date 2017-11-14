@@ -1,5 +1,5 @@
 const dbQuery = require('../db/queries');
-const Status = require('../../definitions/status');
+const Status = require('../../definitions/status-messages');
 const logger = require('../Logger')(module.id);
 const pool = require('../db/pool');
 

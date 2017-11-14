@@ -1,17 +1,7 @@
 module.exports = {
-	Errors: {
-		RentalForm: {
-			EMPTY_FIELDS: 'Please select both a customer and a vehicle.'
-		},
-
-		CalcForm: {
-			EMPTY_FIELDS: 'Please fill all fields.'
-		},
-
-		UNKNOWN: 'Oh no! An unknown error occurred. Please try again or contact the administrator.'
-	},
-
-	Success: {
-		RENTAL_FORM: 'Success!'
-	}
+	OK: 200,
+	BAD_REQUEST: 400,
+	FORBIDDEN: 403,
+	NOT_FOUND: 404,
+	INTERNAL_SERVER_ERROR: 500
 };
