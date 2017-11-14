@@ -1,12 +1,13 @@
 {
 	"app": {
+		"host": "HOST",
 		"port": "PORT"
 	},
 	"db": {
 		"database": "DBNAME",
 		"user": "USERNAME",
 		"password": "PASSWORD",
-		"host": "HOST",
+		"host": "DBHOST",
 		"port": "DBPORT"
 	}
 }

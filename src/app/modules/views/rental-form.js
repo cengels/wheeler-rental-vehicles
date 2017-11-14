@@ -1,16 +1,16 @@
-const dbQuery = require('../db/queries');
+const httpRequest = require('../request');
 const Status = require('../../definitions/status-messages');
+const HTTP = require('../../definitions/http-verbs');
 const logger = require('../Logger')(module.id);
-const pool = require('../db/pool');
 
 const showRentalForm = (req, res, route, hint) => {
-	return dbQuery.getAll.availableVehicles(pool)
-		.then((availableVehicles) => dbQuery.getAll.customers(pool)
+	return httpRequest(HTTP.GET, '/vehicles?available=true')
+		.then((result) => httpRequest(HTTP.GET, '/customers')
 			.then((customers) => {
 				const options = {
 					data: {
-						vehicles: availableVehicles.rows,
-						customers: customers.rows
+						vehicles: result,
+						customers: customers
 					},
 					partials: {
 						hint: hint || '',
@@ -31,8 +31,11 @@ module.exports = (router, route) => {
 			logger.userError('Error posting new rental from rental-form. Invalid parameters.', req.body);
 			showRentalForm(req, res, route, `<div class="hint-error">${Status.Errors.RentalForm.EMPTY_FIELDS}</div>`);
 		} else {
-			dbQuery.post.newRental(pool, req.body.customerid, req.body.vehicleid, new Date().toISOString())
-				.then(() => {
+			httpRequest(HTTP.POST, '/rentals', {
+				'customerid': req.body.customerid,
+				'vehicleid': req.body.vehicleid,
+				'rentedsince': new Date().toISOString()
+			}).then(() => {
 					logger.info('Successfully posted new rental from rental-form.', req.body);
 					showRentalForm(req, res, route, `<div class="hint-success">${Status.Success.RENTAL_FORM}</div>`);
 				})

@@ -1,16 +1,16 @@
-const dbQuery = require('../db/queries');
+const httpRequest = require('../request');
 const Status = require('../../definitions/status-messages');
+const HTTP = require('../../definitions/http-verbs');
 const logger = require('../Logger')(module.id);
-const pool = require('../db/pool');
 const Car = require('../vehicles/Car');
 const Truck = require('../vehicles/Truck');
 
 const showCalcForm = (req, res, route, price, hint) => {
-	return dbQuery.getAll.vehicles(pool)
+	return httpRequest(HTTP.GET, '/vehicles')
 		.then((result) => {
 			const options = {
 				data: {
-					vehicles: result.rows
+					vehicles: result
 				},
 				partials: {
 					hint: hint || '',
@@ -21,15 +21,16 @@ const showCalcForm = (req, res, route, price, hint) => {
 
 			res.render('calc-form', options);
 		}).catch((err) => logger.serverError('Failed to fetch vehicles', err.stack));
+
 };
 
 const newVehicleInstance = (vehicle) => {
 	const { modelid, licenseplate, mileage, milessincemaintenance, maximumcargoload, available } = vehicle;
 
-	return dbQuery.getOnly.model(pool, modelid)
-		.then((res) => dbQuery.getOnly.type(pool, res.rows[0].typeid))
+	return httpRequest(HTTP.GET, '/models/' + modelid)
+		.then((res) => httpRequest(HTTP.GET, '/types/' + res[0].typeid))
 		.then((res) => {
-			if (res.rows[0].name === 'Truck') {
+			if (res[0].name === 'Truck') {
 				return new Truck(licenseplate, mileage, milessincemaintenance, maximumcargoload, available);
 			} else {
 				return new Car(licenseplate, mileage, milessincemaintenance, available);
@@ -48,8 +49,8 @@ module.exports = (router, route) => {
 			showCalcForm(req, res, route, '', `<div class="hint-error">${Status.Errors.CalcForm.EMPTY_FIELDS}</div>`);
 		} else {
 			const { vehicleid, days, distance } = req.body;
-			dbQuery.getOnly.vehicle(pool, vehicleid)
-				.then((res) => newVehicleInstance(res.rows[0]))
+			httpRequest(HTTP.GET, '/vehicles/' + vehicleid)
+				.then((res) => newVehicleInstance(res[0]))
 				.then((vehicleInstance) => {
 					const rentPrice = vehicleInstance.getRentPrice(days, distance);
 					showCalcForm(req, res, route, rentPrice.toFixed(2).toString());

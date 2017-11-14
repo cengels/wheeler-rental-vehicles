@@ -1,6 +1,7 @@
 const request = require('request-promise-native');
 const HTTP = require('../definitions/http-verbs');
 const Status = require('../definitions/status');
+const httpRequest = require('../modules/request');
 
 const originalTables = {
 	colors: [
@@ -73,28 +74,6 @@ const originalTables = {
 		{'customerid':1,'vehicleid':1,'rentedsince':'2017-09-05'}
 	]
 };
-
-const getOptions = (method, path, body) => {
-	let options = {
-		uri: 'http://localhost:8080' + path,
-		method: method,
-		json: true
-	};
-
-	if (body) {
-		options.body = body;
-	}
-
-	return options;
-};
-
-function httpRequest(method, path, requestBody) {
-	return new Promise((resolve, reject) => {
-		request(getOptions(method, path, requestBody))
-			.then((responseBody) => resolve(responseBody))
-			.catch((err) => reject(err));
-	});
-}
 
 describe('Integration Tests', () => {
 	describe('GET Tests', () => {
