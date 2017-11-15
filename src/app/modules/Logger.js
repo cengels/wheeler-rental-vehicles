@@ -1,6 +1,6 @@
 const winston = require('winston');
 const moment = require('moment');
-const config = require('config');
+const config = require('../../../config');
 
 const pyFormat = winston.format.printf(info => {
 	const vars = info.parameters ? `  ${info.parameters}` : '';
@@ -26,10 +26,10 @@ const logger = winston.createLogger({
 
 	// log files do not need to exist, but the directory *must exist*, else winston will not log to file
 	transports: [
-		new winston.transports.File({ filename: config.get('log.file_winston'), maxsize: 1000 })
+		new winston.transports.File({ filename: config.get('log:file_winston'), maxsize: 1000 })
 	],
 	exceptionHandlers: [
-		new winston.transports.File({ filename: config.get('log.file_uncaught'), maxsize: 1000 })
+		new winston.transports.File({ filename: config.get('log:file_uncaught'), maxsize: 1000 })
 	]
 });
 

@@ -1,9 +1,9 @@
 const request = require('request-promise-native');
-const config = require('config');
+const config = require('../../../config');
 
 module.exports = (method, path, requestBody) => {
-	const host = config.get('app.host');
-	const port = config.get('app.port');
+	const host = config.get('app:host');
+	const port = config.get('app:port');
 
 	let options = {
 		uri: `http://${host}:${port}` + path,
