@@ -55,7 +55,7 @@ describe('Vehicle Tests', () => {
 			car.availableForRent = false;
 			expect(car.availableForRent).toBeFalsy();
 		});
-		it('asserts that car will be set to unavailable for rent', () => {
+		it('asserts that truck will obtain new maxCargoLoad', () => {
 			truck.maxCargoLoad = 1600;
 			expect(truck.maxCargoLoad).toBe(1600);
 		});
