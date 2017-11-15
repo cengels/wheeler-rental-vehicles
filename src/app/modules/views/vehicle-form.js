@@ -3,15 +3,21 @@ const Status = require('../../definitions/status-messages');
 const HTTP = require('../../definitions/http-verbs');
 const logger = require('../Logger')(module.id);
 
-const showVehicleForm = (req, res, route, hint) => {
-	const renderForm = (models) => (colors) => {
+const showVehicleForm = (req, res, route, hints) => {
+	if (!hints) {
+		hints = {};
+	}
+
+	const renderForm = (models, colors) => (vehicles) => {
 		const options = {
 			data: {
 				models: models,
-				colors: colors
+				colors: colors,
+				vehicles: vehicles
 			},
 			partials: {
-				hint: hint || '',
+				hintCreate: hints.create || '',
+				hintDelete: hints.delete || '',
 				route: route
 			}
 		};
@@ -21,9 +27,10 @@ const showVehicleForm = (req, res, route, hint) => {
 
 	return httpRequest(HTTP.GET, '/models')
 		.then((models) => httpRequest(HTTP.GET, '/colors')
-			.then(renderForm(models))
-			.catch((err) => logger.serverError('Failed to render vehicle form', err.stack))
-		).catch((err) => logger.serverError('Failed to fetch', err.stack));
+			.then((colors) => httpRequest(HTTP.GET, '/vehicles')
+				.then(renderForm(models, colors))
+				.catch((err) => logger.serverError('Failed to render vehicle form', err.stack))
+			)).catch((err) => logger.serverError('Failed to fetch', err.stack));
 };
 
 module.exports = (router, route) => {
@@ -37,12 +44,12 @@ module.exports = (router, route) => {
 
 		const renderErrorHint = (errorHint, loggerMessage) => (err) => {
 			logger.userError(loggerMessage, err);
-			showVehicleForm(req, res, route, `<div class="hint-error">${errorHint}</div>`);
+			showVehicleForm(req, res, route, { create: `<div class="hint-error">${errorHint}</div>` });
 		};
 
 		const renderSuccessHint = (successHint, loggerMessage) => (info) => {
 			logger.info(loggerMessage, info);
-			showVehicleForm(req, res, route, `<div class="hint-success">${successHint}</div>`);
+			showVehicleForm(req, res, route, { create: `<div class="hint-success">${successHint}</div>` });
 		};
 
 		if (invalidInput) {
@@ -60,6 +67,27 @@ module.exports = (router, route) => {
 			})
 				.then(renderSuccessHint(Status.Success.SUCCESS, 'Successfully posted new vehicle from vehicle-form.'))
 				.catch(renderErrorHint(Status.Errors.UNKNOWN, 'Error posting new vehicle from vehicle-form.'));
+		}
+	});
+
+	router.post(route + '/delete', (req, res) => {
+		const renderErrorHint = (errorHint, loggerMessage) => (err) => {
+			logger.userError(loggerMessage, err);
+			showVehicleForm(req, res, route, { delete: `<div class="hint-error">${errorHint}</div>` });
+		};
+
+		const renderSuccessHint = (successHint, loggerMessage) => (info) => {
+			logger.info(loggerMessage, info);
+			showVehicleForm(req, res, route, { delete: `<div class="hint-success">${successHint}</div>` });
+		};
+
+		if (!req.body.vehicleid) {
+			renderErrorHint(Status.Errors.EMPTY_FIELDS,
+				'Error deleting vehicle from vehicle-form. Invalid parameters.')(req.body);
+		} else {
+			httpRequest(HTTP.DELETE, `/vehicles/${req.body.vehicleid}`)
+				.then(renderSuccessHint(Status.Success.SUCCESS, 'Successfully deleted vehicle from vehicle-form.'))
+				.catch(renderErrorHint(Status.Errors.UNKNOWN, 'Error deleting vehicle from vehicle-form.'));
 		}
 	});
 };
