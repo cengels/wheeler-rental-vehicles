@@ -5,38 +5,12 @@
 </div>
 
 <form id="rental-form" method="post" action="{{>route}}">
-	<div class="selection">
-		<label for="model-dropdown">Model</label>
-		<select id="model-dropdown" name="modelid">
-			<option value="default">Select a model</option>
-			{{#each @models}}
-				<option value="{{modelid}}">{{name}}</option>
-			{{/each}}
-		</select>
-	</div>
+    {{>dropdown itemName="model" dropdownArray=@models dropdownId="modelid" props="name"}}
+    {{>dropdown itemName="color" dropdownArray=@colors dropdownId="colorid" props="name"}}
 
-	<div class="selection">
-		<label for="color-dropdown">Color</label>
-		<select id="color-dropdown" name="colorid">
-			<option value="default">Select a color</option>
-			{{#each @colors}}
-				<option value="{{colorid}}">{{name}}</option>
-			{{/each}}
-		</select>
-	</div>
+    {{>input-field name="license-plate" type="text"}}
+    {{>input-field name="year" type="number"}}
 
-    <div class="input-field">
-        <label for="license-plate-input">License plate</label>
-        <input id="license-plate-input" name="licenseplate" type="text"/>
-    </div>
-
-    <div class="input-field">
-        <label for="year-input">Year</label>
-        <input id="year-input" name="year" type="number"/>
-    </div>
-
-	<div class="submit">
-		<input type="submit" id="submit-vehicle" value="Submit"/>
-	</div>
+	{{>submit name="vehicle"}}
 	{{>hint}}
 </form>

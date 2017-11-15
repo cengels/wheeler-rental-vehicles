@@ -52,7 +52,7 @@ module.exports = (router, route) => {
 			httpRequest(HTTP.POST, '/vehicles', {
 				'colorid': req.body.colorid,
 				'modelid': req.body.modelid,
-				'licenseplate': req.body.licenseplate,
+				'licenseplate': req.body['license-plate'],
 				'year': req.body.year,
 				'mileage': 0,
 				'milessincemaintenance': 0,

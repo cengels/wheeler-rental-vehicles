@@ -6,29 +6,12 @@
 </div>
 
 <form id="calc-form" method="post" action="{{>route}}">
-	<div class="selection">
-		<label for="vehicle-dropdown">Vehicle</label>
-		<select id="vehicle-dropdown" name="vehicleid">
-			<option value="default">Select a vehicle</option>
-			{{#each @vehicles}}
-				<option value="{{vehicleid}}">{{vehicleid}} ({{licenseplate}})</option>
-			{{/each}}
-		</select>
-	</div>
+    {{>dropdown itemName="vehicle" dropdownArray=@vehicles dropdownId="vehicleid" props="vehicleid licenseplate"}}
 
-	<div class="input-field">
-		<label for="days-input">Days</label>
-		<input id="days-input" name="days" type="number"/>
-	</div>
+    {{>input-field name="days" type="number"}}
+    {{>input-field name="distance" type="number"}}
 
-	<div class="input-field">
-		<label for="distance-input">Distance (km)</label>
-		<input id="distance-input" name="distance" type="number"/>
-	</div>
-
-	<div class="submit">
-		<input type="submit" id="submit-calc" value="Calculate Price"/>
-	</div>
+    {{>submit name="calc" text="Calculate Price"}}
 	{{>hint}}
 </form>
 

@@ -6,28 +6,9 @@
 </div>
 
 <form id="rental-form" method="post" action="{{>route}}">
-	<div class="selection">
-		<label for="vehicle-dropdown">Vehicle</label>
-		<select id="vehicle-dropdown" name="vehicleid">
-			<option value="default">Select a vehicle</option>
-			{{#each @vehicles}}
-				<option value="{{vehicleid}}">{{vehicleid}} ({{licenseplate}})</option>
-			{{/each}}
-		</select>
-	</div>
+    {{>dropdown itemName="vehicle" dropdownArray=@vehicles dropdownId="vehicleid" props="vehicleid licenseplate"}}
+    {{>dropdown itemName="customer" dropdownArray=@customers dropdownId="customerid" props="customerid firstname lastname"}}
 
-	<div class="selection">
-		<label for="customer-dropdown">Customer</label>
-		<select id="customer-dropdown" name="customerid">
-			<option value="default">Select a customer</option>
-			{{#each @customers}}
-				<option value="{{customerid}}">{{customerid}} ({{firstname}} {{lastname}})</option>
-			{{/each}}
-		</select>
-	</div>
-
-	<div class="submit">
-		<input type="submit" id="submit-rental" value="Submit"/>
-	</div>
+    {{>submit name="rental"}}
 	{{>hint}}
 </form>

@@ -26,14 +26,13 @@ const showRentalForm = (req, res, route, hint) => {
 					const rentedVehicleIDs = rentals.map(rental => rental.vehicleid);
 					const vehicles = availableVehicles
 						.filter(vehicle => rentedVehicleIDs.indexOf(vehicle.vehicleid) < 0);
-
 					renderForm(vehicles, customers);
 				}).catch((err) => logger.serverError('Failed to render rental form', err.stack))
 		)).catch((err) => logger.serverError('Failed to fetch', err.stack));
 };
 
 module.exports = (router, route) => {
-		router.get(route, (req, res) => showRentalForm(req, res, route));
+	router.get(route, (req, res) => showRentalForm(req, res, route));
 
 	router.post(route, (req, res) => {
 		const renderErrorHint = (errorHint, loggerMessage) => (err) => {

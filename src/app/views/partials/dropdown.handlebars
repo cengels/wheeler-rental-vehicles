@@ -1,0 +1,9 @@
+<div class="selection">
+    <label for="{{itemName}}-dropdown">{{capitalize itemName}}</label>
+    <select id="{{itemName}}-dropdown" name="{{dropdownId}}">
+        <option value="default">Select a {{itemName}}</option>
+        {{#each dropdownArray}}
+            <option value="{{getProps this ../dropdownId}}">{{getProps this ../props}}</option>
+        {{/each}}
+    </select>
+</div>

@@ -7,10 +7,27 @@ const newStandardRoute = require('./modules/routes/view-routes')(router);
 const expressValidator = require('express-validator');
 require('./modules/db/initialize');
 
+const getProps = (item, props) => {
+	props = props.split(' ');
+
+	if (props.length === 1) {
+		return item[props];
+	} else {
+		const values = props.map(prop => item[prop]);
+		const otherValues = values.slice(1, values.length).join(' ');
+
+		return `${values[0]} (${otherValues})`;
+	}
+};
+
 const handlebarsConfig = {
 	layoutsDir: __dirname + '/views/layouts',
 	partialsDir: __dirname + '/views/partials',
-	defaultLayout: 'main'
+	defaultLayout: 'main',
+	helpers: {
+		'capitalize': (str) => str.charAt(0).toUpperCase() + str.slice(1).replace('-', ' '),
+		'getProps': getProps
+	}
 };
 
 router.use(bodyParser.json());
