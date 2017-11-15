@@ -4,6 +4,21 @@ const HTTP = require('../../definitions/http-verbs');
 const logger = require('../Logger')(module.id);
 
 const showRentalForm = (req, res, route, hint) => {
+	const renderForm = (vehicles, customers) => {
+		const options = {
+			data: {
+				vehicles: vehicles,
+				customers: customers
+			},
+			partials: {
+				hint: hint || '',
+				route: route
+			}
+		};
+
+		res.render('rental-form', options);
+	};
+
 	return httpRequest(HTTP.GET, '/vehicles?available=true')
 		.then((availableVehicles) => httpRequest(HTTP.GET, '/rentals')
 			.then((rentals) => httpRequest(HTTP.GET, '/customers')
@@ -12,42 +27,36 @@ const showRentalForm = (req, res, route, hint) => {
 					const vehicles = availableVehicles
 						.filter(vehicle => rentedVehicleIDs.indexOf(vehicle.vehicleid) < 0);
 
-					const options = {
-						data: {
-							vehicles: vehicles,
-							customers: customers
-						},
-						partials: {
-							hint: hint || '',
-							route: route
-						}
-					};
-
-					res.render('rental-form', options);
+					renderForm(vehicles, customers);
 				}).catch((err) => logger.serverError('Failed to render rental form', err.stack))
 		)).catch((err) => logger.serverError('Failed to fetch', err.stack));
 };
 
 module.exports = (router, route) => {
-	router.get(route, (req, res) => showRentalForm(req, res, route));
+		router.get(route, (req, res) => showRentalForm(req, res, route));
 
 	router.post(route, (req, res) => {
+		const renderErrorHint = (errorHint, loggerMessage) => (err) => {
+			logger.userError(loggerMessage, err);
+			showRentalForm(req, res, route, `<div class="hint-error">${errorHint}</div>`);
+		};
+
+		const renderSuccessHint = (successHint, loggerMessage) => (info) => {
+			logger.info(loggerMessage, info);
+			showRentalForm(req, res, route, `<div class="hint-success">${successHint}</div>`);
+		};
+
 		if (req.body.customerid === 'default' || req.body.vehicleid === 'default') {
-			logger.userError('Error posting new rental from rental-form. Invalid parameters.', req.body);
-			showRentalForm(req, res, route, `<div class="hint-error">${Status.Errors.RentalForm.EMPTY_FIELDS}</div>`);
+			renderErrorHint(Status.Errors.RentalForm.EMPTY_FIELDS,
+				'Error posting new rental from rental-form. Invalid parameters.')(req.body);
 		} else {
 			httpRequest(HTTP.POST, '/rentals', {
 				'customerid': req.body.customerid,
 				'vehicleid': req.body.vehicleid,
 				'rentedsince': new Date().toISOString()
-			}).then(() => {
-					logger.info('Successfully posted new rental from rental-form.', req.body);
-					showRentalForm(req, res, route, `<div class="hint-success">${Status.Success.SUCCESS}</div>`);
-				})
-				.catch((err) => {
-					logger.serverError('Error posting new rental from rental-form.', err, req.body);
-					showRentalForm(req, res, route, `<div class="hint-error">${Status.Errors.UNKNOWN}</div>`);
-				});
+			})
+				.then(renderSuccessHint(Status.Success.SUCCESS, 'Successfully posted new rental from rental-form.'))
+				.catch(renderErrorHint(Status.Errors.UNKNOWN, 'Error posting new rental from rental-form.'));
 		}
 	});
 };
