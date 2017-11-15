@@ -41,7 +41,7 @@ newApiRoute('/vehicles', HTTP.GET, HTTP.POST, HTTP.DELETE);
 newApiRoute('/vehicles/:vehicleId', HTTP.GET, HTTP.DELETE);
 newApiRoute('/customers', HTTP.GET, HTTP.POST, HTTP.DELETE);
 newApiRoute('/customers/:customerId', HTTP.GET, HTTP.DELETE);
-newApiRoute('/rentals', HTTP.GET, HTTP.POST), HTTP.DELETE;
+newApiRoute('/rentals', HTTP.GET, HTTP.POST, HTTP.DELETE);
 newApiRoute('/rentals/:customerId/:vehicleId', HTTP.GET, HTTP.DELETE);
 newApiRoute('/colors', HTTP.GET, HTTP.POST, HTTP.DELETE);
 newApiRoute('/colors/:colorId', HTTP.GET, HTTP.DELETE);
