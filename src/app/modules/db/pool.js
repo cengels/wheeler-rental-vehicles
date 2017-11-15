@@ -10,9 +10,11 @@ types.setTypeParser(DATE_OID, (val) => val === null ? null : val);
 
 const pool = new Pool(options);
 
-pool.on('error', (err, client) => {
+const logError = (err, client) => {
 	logger.serverError('Unexpected error on idle client', err.stack, client);
 	throw Error('Unexpected error on idle client');
-});
+};
+
+pool.on('error', logError);
 
 module.exports = pool;

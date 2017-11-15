@@ -27,14 +27,16 @@ const buildQuery = (operation, table, params, query) => {
 	return dbPool.query(`${queryText} ${table}`);
 };
 
+const sendError = (res, operation) => (err) => {
+	logger.serverError(`${operation} operation failed.`, err);
+	res.status(Status.INTERNAL_SERVER_ERROR).send(`${operation} operation failed. ${err}`);
+};
+
 module.exports = {
 	getCallback: (req, res, table) => {
 		buildQuery('SELECT', table, req.params, req.query)
 			.then((result) => res.status(Status.OK).send(result.rows))
-			.catch((err) => {
-				logger.serverError('GET operation failed.', err);
-				res.status(Status.INTERNAL_SERVER_ERROR).send('GET operation failed. ' + err);
-			});
+			.catch(sendError(res, 'GET'));
 	},
 
 	postCallback: (req, res, table) => {
@@ -47,10 +49,7 @@ module.exports = {
 		} else {
 			dbPool.query(`INSERT INTO ${table} (${keys}) VALUES (${placeholders})`, values)
 				.then(() => res.status(Status.OK).send('POST operation succeeded.'))
-				.catch((err) => {
-					logger.serverError('POST operation failed.', err);
-					res.status(Status.INTERNAL_SERVER_ERROR).send('POST operation failed. ' + err);
-				});
+				.catch(sendError(res, 'POST'));
 		}
 	},
 
@@ -63,8 +62,7 @@ module.exports = {
 					logger.userError(err.detail);
 					res.status(Status.BAD_REQUEST).send(`DELETE operation failed. ${match[1]} ${match[2]} is still in use by table ${err.table}.`);
 				} else {
-					logger.serverError('DELETE operation failed.', err);
-					res.status(Status.INTERNAL_SERVER_ERROR).send('DELETE operation failed. ' + err);
+					sendError(res, 'DELETE')(err);
 				}
 			});
 	}
