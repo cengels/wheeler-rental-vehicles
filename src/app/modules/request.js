@@ -4,9 +4,10 @@ const config = require('../../../config');
 module.exports = (method, path, requestBody) => {
 	const host = config.get('app:host');
 	const port = config.get('app:port');
+	const uri = process.env.NODE_ENV === 'production' ? `http://${host}` + path : `http://${host}:${port}` + path;
 
 	let options = {
-		uri: `http://${host}:${port}` + path,
+		uri: uri,
 		method: method,
 		json: true
 	};
