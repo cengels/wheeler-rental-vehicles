@@ -85,9 +85,17 @@ module.exports = (router, route) => {
 			renderErrorHint(Status.Errors.EMPTY_FIELDS,
 				'Error deleting vehicle from vehicle-form. Invalid parameters.')(req.body);
 		} else {
-			httpRequest(HTTP.DELETE, `/vehicles/${req.body.vehicleid}`)
-				.then(renderSuccessHint(Status.Success.SUCCESS, 'Successfully deleted vehicle from vehicle-form.'))
-				.catch(renderErrorHint(Status.Errors.UNKNOWN, 'Error deleting vehicle from vehicle-form.'));
+			httpRequest(HTTP.GET, `/rentals?vehicleid=${req.body.vehicleid}`)
+				.then((res) => {
+					if (res.length > 0) {
+						renderErrorHint(Status.Errors.VehicleForm.STILL_IN_USE,
+							'Error deleting vehicle from vehicle-form. Vehicle still in use.')(req.body);
+					} else {
+						httpRequest(HTTP.DELETE, `/vehicles/${req.body.vehicleid}`)
+							.then(renderSuccessHint(Status.Success.SUCCESS, 'Successfully deleted vehicle from vehicle-form.'))
+							.catch(renderErrorHint(Status.Errors.UNKNOWN, 'Error deleting vehicle from vehicle-form.'));
+					}
+				}).catch(renderErrorHint(Status.Errors.UNKNOWN, 'Error deleting vehicle from vehicle-form.'));
 		}
 	});
 };
