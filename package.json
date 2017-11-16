@@ -7,7 +7,7 @@
 		"watch": "jest --watch",
 		"start": "node scripts/start.js",
 		"build": "scripts/build.sh",
-		"deploy": "scripts/build.sh && scripts/deploy.sh",
+		"deploy": "node ./node_modules/.bin/eslint src/** && scripts/build.sh && scripts/deploy.sh",
 		"mock": "node scripts/createMockDatabase.js",
 		"lint": "node ./node_modules/.bin/eslint src/**",
 		"clearLogs": "echo '' > logs/winston.log && echo '' > logs/uncaught.log"

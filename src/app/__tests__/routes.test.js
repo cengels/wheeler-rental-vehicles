@@ -1,4 +1,3 @@
-const request = require('request-promise-native');
 const HTTP = require('../definitions/http-verbs');
 const Status = require('../definitions/status');
 const httpRequest = require('../modules/request');
