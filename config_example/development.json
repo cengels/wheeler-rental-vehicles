@@ -11,7 +11,6 @@
 		"database": "rentaldb",
 		"user": "USERNAME",
 		"password": "PASSWORD",
-		"host": "localhost",
-		"port": 1234
+		"port": 5432
 	}
 }

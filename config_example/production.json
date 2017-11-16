@@ -1,17 +1,17 @@
 {
 	"app": {
-		"host": "localhost",
-		"port": 8080
+		"host": "HOST",
+		"port": "PORT"
 	},
 	"log" : {
-		"file_winston" : "../logs/winston.log",
-		"file_uncaught" : "../logs/uncaught.log"
+		"file_winston" : "FULLPATH",
+		"file_uncaught" : "FULLPATH"
 	},
 	"db": {
 		"database": "rentaldb",
 		"user": "USERNAME",
 		"password": "PASSWORD",
 		"host": "localhost",
-		"port": 1234
+		"port": 5432
 	}
 }
