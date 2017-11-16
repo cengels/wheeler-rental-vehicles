@@ -55,5 +55,6 @@ newApiRoute('/models/:modelId', HTTP.GET, HTTP.DELETE);
 newStandardRoute.rentalFormView('/');
 newStandardRoute.calcPriceView('/calc');
 newStandardRoute.vehicleFormView('/vehicle-form');
+newStandardRoute.customerFormView('/customer-form');
 
 module.exports = router;

@@ -1,0 +1,17 @@
+<h2>Register a customer</h2>
+
+<div id="main-text">
+	Got a new customer? Enter their data here to register them with the system.
+</div>
+
+<form id="customer-form-create" method="POST" action="{{>route}}">
+    {{>input-field name="first-name" type="text"}}
+    {{>input-field name="last-name" type="text"}}
+    {{>input-field name="postal-code" type="text"}}
+    {{>input-field name="address" type="text"}}
+    {{>input-field name="city" type="text"}}
+    {{>input-field name="phone-number" type="text"}}
+
+	{{>submit name="create-customer"}}
+	{{>hint}}
+</form>
