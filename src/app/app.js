@@ -23,7 +23,8 @@ const getProps = (item, props) => {
 const returnDropdown = (array, keyValue, textProps, selected) => {
 	return array.map(obj => {
 		const value = obj[keyValue];
-		const selectedText = selected === value ? 'selected' : '';
+		console.log(selected + '=' + value);
+		const selectedText = parseInt(selected) === parseInt(value) ? 'selected' : '';
 		const props = textProps.split(' ').map(prop => obj[prop]).join(' ');
 
 		return `<option value="${value}" ${selectedText}>${value}: ${props}</option>`;
