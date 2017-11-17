@@ -20,13 +20,25 @@ const getProps = (item, props) => {
 	}
 };
 
+const returnDropdown = (array, keyValue, textProps, selected) => {
+	return array.map(obj => {
+		const value = obj[keyValue];
+		const selectedText = selected === value ? 'selected' : '';
+		const props = textProps.split(' ').map(prop => obj[prop]).join(' ');
+
+		return `<option value="${value}" ${selectedText}>${value}: ${props}</option>`;
+	});
+};
+
 const handlebarsConfig = {
 	layoutsDir: __dirname + '/views/layouts',
 	partialsDir: __dirname + '/views/partials',
 	defaultLayout: 'main',
 	helpers: {
 		'capitalize': (str) => str.charAt(0).toUpperCase() + str.slice(1).replace('-', ' '),
-		'getProps': getProps
+		'getProps': getProps,
+		'isEqual': (a, b, options) => a === b ? options.fn(this) : options.inverse(this),
+		'returnDropdown': returnDropdown
 	}
 };
 

@@ -18,7 +18,7 @@
 <h2>Delete a vehicle</h2>
 
 <form id="vehicle-form-delete" method="POST" action="{{>route}}/delete">
-    {{>dropdown itemName="vehicle" dropdownArray=@vehicles dropdownId="vehicleid" props="vehicleid licenseplate"}}
+    {{>dropdown itemName="vehicle" dropdownArray=@vehicles dropdownId="vehicleid" props="licenseplate"}}
 
     {{>submit name="delete-vehicle"}}
     {{>hintDelete}}

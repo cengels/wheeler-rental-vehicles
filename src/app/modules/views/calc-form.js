@@ -5,16 +5,19 @@ const logger = require('../Logger')(module.id);
 const Car = require('../vehicles/Car');
 const Truck = require('../vehicles/Truck');
 
-const showCalcForm = (req, res, route, price, hint) => {
+const showCalcForm = (req, res, route, partials = {}) => {
 	const renderForm = (result) => {
 		const options = {
 			data: {
-				vehicles: result
+				vehicles: result,
+				vehicleId: partials.vehicleid || '',
+				distance: partials.distance || '',
+				days: partials.days || ''
 			},
 			partials: {
-				hint: hint || '',
 				route: route,
-				price: price || ''
+				hint: partials.hint || '',
+				price: partials.price || ''
 			}
 		};
 
@@ -48,23 +51,29 @@ module.exports = (router, route) => {
 	router.get(route, (req, res) => showCalcForm(req, res, route));
 
 	router.post(route, (req, res) => {
-		const renderRentPrice = (days, distance) => (vehicleInstance) => {
-			const rentPrice = vehicleInstance.getRentPrice(days, distance);
-			showCalcForm(req, res, route, rentPrice.toFixed(2).toString());
+		const data = {
+			vehicleid: req.body.vehicleid,
+			days: req.body.days,
+			distance: req.body.distance
+		};
+
+		const renderRentPrice = (vehicleInstance) => {
+			data.price = vehicleInstance.getRentPrice(req.body.days, req.body.distance).toFixed(2).toString();
+			showCalcForm(req, res, route, data);
 		};
 
 		const renderErrorHint = (errorHint, loggerMessage) => (err) => {
+			data.hint = `<div class="hint-error">${errorHint}</div>`;
 			logger.serverError(loggerMessage, err, req.body);
-			showCalcForm(req, res, route, '', `<div class="hint-error">${errorHint}</div>`);
+			showCalcForm(req, res, route, data);
 		};
 
-		if (req.body.vehicleid === 'default' || req.body.days === '' || req.body.distance === '') {
-			renderErrorHint(Status.Errors.EMPTY_FIELDS, 'Error calculating price. Invalid parameters.')(req.body);
+		if (data.vehicleid === 'default' || data.days === '' || data.distance === '') {
+			renderErrorHint(Status.Errors.EMPTY_FIELDS, 'Error calculating price. Invalid parameters.')(data);
 		} else {
-			const { vehicleid, days, distance } = req.body;
-			httpRequest(HTTP.GET, '/vehicles/' + vehicleid)
+			httpRequest(HTTP.GET, '/vehicles/' + data.vehicleid)
 				.then((res) => getInstanceOf(res[0]))
-				.then(renderRentPrice(days, distance))
+				.then(renderRentPrice)
 				.catch(renderErrorHint(Status.Errors.UNKNOWN, 'Error calculating price.'));
 		}
 	});

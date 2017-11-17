@@ -6,8 +6,8 @@
 </div>
 
 <form id="rental-form" method="post" action="{{>route}}">
-    {{>dropdown itemName="vehicle" dropdownArray=@vehicles dropdownId="vehicleid" props="vehicleid licenseplate"}}
-    {{>dropdown itemName="customer" dropdownArray=@customers dropdownId="customerid" props="customerid firstname lastname"}}
+    {{>dropdown itemName="vehicle" dropdownArray=@vehicles dropdownId="vehicleid" props="licenseplate"}}
+    {{>dropdown itemName="customer" dropdownArray=@customers dropdownId="customerid" props="firstname lastname"}}
 
     {{>submit name="rental"}}
 	{{>hint}}
