@@ -58,7 +58,7 @@ module.exports = (router, route) => {
 		};
 
 		const renderRentPrice = (vehicleInstance) => {
-			data.price = vehicleInstance.getRentPrice(req.body.days, req.body.distance).toFixed(2).toString();
+			data.price = vehicleInstance.getRentPrice(req.body.days, req.body.distance).toFixed(2).toString() + ' €';
 			showCalcForm(req, res, route, data);
 		};
 
