@@ -3,8 +3,7 @@ const environment = process.env.NODE_ENV || 'development';
 
 const defaults = {
 	"log" : {
-		"file_winston" : "../logs/winston.log",
-		"file_uncaught" : "../logs/uncaught.log"
+		"file_winston" : "../logs/winston.log"
 	},
 	"db": {
 		"database": "rentaldb",

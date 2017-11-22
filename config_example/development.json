@@ -4,8 +4,7 @@
 		"port": 8080
 	},
 	"log" : {
-		"file_winston" : "../logs/winston.log",
-		"file_uncaught" : "../logs/uncaught.log"
+		"file_winston" : "../logs/winston.log"
 	},
 	"db": {
 		"database": "rentaldb",

@@ -4,8 +4,7 @@
 		"port": "PORT"
 	},
 	"log" : {
-		"file_winston" : "FULLPATH",
-		"file_uncaught" : "FULLPATH"
+		"file_winston" : "LOGPATH"
 	},
 	"db": {
 		"database": "rentaldb",
