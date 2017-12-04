@@ -1,4 +1,5 @@
-const router = require('express')();
+const express = require('express');
+const router = express();
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const HTTP = require('./definitions/http-verbs');
@@ -33,7 +34,7 @@ const returnDropdown = (array, keyValue, textProps, selected) => {
 const handlebarsConfig = {
 	layoutsDir: __dirname + '/views/layouts',
 	partialsDir: __dirname + '/views/partials',
-	defaultLayout: 'main',
+	defaultLayout: 'dashboard',
 	helpers: {
 		'capitalize': (str) => str.charAt(0).toUpperCase() + str.slice(1).replace('-', ' '),
 		'getProps': getProps,
@@ -41,9 +42,12 @@ const handlebarsConfig = {
 	}
 };
 
+const STATIC_FILE_PATH = __dirname.slice(0, __dirname.lastIndexOf('/src')) + '/public';
+
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(expressValidator());
+router.use('/public', express.static(STATIC_FILE_PATH));
 router.engine('handlebars', handlebars(handlebarsConfig));
 router.set('view engine', 'handlebars');
 router.set('views', __dirname + '/views');
@@ -63,6 +67,7 @@ newApiRoute('/makes/:makeId', HTTP.GET, HTTP.DELETE);
 newApiRoute('/models', HTTP.GET, HTTP.POST, HTTP.DELETE);
 newApiRoute('/models/:modelId', HTTP.GET, HTTP.DELETE);
 
+newViewRoute.frontPageView();
 newViewRoute.rentalFormView();
 newViewRoute.calcPriceView();
 newViewRoute.vehicleFormView();

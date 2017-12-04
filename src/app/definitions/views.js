@@ -1,4 +1,8 @@
 module.exports = {
+	FrontPage: {
+		name: 'front-page-view',
+		route: '/'
+	},
 	CalcForm: {
 		name: 'calc-form',
 		route: '/calc'
@@ -9,7 +13,7 @@ module.exports = {
 	},
 	RentalForm: {
 		name: 'rental-form',
-		route: '/'
+		route: '/rental'
 	},
 	VehicleForm: {
 		name: 'vehicle-form',
