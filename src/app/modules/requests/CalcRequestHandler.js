@@ -17,7 +17,8 @@ class CalcRequestHandler extends RequestHandler {
 		makeGetRequest('/vehicles/' + this._requestBody.vehicleId.value)
 			.then(vehicle => this._getVehicleInstance(vehicle))
 			.then(vehicleInstance => {
-				this._responseBody.price = this._getRentPrice(vehicleInstance);
+				this._responseBody.customerPrice = this._getCustomerPrice(vehicleInstance);
+				this._responseBody.maintenancePrice = this._getMaintenancePrice(vehicleInstance);
 				this.renderCalcForm();
 			})
 			.catch(err => this.renderCalcError(StatusMessages.Errors.UNKNOWN, 'Error calculating price.', err));
@@ -84,9 +85,16 @@ class CalcRequestHandler extends RequestHandler {
 		}
 	}
 
-	_getRentPrice(vehicleInstance) {
+	_getCustomerPrice(vehicleInstance) {
 		return vehicleInstance
-			.getRentPrice(this._requestBody.days.value, this._requestBody.distance.value)
+			.getCustomerPrice(this._requestBody.days.value, this._requestBody.distance.value)
+			.toFixed(2)
+			.toString() + ' €';
+	}
+
+	_getMaintenancePrice(vehicleInstance) {
+		return vehicleInstance
+			.getMaintenancePrice(this._requestBody.distance.value)
 			.toFixed(2)
 			.toString() + ' €';
 	}

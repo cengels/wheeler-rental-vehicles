@@ -17,5 +17,6 @@
 </form>
 
 <div id="price-output">
-	<input type="text" value="{{@price}}" disabled/>
+    {{>output-field label="customer-price" value=@customerPrice}}
+    {{>output-field label="maintenance-price" value=@maintenancePrice}}
 </div>
