@@ -26,8 +26,6 @@ module.exports = (router, viewObject) => {
 	router.post(viewObject.route + '/delete', (req, res) => {
 		const vehicleDeleteRequest = new VehicleDeleteRequestHandler(res, viewObject, req.body);
 
-		console.log(vehicleDeleteRequest.inputIsValid());
-
 		if (vehicleDeleteRequest.inputIsValid()) {
 			vehicleDeleteRequest.deleteVehicle()
 				.then(() => vehicleDeleteRequest.renderVehicleSuccess(Status.Success.SUCCESS))

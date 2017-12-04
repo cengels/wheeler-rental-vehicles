@@ -26,7 +26,7 @@ class CalcRequestHandler extends RequestHandler {
 	renderCalcForm(hint) {
 		return this._getVehicles()
 			.then(() => this._renderForm(this._responseBody, { hint: hint }))
-			.catch(err => logger.serverError('Failed to render form', err.stack))
+			.catch(err => logger.serverError('Failed to render form', err.stack));
 	}
 
 	renderCalcError(errorHint, logMessage, err) {
@@ -35,7 +35,7 @@ class CalcRequestHandler extends RequestHandler {
 				const hint = this.generateErrorHint(errorHint, logMessage, err);
 				this.renderCalcForm(hint);
 			})
-			.catch(err => logger.serverError('Failed to render form', err.stack))
+			.catch(err => logger.serverError('Failed to render form', err.stack));
 	}
 
 	static _buildRequestBody(requestBody) {
