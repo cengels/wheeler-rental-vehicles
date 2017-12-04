@@ -1,6 +1,6 @@
 const HTTP = require('../definitions/http-verbs');
 const Status = require('../definitions/status');
-const httpRequest = require('../modules/request');
+const httpRequest = require('../modules/requests/Request');
 
 const originalTables = {
 	colors: [

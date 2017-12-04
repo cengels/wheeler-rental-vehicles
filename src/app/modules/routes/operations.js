@@ -20,7 +20,6 @@ const buildQuery = (operation, table, params, query) => {
 		const keys = Object.keys(params).concat(Object.keys(query));
 		const values = Object.values(params).concat(Object.values(query));
 		const whereConditions = keys.map((key, i) => `${key} = $${i + 1}`).join(' AND ');
-
 		return dbPool.query(`${queryText} ${table} WHERE ${whereConditions}`, values);
 	}
 

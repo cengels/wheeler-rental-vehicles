@@ -1,4 +1,4 @@
-const Vehicle = require('../Vehicle');
+const Vehicle = require('./Vehicle');
 const Numbers = require('../../definitions/numbers');
 
 class Car extends Vehicle {

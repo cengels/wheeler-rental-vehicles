@@ -5,7 +5,7 @@
 	This will not automatically rent a vehicle, just give you the price.
 </div>
 
-<form id="calc-form" method="post" action="{{>route}}">
+<form id="calc-form" method="post" action="{{@route}}">
     {{>dropdown itemName="vehicle" dropdownArray=@vehicles dropdownId="vehicleid"
             props="licenseplate" default=@vehicleId}}
 
@@ -17,5 +17,5 @@
 </form>
 
 <div id="price-output">
-	<input type="text" value="{{>price}}" disabled/>
+	<input type="text" value="{{@price}}" disabled/>
 </div>
