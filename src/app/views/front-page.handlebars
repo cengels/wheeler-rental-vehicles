@@ -27,41 +27,54 @@
             </div>
 
             <div id="navbar">
-                <div id="login-button"><a href="/">Login</a></div>
-                <div id="features-button"><a href="/">Features</a></div>
-                <div id="about-button"><a href="/">About</a></div>
+                <div id="elements-hover">
+                    <div id="login-link"><a href="/">Login</a></div>
+                    <div id="features-link"><a href="/">Features</a></div>
+                    <div id="about-link"><a href="/">About</a></div>
+                </div>
+                <div id="elements-no-hover">
+                    <a href="/">Login</a>
+                    <a href="/">Features</a>
+                    <a href="/">About</a>
+                </div>
             </div>
         </div>
 
-        <div id="page-content">
+        <div id="title-container">
             <div id="title-image-container"></div>
             <div id="title-label-container">
                 <h1>Managing your wheels has never been so simple</h1>
                 <button id="title-sign-up-button">Sign Up</button>
                 <div id="image-attribution">"Red Shelby Daytona with white racing stripes parked at an auto show" by nate_kate is licensed under CC BY 2.0</div>
             </div>
+        </div>
 
+        <div id="page-content">
             <div class="info-container" id="features-container">
-                <span class="fa fa-cubes fa-5x"></span>
-                <div class="info-container-content">
-                    <h3>Features</h3>
-                    <ul>
-                        <li>Get an overview of all your vehicles and customers in a clean, modern dashboard.</li>
-                        <li>Multiple branches? No problem, get individual or collective data of all of them.</li>
-                        <li>We calculate rent prices, costs, and revenue for you &mdash; never grab the calculator again!</li>
-                        <li>Automatically bill your customers with the press of a button.</li>
-                        <li>Access your dashboard from anywhere, wherever you are.</li>
-                    </ul>
-                    <span id="wheeler-lite-link">Not a rental vehicle retailer? Check out our sister product, <a href="/">Wheeler Lite</a>!</span>
+                <h3>Features</h3>
+                <div class="two-column-box">
+                    <span class="fa fa-cubes fa-5x"></span>
+                    <div class="info-container-content">
+                        <ul>
+                            <li>Get an overview of all your vehicles and customers in a clean, modern dashboard.</li>
+                            <li>Multiple branches? No problem, get individual or collective data of all of them.</li>
+                            <li>We calculate rent prices, costs, and revenue for you &mdash; never grab the calculator again!</li>
+                            <li>Automatically bill your customers with the press of a button.</li>
+                            <li>Access your dashboard from anywhere, wherever you are.</li>
+                        </ul>
+                        <span class="aligned-to-li">Not a rental vehicle retailer? Check out our sister product, <a href="/">Wheeler Lite</a>!</span>
+                    </div>
                 </div>
             </div>
 
             <div class="info-container" id="sign-up-container">
-                <span class="fa fa-car fa-5x"></span>
-                <div class="info-container-content">
-                    <h3>It's simple.</h3>
-                    <p>Instant sign-up. No lengthy verification process. No hidden fees. 100% free &mdash; now and forever.</p>
-                    <button id="info-sign-up-button">Sign Up Now!</button>
+                <h3>It's simple.</h3>
+                <div class="two-column-box">
+                    <div class="info-container-content">
+                        <p>Instant sign-up. No lengthy verification process. No hidden fees. 100% free &mdash; now and forever.</p>
+                        <button id="info-sign-up-button">Sign Up Now!</button>
+                    </div>
+                    <span class="fa fa-car fa-5x"></span>
                 </div>
             </div>
         </div>

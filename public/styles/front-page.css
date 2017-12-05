@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body, html {
     font-family: 'Signika', sans-serif;
     font-weight: lighter;
@@ -5,21 +9,36 @@ body, html {
     height: 100%;
 }
 
-h1, h2, h3, h4, h5, h6, #navbar {
+h1, h2, h3, h4, h5, h6, #navbar, #elements-no-hover button {
     font-family: 'Josefin Sans', sans-serif;
     margin: 0;
     text-transform: uppercase;
 }
 
 #header {
-    height: 54px;
+    height: 4vw;
+    min-height: 40px;
+    max-height: 54px;
+    width: 100%;
+    position: relative;
     background: black;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+}
+
+#header a {
+    color: inherit;
+    text-decoration: none;
+}
+
+#title, #navbar {
+    opacity: 0.9;
 }
 
 #title {
     height: 100%;
     margin-left: 10px;
-    float: left;
     color: white;
 }
 
@@ -31,7 +50,7 @@ h1, h2, h3, h4, h5, h6, #navbar {
 }
 
 #wheeler-logo {
-    height: 42px;
+    height: 90%;
     width: auto;
 }
 
@@ -41,33 +60,60 @@ h1, h2, h3, h4, h5, h6, #navbar {
 }
 
 h2 {
+    display: none;
     text-transform: none;
     margin-left: 9px;
     margin-top: 5px;
 }
 
 #navbar {
+    display: inline-block;
     height: 100%;
-    color: #DCDCDC;
     font-weight: 700;
-    float: right;
+    font-size: 9pt;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.6);
+    letter-spacing: 2px;
+    text-align: center;
+    transition: background-color 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
+}
+
+#elements-no-hover, #elements-hover {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    background: transparent;
+}
+
+#elements-no-hover a, #elements-hover div {
+    height: 100%;
+    width: 8.33vw;
+    min-width: 86px;
+    max-width: 256px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
-#navbar div {
-    margin-right: 50px;
-    font-size: 9pt;
-    letter-spacing: 2px;
-    text-shadow: 0 0 1px rgba(255, 255, 255, 0.6);
+#elements-no-hover a:hover {
+    background-color: #DCDCDC;
+    color: black;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.6);
 }
 
-#navbar div a:hover {
-    opacity: 0.7;
+#elements-hover {
+    display: none;
+}
+
+#title-container {
+    position: relative;
+    height: 38vw;
+    min-height: 290px;
+    width: 100%;
 }
 
 #title-image-container {
-    height: 38vw;
+    height: 100%;
     width: 100%;
     background-size: cover !important;
     background: url('/public/images/title-image-daytona.jpg') no-repeat center;
@@ -75,32 +121,40 @@ h2 {
 }
 
 #title-label-container {
-    height: 38vw;
+    height: 100%;
     width: 100%;
+    position: absolute;
+    top: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 54px;
     color: white;
     opacity: 0.9;
 }
 
 h1 {
-    font-size: 1.9vw;
-    letter-spacing: 4px;
+    font-size: calc(12pt + 1vw);
+    letter-spacing: 0.3vw;
+    text-align: center;
+    margin: 0 32px;
+    line-height: 140%;
 }
 
 #title-sign-up-button {
-    color: white;
-    font-size: 1.5vw;
+    height: 5vw;
+    min-height: 52px;
+    width: 16.67vw;
+    min-width: 178px;
     margin-top: 2vw;
     border: 2px solid white;
     background-color: rgba(0, 0, 0, 0.3);
-    padding: 1.5vw 4vw;
-    text-transform: uppercase;
     transition: border 0.1s linear, background-color 0.1s linear;
+    color: white;
+    font-size: 87.5%;
+    font-weight: 700;
+    letter-spacing: 2pt;
+    text-transform: uppercase;
 }
 
 #title-sign-up-button:hover {
@@ -118,10 +172,41 @@ h1 {
     opacity: 0.7;
 }
 
-#header a {
-    color: inherit;
-    text-decoration: none;
+
+
+
+@media screen and (hover: hover), screen and (min-width: 769px) {
+    #elements-hover div {
+        display: flex;
+    }
+
+    #elements-hover {
+        display: flex;
+    }
+
+    #elements-hover a:hover {
+        opacity: 0.7;
+    }
+
+    #elements-no-hover {
+        display: none;
+    }
 }
+
+@media only screen and (max-width: 560px) {
+    #image-attribution {
+        font-size: 8pt;
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width: 481px) {
+    #title h2 {
+        display: inline-block !important;
+    }
+}
+
+
 
 @-moz-keyframes spin {
     100% { -moz-transform: rotate(360deg); }
