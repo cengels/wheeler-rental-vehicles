@@ -1,5 +1,13 @@
-# rental-vehicles-web
-Rent vehicles — now as web app!
+# Wheeler
+###### formerly known as rental-vehicles-web
+A web-app for retailers of rental vehicles and (eventually) private consumers looking to manage all their vehicles in one place. Also offers customer management, automatic price calculations and billing, and much more.
+
+## Run the web-app online
+
+1. Go to http://wheeler.clinqlabs.com for the landing page.
+2. Go to http://wheeler.clinqlabs.com/rental or any of the other linked sub-pages to get a glimpse into the backend.
+
+Note that the domain is temporary only. Also note that the app is an active work-in-progress, and that you will eventually be able to register an account and access a one-page dashboard instead of individual HTML pages.
 
 ## Run the web-app locally
 
