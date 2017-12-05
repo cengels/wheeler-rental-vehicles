@@ -1,0 +1,41 @@
+body, html {
+    font-family: 'Signika', sans-serif;
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    background: #feac5e; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #feac5e, #c779d0); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #feac5e, #c779d0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+#main-content-container {
+    height: 100%;
+    width: 80%;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.75);
+}
+
+#header {
+    text-align: center;
+    margin: auto;
+}
+
+#navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#navbar div {
+
+}
+
+h1 {
+    margin: 0;
+}

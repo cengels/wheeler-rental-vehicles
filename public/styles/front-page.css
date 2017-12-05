@@ -1,0 +1,137 @@
+body, html {
+    font-family: 'Signika', sans-serif;
+    font-weight: lighter;
+    margin: 0;
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, #navbar {
+    font-family: 'Josefin Sans', sans-serif;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+#header {
+    height: 54px;
+    background: black;
+}
+
+#title {
+    height: 100%;
+    margin-left: 10px;
+    float: left;
+    color: white;
+}
+
+#title a {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#wheeler-logo {
+    height: 42px;
+    width: auto;
+}
+
+#title:hover #wheeler-logo {
+    animation: spin 1.5s linear infinite;
+    opacity: 0.95;
+}
+
+h2 {
+    text-transform: none;
+    margin-left: 9px;
+    margin-top: 5px;
+}
+
+#navbar {
+    height: 100%;
+    color: #DCDCDC;
+    font-weight: 700;
+    float: right;
+    display: flex;
+    align-items: center;
+}
+
+#navbar div {
+    margin-right: 50px;
+    font-size: 9pt;
+    letter-spacing: 2px;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+#navbar div a:hover {
+    opacity: 0.7;
+}
+
+#title-image-container {
+    height: 38vw;
+    width: 100%;
+    background-size: cover !important;
+    background: url('/public/images/title-image-daytona.jpg') no-repeat center;
+    filter: grayscale(0.5) brightness(0.4);
+}
+
+#title-label-container {
+    height: 38vw;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 54px;
+    color: white;
+    opacity: 0.9;
+}
+
+h1 {
+    font-size: 1.9vw;
+    letter-spacing: 4px;
+}
+
+#title-sign-up-button {
+    color: white;
+    font-size: 1.5vw;
+    margin-top: 25px;
+    border: 2px solid white;
+    background-color: transparent;
+    padding: 20px 35px;
+    text-transform: uppercase;
+    transition: border 0.1s linear, background-color 0.1s linear;
+}
+
+#title-sign-up-button:hover {
+    color: black;
+    border: 2px solid #ff7974;
+    background-color: #ff7974;
+    cursor: pointer;
+}
+
+#image-attribution {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 9pt;
+    opacity: 0.7;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+@-moz-keyframes spin {
+    100% { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform:rotate(360deg);
+    }
+}

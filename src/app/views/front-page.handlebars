@@ -4,29 +4,33 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Rental Vehicles Web-App</title>
+    <link rel="stylesheet" href="/public/styles/front-page.css">
+    <link href="https://fonts.googleapis.com/css?family=Signika:300,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300" rel="stylesheet">
 </head>
 <body>
     <div id="main-content-container">
         <div id="header">
             <div id="title">
-                <h2>Wheeler</h2>
+                <a href="/">
+                    <img id="wheeler-logo" src="/public/images/wheeler-logo.png">
+                    <h2>Wheeler</h2>
+                </a>
             </div>
 
             <div id="navbar">
-                <div id="rental-form"><a href="/rental">Rent-A-Car</a></div>
-                <div id="rental-calc"><a href="/calc">Calculation</a></div>
-                <div id="vehicle-form"><a href="/vehicle-form">New Vehicle</a></div>
-                <div id="customer-form"><a href="/customer-form">New Customer</a></div>
+                <div id="login-button"><a href="/">Login</a></div>
+                <div id="features-button"><a href="/">Features</a></div>
+                <div id="about-button"><a href="/">About</a></div>
             </div>
         </div>
 
         <div id="page-content">
-            <div id="title-image-container">
-                <img src="/public/images/title-image-daytona.jpg" alt="Title Image - Daytona"/>
-                <div id="title-label-container">
-                    <h1>Managing your wheels has never been so simple</h1>
-                    <button id="title-sign-up-button">Sign Up</button>
-                </div>
+            <div id="title-image-container"></div>
+            <div id="title-label-container">
+                <h1>Managing your wheels has never been so simple</h1>
+                <button id="title-sign-up-button">Sign Up</button>
+                <div id="image-attribution">"Red Shelby Daytona with white racing stripes parked at an auto show" by nate_kate is licensed under CC BY 2.0</div>
             </div>
 
             <div class="info-container" id="features-container">
