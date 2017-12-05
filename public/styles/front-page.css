@@ -97,7 +97,7 @@ h1 {
     font-size: 1.5vw;
     margin-top: 2vw;
     border: 2px solid white;
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.3);
     padding: 1.5vw 4vw;
     text-transform: uppercase;
     transition: border 0.1s linear, background-color 0.1s linear;
