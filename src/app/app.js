@@ -42,7 +42,8 @@ const handlebarsConfig = {
 	}
 };
 
-const STATIC_FILE_PATH = __dirname.slice(0, __dirname.lastIndexOf('/src')) + '/public';
+const searchDirectory = process.env.NODE_ENV === 'production' ? '/dist' : '/src';
+const STATIC_FILE_PATH = __dirname.slice(0, __dirname.lastIndexOf(searchDirectory)) + '/public';
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
