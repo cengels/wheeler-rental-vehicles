@@ -69,6 +69,7 @@ newApiRoute('/models', HTTP.GET, HTTP.POST, HTTP.DELETE);
 newApiRoute('/models/:modelId', HTTP.GET, HTTP.DELETE);
 
 newViewRoute.frontPageView();
+newViewRoute.featuresView();
 newViewRoute.rentalFormView();
 newViewRoute.calcPriceView();
 newViewRoute.vehicleFormView();
