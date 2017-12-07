@@ -29,58 +29,103 @@
 
             <div id="navbar">
                 <div id="elements-hover">
-                    <div id="login-link"><a href="/">Login</a></div>
+                    <div class="small-navbar-item" id="login-link"><a href="/">Login</a></div>
                     <div id="features-link"><a href="/">Features</a></div>
-                    <div id="about-link"><a href="/">About</a></div>
+                    <div class="small-navbar-item" id="about-link"><a href="/">About</a></div>
+                    <div id="contact-link"><a href="/">Contact</a></div>
                 </div>
                 <div id="elements-no-hover">
-                    <a href="/">Login</a>
+                    <a class="small-navbar-item" href="/">Login</a>
                     <a href="/">Features</a>
-                    <a href="/">About</a>
+                    <a class="small-navbar-item" href="/">About</a>
+                    <a href="/">Contact</a>
                 </div>
             </div>
         </div>
 
         <div id="title-container">
+            <div id="title-image-overlay"></div>
             <div id="title-image-container"></div>
             <div id="title-label-container">
                 <h1>Managing your wheels has never been so simple</h1>
-                <button id="title-sign-up-button">Sign Up</button>
+                <button id="title-sign-up-button">Sign Up For Free</button>
                 <div id="image-attribution">"Red Shelby Daytona with white racing stripes parked at an auto show" by nate_kate is licensed under CC BY 2.0</div>
             </div>
         </div>
 
         <div id="page-content">
             <div class="info-container" id="features-container">
-                <h3>Features</h3>
-                <div class="two-column-box">
-                    <span class="fa fa-cubes fa-5x"></span>
-                    <div class="info-container-content">
-                        <ul>
-                            <li>Get an overview of all your vehicles and customers in a clean, modern dashboard.</li>
-                            <li>Multiple branches? No problem, get individual or collective data of all of them.</li>
-                            <li>We calculate rent prices, costs, and revenue for you &mdash; never grab the calculator again!</li>
-                            <li>Automatically bill your customers with the press of a button.</li>
-                            <li>Access your dashboard from anywhere, wherever you are.</li>
-                        </ul>
-                        <span class="aligned-to-li">Not a rental vehicle retailer? Check out our sister product, <a href="/">Wheeler Lite</a>!</span>
+                <div class="info-container-content">
+                    <h3>A free and modern vehicle management system</h3>
+                    <div class="column-box">
+                        <div class="feature-column">
+                            <div class="feature-icon wip-icon">
+                                <span class="fa fa-circle"></span>
+                                <span class="fa fa-car fa-inverse"></span>
+                            </div>
+                            <div class="feature-text">
+                                <h5>All your vehicles in one place</h5>
+                                <span>Tired of having to look through a hundred dropdowns just to find the feature you want? Our sleek, modern dashboard is specifically designed for ease-of-use. Never see more than what you need.</span>
+                            </div>
+                        </div>
+                        <div class="feature-column">
+                            <div class="feature-icon wip-icon">
+                                <span class="fa fa-circle"></span>
+                                <span class="fa fa-users fa-inverse"></span>
+                            </div>
+                            <div class="feature-text">
+                                <h5>Integrated custom-tailored CRM</h5>
+                                <span>Manage your customers and link them to your rentals to be able to automatically print and send them their bill – all with the press of a single button.</span>
+                            </div>
+                        </div>
+                        <div class="feature-column">
+                            <div class="feature-icon wip-icon">
+                                <span class="fa fa-circle"></span>
+                                <span class="fa fa-calculator fa-inverse"></span>
+                            </div>
+                            <div class="feature-text">
+                                <h5>Automatic Accounting</h5>
+                                <span>Never fetch a calculator again. We can automatically calculate your costs, revenue, and profit for all your branches.</span>
+                            </div>
+                        </div>
+                        <div class="feature-column">
+                            <div class="feature-icon wip-icon">
+                                <span class="fa fa-circle"></span>
+                                <span class="fa fa-handshake-o fa-inverse"></span>
+                            </div>
+                            <div class="feature-text">
+                                <h5>We're there for you</h5>
+                                <span>We want you to feel at home. If you have a problem or a feature request, <a href="/">just contact us</a> and we'll try to help you as swiftly as possible.</span>
+                            </div>
+                        </div>
+                        <div class="feature-column">
+                            <div class="feature-icon wip-icon">
+                                <span class="fa fa-circle"></span>
+                                <span class="fa fa-pie-chart fa-inverse"></span>
+                            </div>
+                            <div class="feature-text">
+                                <h5>Built-in statistics</h5>
+                                <span>Get detailed statistics and graphs of your vehicles and customers, customizable to suit your needs.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="wheeler-lite-box">
+                        <h4>Not a rental vehicle retailer?</h4>
+                        <p>Have many cars in your garage? Want to track the mileage and other important information of each of them? Check out <a href="/">Wheeler Lite</a>!</p>
                     </div>
                 </div>
             </div>
 
             <div class="info-container" id="sign-up-container">
                 <h3>It's simple.</h3>
-                <div class="two-column-box">
+                <div class="column-box">
                     <div class="info-container-content">
-                        <p>Instant sign-up. No lengthy verification process. No hidden fees. 100% free &mdash; now and forever.</p>
+                        <span>Instant sign-up. No lengthy verification process. No hidden fees. 100% free &mdash; now and forever.</span>
                         <button id="info-sign-up-button">Sign Up Now!</button>
                     </div>
-                    <span class="fa fa-car fa-5x"></span>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="https://use.fontawesome.com/98bdc56529.js"></script>
 </body>
 </html>
