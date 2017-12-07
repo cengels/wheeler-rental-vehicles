@@ -6,17 +6,17 @@
 </div>
 
 <form id="calc-form" method="post" action="{{@route}}">
-    {{>dropdown itemName="vehicle" dropdownArray=@vehicles dropdownId="vehicleid"
-            props="licenseplate" default=@vehicleId}}
+	{{>dropdown itemName="vehicle" dropdownArray=@vehicles dropdownId="vehicleid"
+			props="licenseplate" default=@vehicleId}}
 
-    {{>input-field name="days" type="number" default=@days}}
-    {{>input-field name="distance" type="number" default=@distance}}
+	{{>input-field name="days" type="number" default=@days}}
+	{{>input-field name="distance" type="number" default=@distance}}
 
-    {{>submit name="calc" text="Calculate Price"}}
+	{{>submit name="calc" text="Calculate Price"}}
 	{{>hint}}
 </form>
 
 <div id="price-output">
-    {{>output-field label="customer-price" value=@customerPrice}}
-    {{>output-field label="maintenance-price" value=@maintenancePrice}}
+	{{>output-field label="customer-price" value=@customerPrice}}
+	{{>output-field label="maintenance-price" value=@maintenancePrice}}
 </div>

@@ -5,11 +5,11 @@
 </div>
 
 <form id="vehicle-form-create" method="post" action="{{@route}}">
-    {{>dropdown itemName="model" dropdownArray=@models dropdownId="modelid" props="name"}}
-    {{>dropdown itemName="color" dropdownArray=@colors dropdownId="colorid" props="name"}}
+	{{>dropdown itemName="model" dropdownArray=@models dropdownId="modelid" props="name"}}
+	{{>dropdown itemName="color" dropdownArray=@colors dropdownId="colorid" props="name"}}
 
-    {{>input-field name="license-plate" type="text"}}
-    {{>input-field name="year" type="number"}}
+	{{>input-field name="license-plate" type="text"}}
+	{{>input-field name="year" type="number"}}
 
 	{{>submit name="create-vehicle"}}
 	{{>hintCreate}}
@@ -18,8 +18,8 @@
 <h2>Delete a vehicle</h2>
 
 <form id="vehicle-form-delete" method="POST" action="{{@route}}/delete">
-    {{>dropdown itemName="vehicle" dropdownArray=@vehicles dropdownId="vehicleid" props="licenseplate"}}
+	{{>dropdown itemName="vehicle" dropdownArray=@vehicles dropdownId="vehicleid" props="licenseplate"}}
 
-    {{>submit name="delete-vehicle"}}
-    {{>hintDelete}}
+	{{>submit name="delete-vehicle"}}
+	{{>hintDelete}}
 </form>
