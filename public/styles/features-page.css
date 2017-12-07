@@ -1,0 +1,97 @@
+table {
+	width: 100%;
+	margin-top: 20px;
+	border-spacing: 0;
+}
+
+col {
+	width: 32px;
+}
+
+col:first-of-type {
+	width: auto;
+}
+
+tr:last-of-type td:first-of-type {
+	border-radius: 0 0 0 20px;
+}
+
+th {
+	color: white;
+	height: 64px;
+	padding: 10px;
+	background-color: #2196f3;
+	word-break: break-all;
+	letter-spacing: 1px;
+}
+
+th:first-of-type {
+	border-radius: 20px 0 0 0;
+	background-color: #2196f3;
+}
+
+th:last-of-type {
+	border-radius: 0 20px 0 0;
+}
+
+td {
+	background-color: #e3f2fd;
+	padding: 6px;
+}
+
+td:first-of-type {
+	background-color: #6ec6ff;
+}
+
+tr:nth-of-type(odd) > td {
+	background-color: #d3ecff;
+}
+
+tr:nth-of-type(odd) > td:first-of-type {
+	background-color: #50bdff;
+}
+
+.table-tick {
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-align: center;
+}
+
+.table-tick::before {
+	content: "\f00c";
+}
+
+#button-wrapper {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-end;
+}
+
+button {
+	width: 32px;
+	word-break: break-all;
+	font-size: inherit;
+	border: 0 solid white;
+	border-radius: 0 0 20px 20px;
+	background-color: #2962ff;
+}
+
+button:hover {
+	color: #2962ff;
+	background-color: #e2e8ff;
+}
+
+#button-wrapper a:first-of-type button {
+	border-right-width: 4px;
+}
+
+
+
+@media only screen and (min-width: 591px) {
+	col, button {
+		width: 130px;
+	}
+}
