@@ -132,7 +132,7 @@ h1 {
 }
 
 .wip-icon {
-	color: #fdd835;
+	color: #ffc400;
 	content: "\f06a";
 	z-index: 1;
 	position: absolute;
@@ -145,7 +145,7 @@ h1 {
 	color: white;
 	content: "This feature is still being worked on.";
 	width: 22vw;
-	background-color: #fdd835;
+	background-color: #ffc400;
 	height: 2vw;
 	z-index: 2;
 	position: absolute;
@@ -212,7 +212,7 @@ h4 {
 	margin: auto;
 	border: none;
 	border-radius: 50px;
-	background: red;
+	background: #ffc400;
 }
 
 .fake-column {
