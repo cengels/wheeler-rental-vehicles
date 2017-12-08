@@ -152,6 +152,15 @@ h3 {
 	color: #2196f3;
 }
 
+::selection {
+	color: white;
+	background-color: #2196f3;
+}
+
+a::selection {
+	color: #90caf9;
+}
+
 button {
 	color: white;
 	letter-spacing: 2pt;
