@@ -7,8 +7,14 @@ const customerForm = require('../views/customer-form');
 
 module.exports = (router) => {
 	return {
-		frontPageView: () => mainPages.frontPageView(router, Views.FrontPage),
-		featuresView: () => mainPages.featuresView(router, Views.FeaturesPage),
+		allFrontEndViews: () => {
+			mainPages.frontPageView(router, Views.FrontPage);
+			mainPages.featuresView(router, Views.FeaturesPage);
+			mainPages.liteSignUpView(router, Views.LiteSignUpPage);
+			mainPages.regularSignUpView(router, Views.RegularSignUpPage);
+			mainPages.aboutView(router, Views.AboutPage);
+			mainPages.contactView(router, Views.ContactPage);
+		},
 		rentalFormView: () => rentalForm(router, Views.RentalForm),
 		calcPriceView: () => calc(router, Views.CalcForm),
 		vehicleFormView: () => vehicleForm(router, Views.VehicleForm),

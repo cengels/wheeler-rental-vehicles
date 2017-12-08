@@ -68,8 +68,7 @@ newApiRoute('/makes/:makeId', HTTP.GET, HTTP.DELETE);
 newApiRoute('/models', HTTP.GET, HTTP.POST, HTTP.DELETE);
 newApiRoute('/models/:modelId', HTTP.GET, HTTP.DELETE);
 
-newViewRoute.frontPageView();
-newViewRoute.featuresView();
+newViewRoute.allFrontEndViews();
 newViewRoute.rentalFormView();
 newViewRoute.calcPriceView();
 newViewRoute.vehicleFormView();

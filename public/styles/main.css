@@ -12,7 +12,7 @@ body, html, .wip-icon::after, button {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6, #navbar, #elements-no-hover button, th {
+h1, h2, h3, h4, h5, h6, #navbar, th {
 	font-family: 'Josefin Sans', sans-serif;
 	margin: 0;
 	text-transform: uppercase;
@@ -23,7 +23,7 @@ a {
 	text-decoration: none;
 }
 
-a:hover {
+a:hover, #elements-no-hover span:hover {
 	color: #6ec6ff;
 }
 
@@ -32,7 +32,7 @@ a:hover {
 /*	Flex	*/
 /*************/
 
-#elements-no-hover a, #elements-hover div, .wip-icon::after {
+#elements-no-hover a, #elements-hover div, #elements-no-hover span, .wip-icon::after {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -50,7 +50,7 @@ a:hover {
 	color: white;
 }
 
-#header a {
+#header a, #elements-no-hover span {
 	color: inherit;
 	text-decoration: none;
 	cursor: pointer;
@@ -66,7 +66,7 @@ a:hover {
 	color: white;
 }
 
-#title a {
+#title a, #title span {
 	height: 100%;
 	display: flex;
 	flex-direction: row;
@@ -110,7 +110,7 @@ h2 {
 	background: transparent;
 }
 
-#elements-no-hover a, #elements-hover div {
+#elements-no-hover a, #elements-hover div, #elements-no-hover span {
 	height: 100%;
 	width: 16.66vw;
 	min-width: 86px;
@@ -152,6 +152,20 @@ h3 {
 	color: #2196f3;
 }
 
+.info-container:nth-of-type(even), #sign-up-container, #elements-no-hover a:hover, #elements-no-hover span:hover {
+	color: white;
+	background-color: #2196f3;
+	text-shadow: none;
+}
+
+.info-container:nth-of-type(even), #sign-up-container span {
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+	font-size: 16pt;
+	margin: 15px 0 35px;
+}
+
 ::selection {
 	color: white;
 	background-color: #2196f3;
@@ -182,8 +196,9 @@ button {
 		display: flex;
 	}
 
-	#elements-hover a:hover {
+	#elements-hover a:hover, #elements-hover span:hover {
 		opacity: 0.7;
+		cursor: pointer;
 	}
 
 	#elements-no-hover {

@@ -190,20 +190,6 @@ h4 {
 	letter-spacing: 2px;
 }
 
-#sign-up-container, #elements-no-hover a:hover {
-	color: white;
-	background-color: #2196f3;
-	text-shadow: none;
-}
-
-#sign-up-container span {
-	display: inline-block;
-	width: 100%;
-	text-align: center;
-	font-size: 16pt;
-	margin: 15px 0 35px;
-}
-
 #info-sign-up-button {
 	display: block;
 	height: 38px;
