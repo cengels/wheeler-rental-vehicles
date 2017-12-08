@@ -141,12 +141,12 @@ h1 {
 }
 
 .wip-icon::after {
-	font-size: 1.2vw;
+	font-size: 12pt;
 	color: white;
 	content: "This feature is still being worked on.";
-	width: 22vw;
+	width: calc(16px + 10vw);
 	background-color: #ffc400;
-	height: 2vw;
+	height: 90px;
 	z-index: 2;
 	position: absolute;
 	border-radius: 10px;
@@ -209,6 +209,13 @@ h4 {
 
 
 
+
+@media only screen and (min-width: 1561px) {
+	.wip-icon:after {
+		width: 22vw;
+		height: 2vw;
+	}
+}
 
 @media only screen and (min-width: 1401px) {
 	#title-sign-up-button {
