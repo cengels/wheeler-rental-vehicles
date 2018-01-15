@@ -28,6 +28,7 @@
 	border: 1px solid #0d47a1;
 	outline: none;
 	color: #0d47a1;
+	box-shadow: inset 1px 1px 5px rgba(33, 150, 243, 0.28);
 }
 
 .form textarea {
