@@ -156,6 +156,7 @@ h2 {
 }
 
 .info-container-content {
+	flex-grow: 1;
 	width: 100%;
 	max-width: 1200px;
 }
@@ -205,6 +206,10 @@ button {
 	text-transform: uppercase;
 	transition: color 0.1s linear, border 0.1s linear, background-color 0.1s linear;
 	cursor: pointer;
+}
+
+button:focus {
+	outline: none;
 }
 
 
