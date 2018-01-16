@@ -52,7 +52,7 @@ body, html, button, input {
 	border-radius: 9px 0 0 9px;
 	padding: 15px 10px;
 	transition: background-position 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
-	background: linear-gradient(to right, transparent 50%, #FFFFFF 50%);
+	background: linear-gradient(to right, transparent 50%, #b1b1b1 50%);
 	background-size: 200% 100%;
 	cursor: pointer;
 }
@@ -61,6 +61,11 @@ body, html, button, input {
 	color: #1d1d1d;
 	background-position: 100% 0;
 	text-shadow: rgba(0, 0, 0, 0.22) 0 0 1px;
+}
+
+.tab.active {
+	background: linear-gradient(to right, transparent 50%, #FFFFFF 50%) 100% 0;
+	background-size: 200% 100%;
 }
 
 .tab:not(:first-child) {
