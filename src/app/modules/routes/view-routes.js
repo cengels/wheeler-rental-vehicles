@@ -4,6 +4,7 @@ const rentalForm = require('../views/rental-form');
 const calc = require('../views/calc-form');
 const vehicleForm = require('../views/vehicle-form');
 const customerForm = require('../views/customer-form');
+const dashboard = require('../views/dashboard');
 
 module.exports = (router) => {
 	return {
@@ -15,6 +16,7 @@ module.exports = (router) => {
 			mainPages.aboutView(router, Views.AboutPage);
 			mainPages.contactView(router, Views.ContactPage);
 		},
+		dashboardView: () => dashboard(router, Views.Dashboard),
 		rentalFormView: () => rentalForm(router, Views.RentalForm),
 		calcPriceView: () => calc(router, Views.CalcForm),
 		vehicleFormView: () => vehicleForm(router, Views.VehicleForm),

@@ -73,5 +73,6 @@ newViewRoute.rentalFormView();
 newViewRoute.calcPriceView();
 newViewRoute.vehicleFormView();
 newViewRoute.customerFormView();
+newViewRoute.dashboardView();
 
 module.exports = router;

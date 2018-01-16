@@ -38,5 +38,9 @@ module.exports = {
 	VehicleForm: {
 		name: 'vehicle-form',
 		route: '/vehicle-form'
+	},
+	Dashboard: {
+		name: 'dashboard',
+		route: '/dashboard'
 	}
 };
