@@ -16,6 +16,7 @@
 	background-color: #f5faff;
 	font-size: 12pt;
 	color: #2196f3;
+	transition: background-color 0.1s ease, border 0.1s ease, color 0.1s ease, box-shadow 0.1s ease;
 }
 
 .form input::placeholder, .form textarea::placeholder {
