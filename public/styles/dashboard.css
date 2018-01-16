@@ -8,7 +8,7 @@ body, html {
 	height: 100%;
 }
 
-body, html, button {
+body, html, button, input {
 	font-family: 'Signika', sans-serif;
 	font-weight: lighter;
 	-webkit-font-smoothing: antialiased;
@@ -27,7 +27,7 @@ body, html, button {
 }
 
 #top-bar {
-	height: 100px;
+	height: 75px;
 	width: 100%;
 	display: flex;
 	flex-direction: row;
@@ -69,7 +69,7 @@ body, html, button {
 
 #page-logo {
 	width: 200px;
-	padding: 20px 0 0 25px;
+	padding: 15px 0 0 25px;
 }
 
 #page-logo a {
@@ -112,6 +112,97 @@ body, html, button {
 }
 
 #navigation-bar, #top-bar {
+	color: white;
+}
+
+#search-panel {
+	flex: 3;
+	position: relative;
+}
+
+#search-bar {
+	height: 45%;
+	width: 100%;
+	position: absolute;
+	bottom: 15px;
+	left: 15px;
+	display: flex;
+	flex-direction: row;
+	color: #9b9b9b;
+}
+
+#search-bar .fa {
+	font-size: 1.8em;
+	position: absolute;
+	left: 5px;
+	pointer-events: none;
+}
+
+#search-input {
+	height: 100%;
+	width: 4%;
+	background: none;
+	padding-left: 50px;
+	vertical-align: bottom;
+	font-size: 15pt;
+	letter-spacing: 1px;
+	color: #ebebeb;
+	transition: width 0.25s ease;
+	border: none;
+	border-bottom: 1px solid transparent;
+	border-image: linear-gradient(to right, black 50px, #ebebeb 53px, #ebebeb 400px, black) 1 round;
+}
+
+#search-input::placeholder {
+	color: #9b9b9b;
+}
+
+#search-input:focus {
+	width: 100%;
+	/*-webkit-border-image: -webkit-gradient(linear, 100% 0, 0 0, from(white), to(rgba(0, 0, 0, 0))) 1 100%;*/
+	/*-webkit-border-image: -webkit-linear-gradient(right, white, rgba(0, 0, 0, 0)) 1 100%;*/
+	/*-moz-border-image: -moz-linear-gradient(right, white, rgba(0, 0, 0, 0)) 1 100%;*/
+	/*-o-border-image: -o-linear-gradient(right, white, rgba(0, 0, 0, 0)) 1 100%;*/
+}
+
+#user-panel {
+	width: 19%;
+	display: flex;
+	flex-direction: row-reverse;
+	flex-wrap: wrap;
+	padding: 15px;
+}
+
+#user-picture {
+	height: 45px;
+	width: 45px;
+}
+
+#user-info {
+	text-transform: uppercase;
+	margin-right: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+#user-name {
+	font-size: 18px;
+	letter-spacing: 3px;
+}
+
+#user-options {
+	font-size: 14px;
+	letter-spacing: 2px;
+	text-align: right;
+	color: #cccccc;
+}
+
+.account-action {
+	cursor: pointer;
+}
+
+.account-action:hover {
 	color: white;
 }
 
