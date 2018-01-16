@@ -13,7 +13,7 @@ body, html, button, input {
 	font-weight: lighter;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	color: #102027;
+	color: #202020;
 }
 
 #page-container {
@@ -64,7 +64,7 @@ body, html, button, input {
 }
 
 .tab.active {
-	background: linear-gradient(to right, transparent 50%, #FFFFFF 50%) 100% 0;
+	background: linear-gradient(to right, transparent 50%, #f5f5f5 50%) 100% 0;
 	background-size: 200% 100%;
 }
 
@@ -109,15 +109,15 @@ body, html, button, input {
 	font-family: 'Josefin Sans', sans-serif;
 	font-size: 1.6em;
 	letter-spacing: 1px;
-	color: white;
+	color: #f5f5f5;
 	margin-left: 8px;
 	margin-top: 13px;
 	overflow: hidden;
-	text-shadow: white 0 0 1px;
+	text-shadow: #f5f5f5 0 0 1px;
 }
 
 #navigation-bar, #top-bar {
-	color: white;
+	color: #f5f5f5;
 }
 
 #search-panel {
@@ -151,11 +151,11 @@ body, html, button, input {
 	vertical-align: bottom;
 	font-size: 15pt;
 	letter-spacing: 1px;
-	color: #ebebeb;
+	color: #f5f5f5;
 	transition: width 0.25s ease;
 	border: none;
 	border-bottom: 1px solid transparent;
-	border-image: linear-gradient(to right, black 50px, #ebebeb 53px, #ebebeb 400px, black) 1 round;
+	border-image: linear-gradient(to right, #202020 50px, #f5f5f5 53px, #f5f5f5 400px, #202020) 1 round;
 }
 
 #search-input::placeholder {
@@ -208,14 +208,14 @@ body, html, button, input {
 }
 
 .account-action:hover {
-	color: white;
+	color: #f5f5f5;
 }
 
 #content {
-	box-shadow: black -5px 0 16px -7px;
+	box-shadow: #202020 -5px 0 16px -7px;
 	height: 100%;
 	width: 100%;
 	flex: 1;
-	background-color: white;
+	background-color: #f5f5f5;
 	border-radius: 15pt 0 0 0;
 }
