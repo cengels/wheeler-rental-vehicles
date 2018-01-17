@@ -29,6 +29,8 @@ function showTab(tabId) {
 	}
 }
 
+$(document).ready(() => Pages.Overview.show());
+
 $('.tab').click(function() {
 	const tabId = $(this).attr('id');
 
