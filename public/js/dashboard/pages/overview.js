@@ -1,32 +1,34 @@
 Pages.Overview = {
-	renderVehicleNumbers: () => {
-		return $.when(
-			$.get('/vehicles'),
-			$.get('/rentals')
-		)
-		.done((allVehicles, allRentals) => {
-			const currentRentals = allRentals[0].filter(rental => rental.milesdriven !== null);
+	renderVehicleNumbers: (allVehicles, allRentals) => {
+		const currentRentals = allRentals.filter(rental => rental.milesdriven !== null);
 
-			$('#total-vehicles-content').html(allVehicles[0].length);
-			$('#rented-vehicles-content').html(currentRentals.length);
-			$('#available-vehicles-content').html(allVehicles[0].length - currentRentals.length);
-		});
+		$('#total-vehicles-content').html(allVehicles.length);
+		$('#rented-vehicles-content').html(currentRentals.length);
+		$('#available-vehicles-content').html(allVehicles.length - currentRentals.length);
 	},
 
-	renderCustomerNumbers: (allRentals) => {
-		$.get('/customers')
-		.done(allCustomers => {
-			const oneTimeCustomerIds = [...new Set(allRentals.map(item => item.customerid))];
+	renderCustomerNumbers: (allRentals, allCustomers) => {
+		const oneTimeCustomerIds = [...new Set(allRentals.map(item => item.customerid))];
 
-			$('#total-customers-content').html(allCustomers.length);
-			$('#repeat-customers-content').html(allCustomers.length - oneTimeCustomerIds.length);
-			$('#one-time-customers-content').html(oneTimeCustomerIds.length);
+		$('#total-customers-content').html(allCustomers.length);
+		$('#repeat-customers-content').html(allCustomers.length - oneTimeCustomerIds.length);
+		$('#one-time-customers-content').html(oneTimeCustomerIds.length);
+	},
+
+	renderNumbers: () => {
+		return $.when(
+			$.get('/vehicles'),
+			$.get('/rentals'),
+			$.get('/customers')
+		)
+		.done((allVehicles, allRentals, allCustomers) => {
+			Pages.Overview.renderVehicleNumbers(allVehicles[0], allRentals[0]);
+			Pages.Overview.renderCustomerNumbers(allRentals[0], allCustomers[0]);
 		});
 	},
 
 	render: () => {
-		Pages.Overview.renderVehicleNumbers()
-			.done((allVehicles, allRentals) => Pages.Overview.renderCustomerNumbers(allRentals[0]))
+		Pages.Overview.renderNumbers()
 			.done(Pages.show);
 	}
 };
