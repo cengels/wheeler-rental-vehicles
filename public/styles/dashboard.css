@@ -55,6 +55,14 @@ body, html, button, input {
 	background: linear-gradient(to right, transparent 50%, #b1b1b1 50%);
 	background-size: 200% 100%;
 	cursor: pointer;
+	text-align: left;
+}
+
+.tab .fa {
+	width: 22px;
+	text-align: center;
+	margin-right: 20px;
+	font-size: 1.15em;
 }
 
 .tab.active, .tab:hover {
