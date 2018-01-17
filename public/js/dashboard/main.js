@@ -1,4 +1,14 @@
-const Pages = {};
+const Pages = {
+	spin: () => {
+		const spinner = $('<div class="spinner">Loading...</div>');
+		$('#content').append(spinner);
+	},
+
+	show: () => {
+		$('.spinner').remove();
+		$('.super-section').css('opacity', 1);
+	}
+};
 
 function updateActiveTab(newActiveTab) {
 	$('.tab').removeClass('active');
@@ -8,7 +18,7 @@ function updateActiveTab(newActiveTab) {
 function showTab(tabId) {
 	switch (tabId) {
 		case 'overview-tab':
-			Pages.Overview.show();
+			Pages.Overview.render();
 			break;
 		case 'vehicles-tab':
 			break;
@@ -29,11 +39,14 @@ function showTab(tabId) {
 	}
 }
 
-$(document).ready(() => Pages.Overview.show());
+$(document).ready(() => {
+	$('.tab').click(function() {
+		const tabId = $(this).attr('id');
 
-$('.tab').click(function() {
-	const tabId = $(this).attr('id');
+		updateActiveTab(this);
+		showTab(tabId);
+	});
 
-	updateActiveTab(this);
-	showTab(tabId);
+	Pages.spin();
+	Pages.Overview.render();
 });

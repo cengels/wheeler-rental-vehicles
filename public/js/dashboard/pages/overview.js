@@ -24,8 +24,9 @@ Pages.Overview = {
 		});
 	},
 
-	show: () => {
+	render: () => {
 		Pages.Overview.renderVehicleNumbers()
-			.done((allVehicles, allRentals) => Pages.Overview.renderCustomerNumbers(allRentals[0]));
+			.done((allVehicles, allRentals) => Pages.Overview.renderCustomerNumbers(allRentals[0]))
+			.done(Pages.show);
 	}
 };
