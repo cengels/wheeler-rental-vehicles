@@ -6,10 +6,8 @@ const getQueryText = (operation) => {
 	switch (operation.toUpperCase()) {
 		case 'SELECT':
 			return 'SELECT * FROM';
-			break;
 		case 'DELETE':
 			return 'DELETE FROM';
-			break;
 		default:
 			return;
 	}
