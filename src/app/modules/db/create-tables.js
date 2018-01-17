@@ -17,6 +17,8 @@ module.exports = (client) => {
 				CustomerID INTEGER,
 				VehicleID INTEGER,
 				RentedSince DATE NOT NULL,
+				ReturnDate DATE,
+				MilesDriven INTEGER,
 				PRIMARY KEY (CustomerID, VehicleID)
 			)
 		`)).then(() => client.query(`
