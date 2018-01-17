@@ -2,19 +2,21 @@ const dbPool = require('../db/pool');
 const logger = require('../Logger')(module.id);
 const Status = require('../../definitions/status');
 
-const buildQuery = (operation, table, params, query) => {
-	let queryText;
-
+const getQueryText = (operation) => {
 	switch (operation.toUpperCase()) {
 		case 'SELECT':
-			queryText = 'SELECT * FROM';
+			return 'SELECT * FROM';
 			break;
 		case 'DELETE':
-			queryText = 'DELETE FROM';
+			return 'DELETE FROM';
 			break;
 		default:
 			return;
 	}
+};
+
+const buildQuery = (operation, table, params, query) => {
+	const queryText = getQueryText(operation);
 
 	if (Object.keys(params).length > 0 || Object.keys(query).length > 0) {
 		const keys = Object.keys(params).concat(Object.keys(query));
