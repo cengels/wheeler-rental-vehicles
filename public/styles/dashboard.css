@@ -226,4 +226,90 @@ body, html, button, input {
 	flex: 1;
 	background-color: #f5f5f5;
 	border-radius: 15pt 0 0 0;
+	padding: 15px;
+}
+
+.super-section {
+	padding: 33px;
+}
+
+.super-section-content {
+	display: flex;
+}
+
+.super-heading {
+	text-align: center;
+	font-size: 16pt;
+	font-family: 'Josefin Sans', sans-serif;
+	letter-spacing: 10px;
+	margin-bottom: 18px;
+	text-shadow: rgba(0, 0, 0, 0.16) 0 0 1px;
+}
+
+.content-section {
+	flex: 1;
+	text-align: center;
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+.section-heading {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 14px;
+	text-shadow: rgba(0, 0, 0, 0.08) 0 0 1px;
+}
+
+.section-content {
+	font-size: 3em;
+}
+
+#welcome-section-content {
+	display: block;
+	text-align: center;
+}
+
+#welcome-message {
+	font-size: 2.7em;
+	letter-spacing: 4px;
+	color: rgba(0, 0, 0, 0.65);
+}
+
+#vehicles-heading, #vehicles-section-content .section-content {
+	color: #2599f1;
+}
+
+#customers-heading, #customers-section-content .section-content {
+	color: #ffc820;
+}
+
+#finances-heading, #finances-section-content .section-content {
+	color: #ef5350;
+}
+
+#vehicles-heading {
+	text-shadow: rgba(37, 153, 241, 0.41) 0 0 1px;
+}
+
+#customers-heading {
+	text-shadow: rgba(255, 200, 32, 0.58) 0 0 1px;
+}
+
+#finances-heading {
+	text-shadow: rgba(239, 83, 80, 0.28) 0 0 1px;
+}
+
+#vehicles-section-content .section-heading {
+	color: #64b5f6;
+	text-shadow: rgba(100, 181, 246, 0.36) 0 0 1px;
+}
+
+#customers-section-content .section-heading {
+	color: #fbcd5c;
+	text-shadow: rgba(251, 205, 92, 0.3) 0 0 1px;
+}
+
+#finances-section-content .section-heading {
+	color: #f54d4d;
+	text-shadow: rgba(245, 77, 77, 0.17) 0 0 1px;
 }
