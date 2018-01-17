@@ -16,9 +16,6 @@ Pages.Overview = {
 	renderCustomerNumbers: (allRentals) => {
 		$.get('/customers')
 		.done(allCustomers => {
-			console.log(allRentals);
-			console.log(allCustomers);
-
 			const oneTimeCustomerIds = [...new Set(allRentals.map(item => item.customerid))];
 
 			$('#total-customers-content').html(allCustomers.length);
