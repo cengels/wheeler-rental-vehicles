@@ -1,3 +1,5 @@
+const Pages = {};
+
 function updateActiveTab(newActiveTab) {
 	$('.tab').removeClass('active');
 	$(newActiveTab).addClass('active');
@@ -6,6 +8,7 @@ function updateActiveTab(newActiveTab) {
 function showTab(tabId) {
 	switch (tabId) {
 		case 'overview-tab':
+			Pages.Overview.show();
 			break;
 		case 'vehicles-tab':
 			break;
