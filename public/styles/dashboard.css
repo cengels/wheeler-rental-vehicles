@@ -96,7 +96,6 @@ body, html, button, input {
 }
 
 #page-logo img {
-	width: 47px;
 	height: 47px;
 	opacity: 0.95;
 	transition: transform 0.5s ease-in-out;
