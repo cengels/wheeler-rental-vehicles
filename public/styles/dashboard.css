@@ -300,9 +300,6 @@ body, html, button, input {
 	padding: 22px;
 }
 
-.content-section:not(:last-of-type) {
-}
-
 .section-heading {
 	text-transform: uppercase;
 	letter-spacing: 1px;
