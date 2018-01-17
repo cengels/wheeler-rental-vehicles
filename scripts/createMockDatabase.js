@@ -1,8 +1,6 @@
-const sourceDir = process.env.NODE_ENV === 'production' ? 'dist' : 'src';
-
-const pool = require(`../${sourceDir}/app/modules/db/pool`);
-const restoreMockData = require(`../${sourceDir}/app/modules/db/restore-mock-data`);
-const logger = require(`../${sourceDir}/app/modules/Logger`)(module.id);
+const pool = require(`../dist/app/modules/db/pool`);
+const restoreMockData = require(`../dist/app/modules/db/restore-mock-data`);
+const logger = require(`../dist/app/modules/Logger`)(module.id);
 
 pool.connect()
 	.then(client => restoreMockData(client)
