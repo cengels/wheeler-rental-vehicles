@@ -6,6 +6,7 @@
 		"test": "jest",
 		"watch": "jest --watch",
 		"start": "webpack && node scripts/start.js",
+		"bundle": "webpack",
 		"build": "scripts/build.sh && webpack",
 		"deploy": "node ./node_modules/.bin/eslint src/** && scripts/build.sh && webpack && scripts/deploy.sh",
 		"mock": "node scripts/createMockDatabase.js",
