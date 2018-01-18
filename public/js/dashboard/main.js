@@ -32,13 +32,15 @@ function showTab(tabId) {
 	}
 }
 
-$(document).ready(() => {
-	$('.tab').click(function() {
-		const tabId = $(this).attr('id');
+function tabClickHandler() {
+	const tabId = $(this).attr('id');
 
-		updateActiveTab(this);
-		showTab(tabId);
-	});
+	updateActiveTab(this);
+	showTab(tabId);
+}
+
+$(document).ready(() => {
+	$('.tab').click(tabClickHandler);
 
 	spinner.start();
 	Tabs.Overview.render()
