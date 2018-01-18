@@ -5,9 +5,9 @@
 	"scripts": {
 		"test": "jest",
 		"watch": "jest --watch",
-		"start": "node scripts/start.js",
-		"build": "scripts/build.sh",
-		"deploy": "node ./node_modules/.bin/eslint src/** && scripts/build.sh && scripts/deploy.sh",
+		"start": "webpack && node scripts/start.js",
+		"build": "scripts/build.sh && webpack",
+		"deploy": "node ./node_modules/.bin/eslint src/** && scripts/build.sh && webpack && scripts/deploy.sh",
 		"mock": "node scripts/createMockDatabase.js",
 		"lint": "node ./node_modules/.bin/eslint src/**",
 		"clearlogs": "echo '' > logs/winston.log"
@@ -23,6 +23,7 @@
 		"express": "^4.16.2",
 		"express-handlebars": "^3.0.0",
 		"express-validator": "^4.3.0",
+		"jquery": "^3.2.1",
 		"moment": "^2.19.3",
 		"nconf": "^0.9.1",
 		"pg": "^6.4.2",
@@ -36,6 +37,7 @@
 		"babel-preset-stage-2": "^6.24.1",
 		"eslint": "^4.12.1",
 		"eslint-plugin-node": "^5.2.1",
-		"jest": "^21.2.1"
+		"jest": "^21.2.1",
+		"webpack": "^3.10.0"
 	}
 }

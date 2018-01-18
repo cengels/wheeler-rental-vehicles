@@ -1,14 +1,6 @@
-const Pages = {
-	spin: () => {
-		const spinner = $('<div class="spinner">Loading...</div>');
-		$('#content').append(spinner);
-	},
-
-	show: () => {
-		$('.spinner').remove();
-		$('.super-section').css('opacity', 1);
-	}
-};
+import $ from 'jquery';
+import spinner from './modules/spinner';
+import Tabs from './modules/tabs';
 
 function updateActiveTab(newActiveTab) {
 	$('.tab').removeClass('active');
@@ -18,7 +10,8 @@ function updateActiveTab(newActiveTab) {
 function showTab(tabId) {
 	switch (tabId) {
 		case 'overview-tab':
-			Pages.Overview.render();
+			Tabs.Overview.render()
+				.done(() => spinner.stop());
 			break;
 		case 'vehicles-tab':
 			break;
@@ -47,6 +40,7 @@ $(document).ready(() => {
 		showTab(tabId);
 	});
 
-	Pages.spin();
-	Pages.Overview.render();
+	spinner.start();
+	Tabs.Overview.render()
+		.done(() => spinner.stop());
 });
