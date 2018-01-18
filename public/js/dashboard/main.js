@@ -10,11 +10,14 @@ function updateActiveTab(newActiveTab) {
 	$(newActiveTab).addClass('active');
 }
 
+function renderTab(reactObject) {
+	return ReactDOM.render(reactObject, document.getElementById('content'));
+}
+
 function showTab(tabId) {
 	switch (tabId) {
 		case 'overview-tab':
-			ReactDOM.render(<OverviewTab/>, document.getElementById('content'));
-			break;
+			return renderTab(<OverviewTab/>);
 		case 'vehicles-tab':
 			break;
 		case 'locations-tab':
