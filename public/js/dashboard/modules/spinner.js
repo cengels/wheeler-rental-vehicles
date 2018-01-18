@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 export default {
 	start: function() {
-		const spinner = $('<div class="spinner">Loading...</div>');
+		const spinner = $('<div class="tab-spinner">Loading...</div>');
 		$('#content').append(spinner);
 	},
 

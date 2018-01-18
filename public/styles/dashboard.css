@@ -16,9 +16,9 @@ body, html, button, input {
 	color: #202020;
 }
 
-.spinner,
-.spinner:before,
-.spinner:after {
+.page-spinner, .tab-spinner,
+.page-spinner:before, .tab-spinner:before,
+.page-spinner:after, .tab-spinner:after {
 	border-radius: 50%;
 	width: 2.5em;
 	height: 2.5em;
@@ -27,8 +27,13 @@ body, html, button, input {
 	-webkit-animation: load7 1.8s infinite ease-in-out;
 	animation: load7 1.8s infinite ease-in-out;
 }
-.spinner {
+.page-spinner {
+	color: #f5f5f5;
+}
+.tab-spinner {
 	color: #202020;
+}
+.page-spinner, .tab-spinner {
 	font-size: 10px;
 	position: absolute;
 	top: 50%;
@@ -40,18 +45,18 @@ body, html, button, input {
 	-webkit-animation-delay: -0.16s;
 	animation-delay: -0.16s;
 }
-.spinner:before,
-.spinner:after {
+.page-spinner:before, .tab-spinner:before,
+.page-spinner:after, .tab-spinner:after {
 	content: '';
 	position: absolute;
 	top: 0;
 }
-.spinner:before {
+.page-spinner:before, .tab-spinner:before {
 	left: -3.5em;
 	-webkit-animation-delay: -0.32s;
 	animation-delay: -0.32s;
 }
-.spinner:after {
+.page-spinner:after, .tab-spinner:after {
 	left: 3.5em;
 }
 
@@ -271,7 +276,6 @@ body, html, button, input {
 
 .super-section {
 	padding: 33px;
-	opacity: 0;
 	transition: opacity 0.2s ease;
 }
 
