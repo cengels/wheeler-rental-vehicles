@@ -1,6 +1,9 @@
 import $ from 'jquery';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import spinner from './modules/spinner';
-import Tabs from './modules/tabs';
+import Dashboard from './modules/components/dashboard';
+import OverviewTab from './modules/components/tabs/overview';
 
 function updateActiveTab(newActiveTab) {
 	$('.tab').removeClass('active');
@@ -10,8 +13,7 @@ function updateActiveTab(newActiveTab) {
 function showTab(tabId) {
 	switch (tabId) {
 		case 'overview-tab':
-			Tabs.Overview.render()
-				.done(() => spinner.stop());
+			ReactDOM.render(<OverviewTab/>, document.getElementById('content'));
 			break;
 		case 'vehicles-tab':
 			break;
@@ -42,7 +44,9 @@ function tabClickHandler() {
 $(document).ready(() => {
 	$('.tab').click(tabClickHandler);
 
-	spinner.start();
-	Tabs.Overview.render()
-		.done(() => spinner.stop());
+	ReactDOM.render(<Dashboard/>, document.getElementById('page-container'));
+
+	// spinner.start();
+	// Tabs.Overview.render()
+	// 	.done(() => spinner.stop());
 });

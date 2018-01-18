@@ -1,54 +1,8 @@
 <!DOCTYPE html>
 <html>
-{{>html-head-dash title="Wheeler - Dashboard"}}
-<body>
-<div id="page-container">
-	<div id="top-bar">
-		<div id="page-logo">
-			<a href="/dashboard">
-				<img id="wheeler-logo" src="/public/images/wheeler-logo.png">
-				<div id="wheeler-label">Wheeler</div>
-			</a>
-		</div>
-
-		<div id="search-panel">
-			<div id="search-bar">
-				<i class="fa fa-search" aria-hidden="true"></i>
-				<input id="search-input" name="search-input" type="text" value=""
-					   placeholder="Enter a license plate, a customer name, a location, ..."/>
-			</div>
-		</div>
-
-		<div id="user-panel">
-			<img id="user-picture" alt="profile-picture" src="/public/images/blank-profile-picture.png"/>
-			<div id="user-info">
-				<div id="user-name">Anonymous User</div>
-				<div id="user-options">
-					<span id="action-settings" class="account-action">Settings</span> •
-					<span id="action-logout" class="account-action">Logout</span>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div id="main-container">
-		<div id="navigation-bar">
-			<button id="overview-tab" class="tab active"><i class="fa fa-eye" aria-hidden="true"></i> Overview</button>
-			<button id="vehicles-tab" class="tab"><i class="fa fa-car" aria-hidden="true"></i> Vehicles</button>
-			<button id="locations-tab" class="tab"><i class="fa fa-map-marker" aria-hidden="true"></i> Locations</button>
-			<button id="customers-tab" class="tab"><i class="fa fa-user" aria-hidden="true"></i> Customers</button>
-			<button id="employees-tab" class="tab"><i class="fa fa-id-card-o" aria-hidden="true"></i> Employees</button>
-			<button id="finances-tab" class="tab"><i class="fa fa-usd" aria-hidden="true"></i> Finances</button>
-			<button id="statistics-tab" class="tab"><i class="fa fa-line-chart" aria-hidden="true"></i> Analytics</button>
-			<button id="preferences-tab" class="tab"><i class="fa fa-cog" aria-hidden="true"></i> Preferences</button>
-			<button id="about-tab" class="tab"><i class="fa fa-question-circle" aria-hidden="true"></i> About</button>
-		</div>
-
-		<div id="content">
-			{{>tab-overview}}
-		</div>
-	</div>
-</div>
-<script type="text/javascript" src="/public/js/public.js"></script>
-</body>
+	{{>html-head-dash title="Wheeler - Dashboard"}}
+	<body>
+		<div id="page-container"></div>
+		<script type="text/javascript" src="/public/js/public.js"></script>
+	</body>
 </html>
