@@ -1,7 +1,44 @@
 import React from 'react';
+import TabButton from './elements/tab-button';
 import OverviewTab from './tabs/overview';
 
 export default class Dashboard extends React.Component {
+	constructor(props) {
+		super(props);
+		this.setTabState = this.setTabState.bind(this);
+		this.state = {
+			currentTab: 'overview-tab'
+		}
+	}
+
+	setTabState(newTabId) {
+		this.setState({ currentTab: newTabId });
+	}
+
+	returnCurrentTab() {
+		switch (this.state.currentTab) {
+			case 'overview-tab':
+				return <OverviewTab/>;
+			case 'vehicles-tab':
+				return '';
+			case 'locations-tab':
+				return '';
+			case 'customers-tab':
+				return '';
+			case 'employees-tab':
+				return '';
+			case 'statistics-tab':
+				return '';
+			case 'preferences-tab':
+				return '';
+			case 'about-tab':
+				return '';
+			default:
+				return '';
+				// TODO: error page?
+		}
+	}
+
 	render() {
 		return (
 			<React.Fragment>
@@ -35,19 +72,26 @@ export default class Dashboard extends React.Component {
 
 				<div id="main-container">
 					<div id="navigation-bar">
-						<button id="overview-tab" className="tab active"><i className="fa fa-eye" aria-hidden="true"/> Overview</button>
-						<button id="vehicles-tab" className="tab"><i className="fa fa-car" aria-hidden="true"/> Vehicles</button>
-						<button id="locations-tab" className="tab"><i className="fa fa-map-marker" aria-hidden="true"/> Locations</button>
-						<button id="customers-tab" className="tab"><i className="fa fa-user" aria-hidden="true">/</i> Customers</button>
-						<button id="employees-tab" className="tab"><i className="fa fa-id-card-o" aria-hidden="true"/> Employees</button>
-						<button id="finances-tab" className="tab"><i className="fa fa-usd" aria-hidden="true"/> Finances</button>
-						<button id="statistics-tab" className="tab"><i className="fa fa-line-chart" aria-hidden="true"/> Analytics</button>
-						<button id="preferences-tab" className="tab"><i className="fa fa-cog" aria-hidden="true"/> Preferences</button>
-						<button id="about-tab" className="tab"><i className="fa fa-question-circle" aria-hidden="true"/> About</button>
+						<TabButton id="overview-tab" currentTab={this.state.currentTab} icon="fa-eye"
+								   label="Overview" callback={this.setTabState}/>
+						<TabButton id="vehicles-tab" currentTab={this.state.currentTab} icon="fa-car"
+								   label="Vehicles" callback={this.setTabState}/>
+						<TabButton id="customers-tab" currentTab={this.state.currentTab} icon="fa-user"
+								   label="Customers" callback={this.setTabState}/>
+						<TabButton id="employees-tab" currentTab={this.state.currentTab} icon="fa-id-card-o"
+								   label="Employees" callback={this.setTabState}/>
+						<TabButton id="finances-tab" currentTab={this.state.currentTab} icon="fa-usd"
+								   label="Finances" callback={this.setTabState}/>
+						<TabButton id="statistics-tab" currentTab={this.state.currentTab} icon="fa-line-chart"
+								   label="Analytics" callback={this.setTabState}/>
+						<TabButton id="preferences-tab" currentTab={this.state.currentTab} icon="fa-cog"
+								   label="Preferences" callback={this.setTabState}/>
+						<TabButton id="about-tab" currentTab={this.state.currentTab} icon="fa-question-circle"
+								   label="About" callback={this.setTabState}/>
 					</div>
 
 					<div id="content">
-						<OverviewTab/>
+						{this.returnCurrentTab()}
 					</div>
 				</div>
 			</React.Fragment>
