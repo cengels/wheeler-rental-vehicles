@@ -7,8 +7,8 @@
 		"watch": "jest --watch",
 		"start": "webpack && node scripts/start.js",
 		"bundle": "webpack",
-		"build": "scripts/build.sh && webpack",
-		"deploy": "node ./node_modules/.bin/eslint src/** && scripts/build.sh && webpack && scripts/deploy.sh",
+		"build": "scripts/build.sh && webpack && uglifyjs ./public/js/public.js --output ./public/js/public.js",
+		"deploy": "node ./node_modules/.bin/eslint src/** && scripts/build.sh && webpack && uglifyjs ./public/js/public.js --output ./public/js/public.js && scripts/deploy.sh",
 		"mock": "node scripts/createMockDatabase.js",
 		"lint": "node ./node_modules/.bin/eslint src/**",
 		"clearlogs": "echo '' > logs/winston.log"
@@ -47,6 +47,7 @@
 		"eslint": "^4.15.0",
 		"eslint-plugin-node": "^5.2.1",
 		"jest": "^21.2.1",
+		"uglify-js": "^3.3.8",
 		"webpack": "^3.10.0"
 	}
 }
