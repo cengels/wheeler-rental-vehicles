@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import React from 'react';
 
 export default class ErrorTab extends React.Component {

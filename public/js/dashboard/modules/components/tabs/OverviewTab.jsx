@@ -1,38 +1,46 @@
-import $ from 'jquery';
 import React from 'react';
 import httpRequest from '../../http-request';
 
-function renderVehicleNumbers(allVehicles, allRentals) {
-	const currentRentals = allRentals.filter(rental => rental.milesdriven !== null);
-
-	$('#total-vehicles-content').html(allVehicles.length);
-	$('#rented-vehicles-content').html(currentRentals.length);
-	$('#available-vehicles-content').html(allVehicles.length - currentRentals.length);
-}
-
-function renderCustomerNumbers(allRentals, allCustomers) {
-	const oneTimeCustomerIds = [...new Set(allRentals.map(item => item.customerid))];
-
-	$('#total-customers-content').html(allCustomers.length);
-	$('#repeat-customers-content').html(allCustomers.length - oneTimeCustomerIds.length);
-	$('#one-time-customers-content').html(oneTimeCustomerIds.length);
-}
-
-function renderNumbers() {
-	Promise.all([
-		httpRequest('/vehicles'),
-		httpRequest('/rentals'),
-		httpRequest('/customers')
-	])
-		.then(data => {
-			renderVehicleNumbers(data[0], data[1]);
-			renderCustomerNumbers(data[1], data[2]);
-		})
+function returnDifference(firstNumber, secondNumber) {
+	if (isNaN(firstNumber) || isNaN(secondNumber)) {
+		return '?'
+	} else {
+		return firstNumber - secondNumber;
+	}
 }
 
 export default class OverviewTab extends React.Component {
+	constructor(props) {
+		super(props);
+		this.setNumbers = this.setNumbers.bind(this);
+
+		this.state = {
+			totalVehicles: '?',
+			rentedVehicles: '?',
+			totalCustomers: '?',
+			oneTimeCustomers: '?'
+		};
+
+		this.setNumbers();
+	}
+
+	setNumbers() {
+		Promise.all([
+			httpRequest('/vehicles'),
+			httpRequest('/rentals'),
+			httpRequest('/customers')
+		])
+			.then(data => {
+				this.setState({
+					totalVehicles: data[0].length,
+					rentedVehicles: data[1].filter(rental => rental.milesdriven !== null).length,
+					totalCustomers: data[2].length,
+					oneTimeCustomers: [...new Set(data[1].map(item => item.customerid))].length
+				});
+			})
+	}
+
 	render() {
-		renderNumbers();
 		return (
 			<React.Fragment>
 				<div id="welcome-section" className="super-section super">
@@ -47,17 +55,23 @@ export default class OverviewTab extends React.Component {
 					<div id="vehicles-section-content" className="super-section-content">
 						<div id="total-vehicles-section" className="content-section">
 							<div id="total-vehicles-heading" className="section-heading">Total vehicles</div>
-							<div id="total-vehicles-content" className="section-content">?</div>
+							<div id="total-vehicles-content" className="section-content">
+								{this.state.totalVehicles}
+							</div>
 						</div>
 
 						<div id="available-vehicles-section" className="content-section">
 							<div id="available-vehicles-heading" className="section-heading">Available vehicles</div>
-							<div id="available-vehicles-content" className="section-content">?</div>
+							<div id="available-vehicles-content" className="section-content">
+								{returnDifference(this.state.totalVehicles, this.state.rentedVehicles)}
+							</div>
 						</div>
 
 						<div id="rented-vehicles-section" className="content-section">
 							<div id="rented-vehicles-heading" className="section-heading">Rented vehicles</div>
-							<div id="rented-vehicles-content" className="section-content">?</div>
+							<div id="rented-vehicles-content" className="section-content">
+								{this.state.rentedVehicles}
+							</div>
 						</div>
 					</div>
 				</div>
@@ -68,17 +82,23 @@ export default class OverviewTab extends React.Component {
 					<div id="customers-section-content" className="super-section-content">
 						<div id="total-customers-section" className="content-section">
 							<div id="total-customers-heading" className="section-heading">Total customers</div>
-							<div id="total-customers-content" className="section-content">?</div>
+							<div id="total-customers-content" className="section-content">
+								{this.state.totalCustomers}
+							</div>
 						</div>
 
 						<div id="repeat-customers-section" className="content-section">
 							<div id="repeat-customers-heading" className="section-heading">Repeat customers</div>
-							<div id="repeat-customers-content" className="section-content">?</div>
+							<div id="repeat-customers-content" className="section-content">
+								{returnDifference(this.state.totalCustomers, this.state.oneTimeCustomers)}
+							</div>
 						</div>
 
 						<div id="one-time-customers-section" className="content-section">
 							<div id="one-time-customers-heading" className="section-heading">One-time customers</div>
-							<div id="one-time-customers-content" className="section-content">?</div>
+							<div id="one-time-customers-content" className="section-content">
+								{this.state.oneTimeCustomers}
+							</div>
 						</div>
 					</div>
 				</div>
