@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import React from 'react';
+import httpRequest from '../../http-request';
 
 function renderVehicleNumbers(allVehicles, allRentals) {
 	const currentRentals = allRentals.filter(rental => rental.milesdriven !== null);
@@ -18,19 +19,20 @@ function renderCustomerNumbers(allRentals, allCustomers) {
 }
 
 function renderNumbers() {
-	return $.when(
-		$.get('/vehicles'),
-		$.get('/rentals'),
-		$.get('/customers')
-	)
-	.done((allVehicles, allRentals, allCustomers) => {
-		renderVehicleNumbers(allVehicles[0], allRentals[0]);
-		renderCustomerNumbers(allRentals[0], allCustomers[0]);
-	});
+	Promise.all([
+		httpRequest('/vehicles'),
+		httpRequest('/rentals'),
+		httpRequest('/customers')
+	])
+		.then(data => {
+			renderVehicleNumbers(data[0], data[1]);
+			renderCustomerNumbers(data[1], data[2]);
+		})
 }
 
 export default class OverviewTab extends React.Component {
 	render() {
+		renderNumbers();
 		return (
 			<React.Fragment>
 				<div id="welcome-section" className="super-section super">
