@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import spinner from './modules/spinner';
 import Dashboard from './modules/components/Dashboard';
 
 $(document).ready(() => {
