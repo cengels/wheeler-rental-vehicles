@@ -1,5 +1,7 @@
 import React from 'react';
 import OverviewTab from './tabs/OverviewTab';
+import UnderConstructionTab from './tabs/UnderConstructionTab';
+import ErrorTab from './tabs/ErrorTab';
 import TopBar from './elements/TopBar';
 import NavigationBar from './elements/NavigationBar';
 
@@ -21,22 +23,21 @@ export default class Dashboard extends React.Component {
 			case 'overview-tab':
 				return <OverviewTab/>;
 			case 'vehicles-tab':
-				return '';
+				return <UnderConstructionTab/>;
 			case 'locations-tab':
-				return '';
+				return <UnderConstructionTab/>;
 			case 'customers-tab':
-				return '';
+				return <UnderConstructionTab/>;
 			case 'employees-tab':
-				return '';
+				return <UnderConstructionTab/>;
 			case 'statistics-tab':
-				return '';
+				return <UnderConstructionTab/>;
 			case 'preferences-tab':
-				return '';
+				return <UnderConstructionTab/>;
 			case 'about-tab':
-				return '';
+				return <UnderConstructionTab/>;
 			default:
-				return '';
-				// TODO: error page?
+				return <ErrorTab/>;
 		}
 	}
 
