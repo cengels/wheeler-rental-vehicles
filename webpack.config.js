@@ -17,7 +17,7 @@ module.exports = {
 				exclude: /node_modules/,
 				query: {
 					cacheDirectory: true,
-					presets: ['react', 'env', 'stage-2']
+					presets: ['@babel/preset-react', '@babel/preset-env', '@babel/preset-stage-2']
 				}
 			}
 		]
