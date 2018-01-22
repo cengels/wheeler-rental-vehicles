@@ -1,7 +1,7 @@
 import React from 'react';
-import WheelerLogo from './top-bar/wheeler-logo';
-import SearchPanel from './top-bar/search-panel';
-import UserPanel from './top-bar/user-panel';
+import WheelerLogo from './TopBar/WheelerLogo';
+import SearchPanel from './TopBar/SearchPanel';
+import UserPanel from './TopBar/UserPanel';
 
 export default class TopBar extends React.Component {
 	render() {

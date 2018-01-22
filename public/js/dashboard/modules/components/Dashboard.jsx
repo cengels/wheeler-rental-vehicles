@@ -1,7 +1,7 @@
 import React from 'react';
-import OverviewTab from './tabs/overview';
-import TopBar from './elements/top-bar';
-import NavigationBar from './elements/navigation-bar';
+import OverviewTab from './tabs/OverviewTab';
+import TopBar from './elements/TopBar';
+import NavigationBar from './elements/NavigationBar';
 
 export default class Dashboard extends React.Component {
 	constructor(props) {

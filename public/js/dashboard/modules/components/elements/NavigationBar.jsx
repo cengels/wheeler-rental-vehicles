@@ -1,5 +1,5 @@
 import React from 'react';
-import TabButton from './navigation-bar/tab-button';
+import TabButton from './NavigationBar/TabButton';
 
 export default class NavigationBar extends React.Component {
 	constructor(props) {
