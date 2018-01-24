@@ -70,7 +70,6 @@ export default class OverviewTab extends React.Component {
 				<PanelSection name="Vehicles" data={this.state.vehicleData}/>
 				<PanelSection name="Customers" data={this.state.customerData}/>
 				<PanelSection name="Finances" data={this.state.financeData}/>
-
 			</React.Fragment>
 		)
 	}

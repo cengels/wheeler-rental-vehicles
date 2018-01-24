@@ -12,7 +12,8 @@ export default class ContentWrapper extends React.Component {
 			case 'locations-tab':
 			case 'customers-tab':
 			case 'employees-tab':
-			case 'statistics-tab':
+			case 'finances-tab':
+			case 'analytics-tab':
 			case 'preferences-tab':
 			case 'about-tab':
 				return <UnderConstructionTab/>;

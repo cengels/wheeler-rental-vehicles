@@ -28,7 +28,7 @@ export default class NavigationBar extends React.Component {
 						   label="Employees" callback={this.setTabState}/>
 				<TabButton id="finances-tab" currentTab={this.state.currentTab} icon="fa-usd"
 						   label="Finances" callback={this.setTabState}/>
-				<TabButton id="statistics-tab" currentTab={this.state.currentTab} icon="fa-line-chart"
+				<TabButton id="analytics-tab" currentTab={this.state.currentTab} icon="fa-line-chart"
 						   label="Analytics" callback={this.setTabState}/>
 				<TabButton id="preferences-tab" currentTab={this.state.currentTab} icon="fa-cog"
 						   label="Preferences" callback={this.setTabState}/>
