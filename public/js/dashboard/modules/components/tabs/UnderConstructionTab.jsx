@@ -5,7 +5,8 @@ export default class UnderConstructionTab extends React.Component {
 		return (
 			<div id="welcome-section" className="super-section super">
 				<div id="welcome-section-content" className="super-section-content">
-					<div id="welcome-message">Oh no! This part of the dashboard is still under construction.</div>
+					<div id="welcome-message">A team of highly-trained monkeys is currently working hard
+						on bringing you this tab.</div>
 				</div>
 			</div>
 		)
