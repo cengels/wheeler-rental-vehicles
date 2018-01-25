@@ -1,6 +1,6 @@
 import React from 'react';
 import httpRequest from '../../http-request';
-import WelcomeSection from '../elements/OverviewTab/WelcomeSection';
+import WelcomeSection from '../elements/WelcomeSection';
 import PanelSection from '../elements/OverviewTab/SuperSection';
 
 function extractRentedVehicles(totalVehicles) {
@@ -65,7 +65,7 @@ export default class OverviewTab extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<WelcomeSection/>
+				<WelcomeSection text="Welcome back, Anonymous!"/>
 
 				<PanelSection name="Vehicles" data={this.state.vehicleData}/>
 				<PanelSection name="Customers" data={this.state.customerData}/>
