@@ -1,5 +1,13 @@
 import React from 'react';
 
+function getStandardizedValue(value) {
+	if (typeof value === 'boolean') {
+		return value ? '✔' : '';
+	}
+
+	return value;
+}
+
 export default class Table extends React.Component {
 	constructor(props) {
 		super(props);
@@ -16,7 +24,7 @@ export default class Table extends React.Component {
 	getRows() {
 		console.log(this.props.data);
 		return this.props.data.map((obj, i) => <tr key={i}>
-				{Object.values(obj).map((val, i) => <td key={i}>{val}</td>)}
+				{Object.values(obj).map((val, i) => <td key={i}>{getStandardizedValue(val)}</td>)}
 			</tr>);
 	}
 
