@@ -1,6 +1,5 @@
 import React from 'react';
 import httpRequest from '../../http-request';
-import WelcomeSection from '../elements/WelcomeSection';
 import Table from '../elements/Table';
 
 export default class VehiclesTab extends React.Component {
@@ -28,18 +27,12 @@ export default class VehiclesTab extends React.Component {
 
 	getVehicles() {
 		httpRequest('/vehicles')
-			.then(data => {
-				this.setState({
-					data: data
-				})
-			})
+			.then(data => { this.setState({ data: data }) })
 	}
 
 	render() {
 		return (
 			<React.Fragment>
-				<WelcomeSection text="Vehicles"/>
-
 				<Table headers={this.headers} data={this.state.data}/>
 			</React.Fragment>
 		)
