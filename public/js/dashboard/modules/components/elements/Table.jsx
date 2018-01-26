@@ -13,25 +13,22 @@ export default class Table extends React.Component {
 		super(props);
 	}
 
-	getHeaders() {
-		return (
-			<tr>
-				{this.props.headers.map((key, i) => <th key={i}>{key}</th>)}
-			</tr>
-		)
-	}
-
 	getRows() {
-		return this.props.data.map((obj, i) => <tr key={i}>
-				{Object.values(obj).map((val, i) => <td key={i}>{getStandardizedValue(val)}</td>)}
-			</tr>);
+		return this.props.data.map((row, i) => {
+			return (
+				<tr key={i}>
+					{Object.values(row).map((val, j) => {
+						return i === 0 ? <th key={j}>{val}</th> : <td key={j}>{getStandardizedValue(val)}</td>;
+					})}
+				</tr>
+			)
+		});
 	}
 
 	render() {
 		return (
 			<table>
 				<tbody>
-					{this.getHeaders()}
 					{this.getRows()}
 				</tbody>
 			</table>
