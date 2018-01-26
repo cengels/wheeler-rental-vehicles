@@ -3,6 +3,7 @@ import OverviewTab from './tabs/OverviewTab';
 import UnderConstructionTab from './tabs/UnderConstructionTab';
 import ErrorTab from './tabs/ErrorTab';
 import VehiclesTab from './tabs/VehiclesTab';
+import CustomersTab from './tabs/CustomersTab';
 
 export default class ContentWrapper extends React.Component {
 	returnCurrentTabContent() {
@@ -13,6 +14,7 @@ export default class ContentWrapper extends React.Component {
 				return <VehiclesTab/>;
 			case 'locations-tab':
 			case 'customers-tab':
+				return <CustomersTab/>;
 			case 'employees-tab':
 			case 'finances-tab':
 			case 'analytics-tab':
