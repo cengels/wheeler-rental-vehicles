@@ -13,7 +13,7 @@ export default class ContentWrapper extends React.Component {
 			case 'vehicles-tab':
 				return <VehiclesTab/>;
 			case 'locations-tab':
-				break;
+				return <UnderConstructionTab/>;
 			case 'customers-tab':
 				return <CustomersTab/>;
 			case 'employees-tab':
