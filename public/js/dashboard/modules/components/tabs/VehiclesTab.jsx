@@ -2,8 +2,18 @@ import React from 'react';
 import httpRequest from '../../http-request';
 import Table from '../elements/Table';
 
-function getNameFromId(sourceObject, targetObjects, key) {
-	return targetObjects.filter(obj => obj[key] === sourceObject[key])[0].name;
+function matchWithEquivalentValue(idToMatch, targetObjects, idKey, ...returnKeys) {
+	const filteredRows = targetObjects.filter(obj => obj[idKey] === idToMatch);
+
+	if (filteredRows.length > 0) {
+		if (returnKeys.length === 1) {
+			return filteredRows[0][returnKeys[0]];
+		}
+
+		return returnKeys.map(key => filteredRows[0][key]);
+	}
+
+	return '';
 }
 
 export default class VehiclesTab extends React.Component {
@@ -21,7 +31,8 @@ export default class VehiclesTab extends React.Component {
 					'Year',
 					'Mileage',
 					'Miles Since Maintenance',
-					'Currently Available'
+					'Currently Available',
+					'Rented to Customer ID'
 				]
 			]
 		};
@@ -33,19 +44,34 @@ export default class VehiclesTab extends React.Component {
 		Promise.all([
 			httpRequest('/vehicles'),
 			httpRequest('/models'),
-			httpRequest('/colors')
+			httpRequest('/colors'),
+			httpRequest('/rentals'),
+			httpRequest('/customers')
 		])
 			.then(data => {
 				const rows = data[0].map(vehicle => {
-					vehicle.modelid = getNameFromId(vehicle, data[1], 'modelid');
-					vehicle.colorid = getNameFromId(vehicle, data[2], 'colorid');
+					vehicle.modelid = matchWithEquivalentValue(vehicle.modelid, data[1], 'modelid', 'name');
+					vehicle.colorid = matchWithEquivalentValue(vehicle.colorid, data[2], 'colorid', 'name');
 					vehicle.year = vehicle.year.toString();		// to prevent thousand separators
 
-					return Object.values(vehicle);
+					const row = Object.values(vehicle);
+
+					const rentedToId = matchWithEquivalentValue(vehicle.vehicleid, data[3], 'vehicleid', 'customerid');
+					let rentedToCustomer = matchWithEquivalentValue(rentedToId, data[4], 'customerid', 'firstname',
+						'lastname');
+
+					if (rentedToCustomer.constructor === Array) {
+						rentedToCustomer = rentedToCustomer.join(' ');
+					}
+					
+					row.push(rentedToCustomer);
+
+					return row;
 				});
 
 				this.setState({ data: this.state.data.concat(rows) })
 			})
+			.catch(err => console.error('HTTP request failed.', err));
 	}
 
 	render() {
