@@ -1,8 +1,13 @@
 import React from 'react';
+import { applyThousandSeparator } from '../../format-helpers';
 
 function getStandardizedValue(value) {
 	if (typeof value === 'boolean') {
 		return value ? '✔' : '';
+	}
+
+	if (typeof value === 'number') {
+		return applyThousandSeparator(value);
 	}
 
 	return value;

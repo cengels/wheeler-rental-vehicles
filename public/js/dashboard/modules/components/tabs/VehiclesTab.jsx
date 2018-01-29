@@ -39,6 +39,7 @@ export default class VehiclesTab extends React.Component {
 				const columns = data[0].map(vehicle => {
 					vehicle.modelid = getNameFromId(vehicle, data[1], 'modelid');
 					vehicle.colorid = getNameFromId(vehicle, data[2], 'colorid');
+					vehicle.year = vehicle.year.toString();		// to prevent thousand separators
 
 					return Object.values(vehicle);
 				});
