@@ -114,7 +114,6 @@ body, html, button, input {
 .tab.active, .tab:hover {
 	color: #1d1d1d;
 	background-position: 100% 0;
-	text-shadow: rgba(0, 0, 0, 0.22) 0 0 1px;
 }
 
 .tab.active {
