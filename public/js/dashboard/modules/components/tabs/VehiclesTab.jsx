@@ -36,7 +36,7 @@ export default class VehiclesTab extends React.Component {
 			httpRequest('/colors')
 		])
 			.then(data => {
-				const columns = data[0].map(vehicle => {
+				const rows = data[0].map(vehicle => {
 					vehicle.modelid = getNameFromId(vehicle, data[1], 'modelid');
 					vehicle.colorid = getNameFromId(vehicle, data[2], 'colorid');
 					vehicle.year = vehicle.year.toString();		// to prevent thousand separators
@@ -44,7 +44,7 @@ export default class VehiclesTab extends React.Component {
 					return Object.values(vehicle);
 				});
 
-				this.setState({ data: this.state.data.concat(columns) })
+				this.setState({ data: this.state.data.concat(rows) })
 			})
 	}
 
