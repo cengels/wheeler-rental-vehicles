@@ -16,6 +16,28 @@ function matchWithEquivalentValue(idToMatch, targetObjects, idKey, ...returnKeys
 	return '';
 }
 
+function formatRow(vehicle, data) {
+	vehicle.modelid = matchWithEquivalentValue(vehicle.modelid, data[1], 'modelid', 'name');
+	vehicle.colorid = matchWithEquivalentValue(vehicle.colorid, data[2], 'colorid', 'name');
+	vehicle.year = vehicle.year.toString();		// to prevent thousand separators
+
+	const row = Object.values(vehicle);
+
+	const rentedRow = data[3].filter(rental => vehicle.vehicleid === rental.vehicleid && rental.milesdriven === null);
+
+	if (rentedRow.length > 0) {
+		const rentedToId = rentedRow[0].customerid;
+		const customerName = matchWithEquivalentValue(rentedToId, data[4], 'customerid', 'firstname', 'lastname')
+			.join(' ');
+
+		row.push(customerName);
+	} else {
+		row.push('');
+	}
+
+	return row;
+}
+
 export default class VehiclesTab extends React.Component {
 	constructor(props) {
 		super(props);
@@ -32,7 +54,7 @@ export default class VehiclesTab extends React.Component {
 					'Mileage',
 					'Miles Since Maintenance',
 					'Currently Available',
-					'Rented to Customer ID'
+					'Rented to'
 				]
 			]
 		};
@@ -49,25 +71,7 @@ export default class VehiclesTab extends React.Component {
 			httpRequest('/customers')
 		])
 			.then(data => {
-				const rows = data[0].map(vehicle => {
-					vehicle.modelid = matchWithEquivalentValue(vehicle.modelid, data[1], 'modelid', 'name');
-					vehicle.colorid = matchWithEquivalentValue(vehicle.colorid, data[2], 'colorid', 'name');
-					vehicle.year = vehicle.year.toString();		// to prevent thousand separators
-
-					const row = Object.values(vehicle);
-
-					const rentedToId = matchWithEquivalentValue(vehicle.vehicleid, data[3], 'vehicleid', 'customerid');
-					let rentedToCustomer = matchWithEquivalentValue(rentedToId, data[4], 'customerid', 'firstname',
-						'lastname');
-
-					if (rentedToCustomer.constructor === Array) {
-						rentedToCustomer = rentedToCustomer.join(' ');
-					}
-					
-					row.push(rentedToCustomer);
-
-					return row;
-				});
+				const rows = data[0].map(vehicle => formatRow(vehicle, data));
 
 				this.setState({ data: this.state.data.concat(rows) })
 			})
