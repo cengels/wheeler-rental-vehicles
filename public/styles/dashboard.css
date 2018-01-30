@@ -197,7 +197,7 @@ body, html, button, input {
 
 #search-input {
 	height: 100%;
-	width: 0%;
+	width: 0;
 	background: none;
 	padding-left: 50px;
 	vertical-align: bottom;
@@ -309,7 +309,7 @@ body, html, button, input {
 	display: flex;
 	flex-direction: column-reverse;
 	box-shadow: rgba(0, 0, 0, 0.43) 1px 1px 7px -1px;
-	border-radius: 10px;
+	border-radius: 6px;
 	background-color: white;
 	padding: 22px;
 	cursor: pointer;
