@@ -19,11 +19,13 @@ export default class Table extends React.Component {
 	}
 
 	getRows() {
-		return this.props.data.map((row, i) => {
+		return this.props.data.map((row, rowIndex) => {
 			return (
-				<tr key={i}>
-					{Object.values(row).map((val, j) => {
-						return i === 0 ? <th key={j}>{val}</th> : <td key={j}>{getStandardizedValue(val)}</td>;
+				<tr key={rowIndex}>
+					{Object.values(row).map((val, columnIndex) => {
+						return rowIndex === 0
+							? <th key={columnIndex}>{val}</th>
+							: <td key={columnIndex}>{getStandardizedValue(val)}</td>;
 					})}
 				</tr>
 			)
