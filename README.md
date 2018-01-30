@@ -2,12 +2,15 @@
 ###### formerly known as rental-vehicles-web
 A web-app for retailers of rental vehicles and (eventually) private consumers looking to manage all their vehicles in one place. Also offers customer management, automatic price calculations and billing, and much more.
 
+That's the idea anyway. In reality, this project was never meant to be serious and will likely never be "finished." It's just a way for me to evolve as a developer.
+
 ## Run the web-app online
 
 1. Go to http://wheeler.clinqlabs.com for the landing page.
-2. Go to http://wheeler.clinqlabs.com/rental or any of the other linked sub-pages to get a glimpse into the backend.
+2. Go to http://wheeler.clinqlabs.com/dashboard for the backend.
+3. Type http://wheeler.clinqlabs.com/* and replace the asterisk with an API command (like "vehicles") to interact with the API. Documentation to follow.
 
-Note that the domain is temporary only. Also note that the app is an active work-in-progress, and that you will eventually be able to register an account and access a one-page dashboard instead of individual HTML pages.
+Note that the clinqlabs.com domain is temporary only. In the future, the site will only be available via this github page.
 
 ## Run the web-app locally
 
