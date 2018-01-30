@@ -113,9 +113,7 @@ h2 {
 
 #elements-no-hover a, #elements-hover div, #elements-no-hover span {
 	height: 100%;
-	width: 16.66vw;
-	min-width: 86px;
-	max-width: 105px;
+	padding: 0 15px;
 }
 
 .small-navbar-item {
