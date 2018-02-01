@@ -1,16 +1,20 @@
 {
 	"env": {
 		"browser": true,
-		"es6": true,
-		"node": true,
-		"jest": true
+		"es6": true
 	},
-	"plugins": ["node"],
-	"extends": ["eslint:recommended", "plugin:node/recommended"],
+	"plugins": [
+		"react"
+	],
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/all"
+	],
 	"parserOptions": {
 		"sourceType": "module",
 		"ecmaFeatures": {
-			"experimentalObjectRestSpread": true
+			"experimentalObjectRestSpread": true,
+			"jsx": true
 		}
 	},
 	"rules": {
@@ -31,7 +35,6 @@
 		"semi": [
 			"error",
 			"always"
-		],
-		"node/exports-style": ["error", "module.exports"]
+		]
 	}
 }
