@@ -1,7 +1,7 @@
 import React from 'react';
-import httpRequest from '../../http-request';
-import WelcomeSection from '../elements/WelcomeSection';
-import PanelSection from '../elements/OverviewTab/SuperSection';
+import httpRequest from '../../../http-request';
+import WelcomeSection from '../../elements/WelcomeSection';
+import PanelSection from './SuperSection';
 
 function extractRentedVehicles(totalVehicles) {
 	return totalVehicles.filter(rental => rental.milesdriven !== null);

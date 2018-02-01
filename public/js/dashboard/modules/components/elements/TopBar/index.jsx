@@ -1,7 +1,7 @@
 import React from 'react';
-import WheelerLogo from './TopBar/WheelerLogo';
-import SearchPanel from './TopBar/SearchPanel';
-import UserPanel from './TopBar/UserPanel';
+import WheelerLogo from './WheelerLogo';
+import SearchPanel from './SearchPanel';
+import UserPanel from './UserPanel';
 
 export default function TopBar() {
 	return (
