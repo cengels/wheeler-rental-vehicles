@@ -7,7 +7,7 @@
 		"react"
 	],
 	"extends": [
-		"eslint:recommended",
+		"eslint:all",
 		"plugin:react/all"
 	],
 	"parserOptions": {
@@ -23,18 +23,28 @@
 			"tab",
 			{ "SwitchCase": 1 }
 		],
-		"linebreak-style": [
-			"error",
-			"unix"
-		],
+		"linebreak-style": ["error", "unix"],
 		"quotes": [
 			"error",
 			"single",
 			{ "allowTemplateLiterals": true }
 		],
-		"semi": [
+		"no-magic-numbers": [
 			"error",
-			"always"
-		]
+			{
+				"ignore": [0, 1],
+				"enforceConst": true
+			}
+		],
+		"semi": ["error", "always"],
+		"dot-location": ["error", "property"],
+		"no-tabs": "off",
+		"arrow-parens": "off",
+		"padded-blocks": "off",
+		"eol-last": "off",
+		"func-style": "off",
+		"space-before-function-paren": ["error", "never"],
+		"no-ternary": "off",
+		"one-var": "off"
 	}
 }
