@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-	entry: './public/js/dashboard/main.js',
+	entry: './public/js/dashboard/main.jsx',
 	output: {
 		filename: 'public.js',
 		path: path.resolve(__dirname, 'public/js')
