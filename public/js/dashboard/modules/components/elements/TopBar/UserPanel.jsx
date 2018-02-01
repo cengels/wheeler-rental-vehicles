@@ -3,7 +3,7 @@ import React from 'react';
 export default function UserPanel() {
 	return (
 		<div id="user-panel">
-			<img id="user-picture" alt="profile-picture" src="/public/images/blank-profile-picture.png"/>
+			<img id="user-picture" alt="profile-picture" src="/public/images/blank-profile-picture.png" />
 			<div id="user-info">
 				<div id="user-name">Anonymous User</div>
 				<div id="user-options">

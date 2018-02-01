@@ -65,11 +65,11 @@ export default class OverviewTab extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<WelcomeSection text="Welcome back, Anonymous!"/>
+				<WelcomeSection text="Welcome back, Anonymous!" />
 
-				<PanelSection name="Vehicles" data={this.state.vehicleData}/>
-				<PanelSection name="Customers" data={this.state.customerData}/>
-				<PanelSection name="Finances" data={this.state.financeData}/>
+				<PanelSection name="Vehicles" data={this.state.vehicleData} />
+				<PanelSection name="Customers" data={this.state.customerData} />
+				<PanelSection name="Finances" data={this.state.financeData} />
 			</React.Fragment>
 		)
 	}

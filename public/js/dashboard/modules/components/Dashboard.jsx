@@ -21,13 +21,13 @@ export default class Dashboard extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<TopBar/>
+				<TopBar />
 
 				<div id="main-container">
-					<NavigationBar callback={this.setTabState}/>
+					<NavigationBar callback={this.setTabState} />
 
 					<div id="content-container">
-						<ContentWrapper tab={this.state.currentTab} hidden={this.state.hidden}/>
+						<ContentWrapper tab={this.state.currentTab} hidden={this.state.hidden} />
 					</div>
 				</div>
 			</React.Fragment>

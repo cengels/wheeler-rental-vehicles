@@ -19,23 +19,23 @@ export default class NavigationBar extends React.Component {
 		return (
 			<div id="navigation-bar">
 				<TabButton id="overview-tab" currentTab={this.state.currentTab} icon="fa-eye"
-						   label="Overview" callback={this.setTabState}/>
+						   label="Overview" callback={this.setTabState} />
 				<TabButton id="vehicles-tab" currentTab={this.state.currentTab} icon="fa-car"
-						   label="Vehicles" callback={this.setTabState}/>
+						   label="Vehicles" callback={this.setTabState} />
 				<TabButton id="locations-tab" currentTab={this.state.currentTab} icon="fa-map-marker"
-						   label="Locations" callback={this.setTabState}/>
+						   label="Locations" callback={this.setTabState} />
 				<TabButton id="customers-tab" currentTab={this.state.currentTab} icon="fa-user"
-						   label="Customers" callback={this.setTabState}/>
+						   label="Customers" callback={this.setTabState} />
 				<TabButton id="employees-tab" currentTab={this.state.currentTab} icon="fa-id-card-o"
-						   label="Employees" callback={this.setTabState}/>
+						   label="Employees" callback={this.setTabState} />
 				<TabButton id="finances-tab" currentTab={this.state.currentTab} icon="fa-usd"
-						   label="Finances" callback={this.setTabState}/>
+						   label="Finances" callback={this.setTabState} />
 				<TabButton id="analytics-tab" currentTab={this.state.currentTab} icon="fa-line-chart"
-						   label="Analytics" callback={this.setTabState}/>
+						   label="Analytics" callback={this.setTabState} />
 				<TabButton id="preferences-tab" currentTab={this.state.currentTab} icon="fa-cog"
-						   label="Preferences" callback={this.setTabState}/>
+						   label="Preferences" callback={this.setTabState} />
 				<TabButton id="about-tab" currentTab={this.state.currentTab} icon="fa-question-circle"
-						   label="About" callback={this.setTabState}/>
+						   label="About" callback={this.setTabState} />
 			</div>
 		)
 	}

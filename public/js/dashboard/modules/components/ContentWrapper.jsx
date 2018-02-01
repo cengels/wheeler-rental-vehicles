@@ -9,21 +9,21 @@ export default class ContentWrapper extends React.Component {
 	returnCurrentTabContent() {
 		switch (this.props.tab) {
 			case 'overview-tab':
-				return <OverviewTab/>;
+				return <OverviewTab />;
 			case 'vehicles-tab':
-				return <VehiclesTab/>;
+				return <VehiclesTab />;
 			case 'locations-tab':
-				return <UnderConstructionTab/>;
+				return <UnderConstructionTab />;
 			case 'customers-tab':
-				return <CustomersTab/>;
+				return <CustomersTab />;
 			case 'employees-tab':
 			case 'finances-tab':
 			case 'analytics-tab':
 			case 'preferences-tab':
 			case 'about-tab':
-				return <UnderConstructionTab/>;
+				return <UnderConstructionTab />;
 			default:
-				return <ErrorTab/>;
+				return <ErrorTab />;
 		}
 	}
 

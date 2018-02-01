@@ -81,7 +81,7 @@ export default class VehiclesTab extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<Table data={this.state.data}/>
+				<Table data={this.state.data} />
 			</React.Fragment>
 		)
 	}

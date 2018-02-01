@@ -6,9 +6,9 @@ import UserPanel from './UserPanel';
 export default function TopBar() {
 	return (
 		<div id="top-bar">
-			<WheelerLogo/>
-			<SearchPanel/>
-			<UserPanel/>
+			<WheelerLogo />
+			<SearchPanel />
+			<UserPanel />
 		</div>
 	)
 }

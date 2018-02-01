@@ -42,7 +42,7 @@ export default class CustomersTab extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<Table data={this.state.data}/>
+				<Table data={this.state.data} />
 			</React.Fragment>
 		)
 	}

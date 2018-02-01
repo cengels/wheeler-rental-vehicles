@@ -16,7 +16,7 @@ export default class Input extends React.Component {
 	render() {
 		return (
 			<input id={this.props.id} name={this.props.id} type={this.props.type} value={this.state.value}
-				   placeholder={this.props.placeholder} onChange={this.handleChange}/>
+				   placeholder={this.props.placeholder} onChange={this.handleChange} />
 		)
 	}
 }
