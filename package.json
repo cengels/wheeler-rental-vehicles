@@ -8,7 +8,7 @@
 		"start": "webpack && node scripts/start.js",
 		"bundle": "webpack",
 		"build": "scripts/build.sh && webpack && uglifyjs ./public/js/public.js --output ./public/js/public.js",
-		"deploy": "node ./node_modules/.bin/eslint src/** && scripts/build.sh && webpack && uglifyjs ./public/js/public.js --output ./public/js/public.js && scripts/deploy.sh",
+		"deploy": "eslint src/** public/js/** --ignore-pattern public.js && scripts/build.sh && webpack && uglifyjs ./public/js/public.js --output ./public/js/public.js && scripts/deploy.sh",
 		"mock": "node scripts/createMockDatabase.js",
 		"lint": "eslint src/** public/js/** --ignore-pattern public.js",
 		"clearlogs": "echo '' > logs/winston.log"
@@ -41,7 +41,6 @@
 		"@babel/preset-env": "^7.0.0-beta.38",
 		"@babel/preset-react": "^7.0.0-beta.38",
 		"@babel/preset-stage-2": "^7.0.0-beta.38",
-		"babel-jest": "^22.1.0",
 		"babel-loader": "^8.0.0-beta.0",
 		"eslint": "^4.15.0",
 		"eslint-plugin-node": "^5.2.1",
