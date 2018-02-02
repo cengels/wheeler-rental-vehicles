@@ -1,14 +1,13 @@
 const Numbers = require('../../definitions/numbers');
 
 class Vehicle {
-	constructor(licensePlate, mileage, distanceSinceMaintenance, availableForRent,
-		MAX_MAINTENANCE_DISTANCE, PRICE_PER_DAY) {
-		this._licensePlate = licensePlate;
-		this._mileage = mileage;
-		this._distanceSinceMaintenance = distanceSinceMaintenance;
-		this._availableForRent = availableForRent;
-		this._MAX_MAINTENANCE_DISTANCE = MAX_MAINTENANCE_DISTANCE;
-		this._PRICE_PER_DAY = PRICE_PER_DAY;
+	constructor(props) {
+		this._licensePlate = props.licensePlate;
+		this._mileage = props.mileage;
+		this._distanceSinceMaintenance = props.distanceSinceMaintenance;
+		this._availableForRent = props.availableForRent;
+		this._MAX_MAINTENANCE_DISTANCE = props.MAX_MAINTENANCE_DISTANCE;
+		this._PRICE_PER_DAY = props.PRICE_PER_DAY;
 		this._PRICE_PER_MILE = Numbers.PRICE_PER_MILE_DEFAULT;
 		this._PRICE_PER_MAINTENANCE = Numbers.PRICE_PER_MAINTENANCE;
 	}
@@ -46,19 +45,24 @@ class Vehicle {
 	}
 
 	getRentPrice(days, clockedDistance) {
-		return this.getCustomerPrice(days, clockedDistance) - this.getMaintenancePrice(clockedDistance);
+		return this.getCustomerPrice(days, clockedDistance)
+			- this.getMaintenancePrice(clockedDistance);
 	}
 
 	getCustomerPrice(days, clockedDistance) {
-		return days * this._PRICE_PER_DAY + clockedDistance * this._PRICE_PER_MILE;
+		return (days * this._PRICE_PER_DAY)
+			+ (clockedDistance * this._PRICE_PER_MILE);
 	}
 
 	getMaintenancePrice(clockedDistance) {
-		if (this._distanceSinceMaintenance + clockedDistance > this._MAX_MAINTENANCE_DISTANCE) {
+		const totalDistanceSinceMaintenance = this._distanceSinceMaintenance
+			+ clockedDistance;
+
+		if (totalDistanceSinceMaintenance > this._MAX_MAINTENANCE_DISTANCE) {
 			return this._PRICE_PER_MAINTENANCE;
-		} else {
-			return 0;
 		}
+
+		return 0;
 	}
 }
 

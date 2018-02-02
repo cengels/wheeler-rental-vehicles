@@ -5,12 +5,14 @@ const HTTP = require('../../definitions/http-verbs');
 const makeRequest = (method) => (path, requestBody) => {
 	const host = config.get('app:host');
 	const port = config.get('app:port');
-	const uri = process.env.NODE_ENV === 'production' ? `http://${host}` + path : `http://${host}:${port}` + path;
+	const uri = process.env.NODE_ENV === 'production'
+		? `http://${host}${path}`
+		: `http://${host}:${port}${path}`;
 
-	let options = {
-		uri: uri,
-		method: method,
-		json: true
+	const options = {
+		'json': true,
+		method,
+		uri
 	};
 
 	if (requestBody) {
@@ -29,9 +31,9 @@ const makeGetRequests = (...paths) => {
 };
 
 module.exports = {
-	makeGetRequest: makeGetRequest,
-	makeGetRequests: makeGetRequests,
-	makePostRequest: makeRequest(HTTP.POST),
-	makeDeleteRequest: makeRequest(HTTP.DELETE),
-	makePutRequest: makeRequest(HTTP.PUT)
+	'makeDeleteRequest': makeRequest(HTTP.DELETE),
+	makeGetRequest,
+	makeGetRequests,
+	'makePostRequest': makeRequest(HTTP.POST),
+	'makePutRequest': makeRequest(HTTP.PUT)
 };

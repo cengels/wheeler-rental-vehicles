@@ -2,6 +2,7 @@ const HTTP = require('../../definitions/http-verbs');
 const { getCallback, postCallback, deleteCallback } = require('./operations');
 
 module.exports = (router) => (route, ...httpVerbs) => {
+	// eslint-disable-next-line prefer-destructuring
 	const table = route.split('/')[1];
 
 	if (httpVerbs.indexOf(HTTP.GET) >= 0) {

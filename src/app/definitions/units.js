@@ -1,12 +1,12 @@
 module.exports = {
-	COUNTRIES: {
-		DE: 'DE',
-		GB: 'GB',
-		US: 'US',
+	'COUNTRIES': {
+		'DE': 'DE',
+		'GB': 'GB',
+		'US': 'US'
 	},
 
-	SYSTEMS: {
-		METRIC: 'METRIC',
-		IMPERIAL: 'IMPERIAL',
-	},
+	'SYSTEMS': {
+		'IMPERIAL': 'IMPERIAL',
+		'METRIC': 'METRIC'
+	}
 };

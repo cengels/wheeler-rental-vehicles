@@ -5,11 +5,12 @@ class CustomerRequestHandler extends RequestHandler {
 	constructor(res, viewObject, requestBody) {
 		super(res, viewObject);
 
-		this._requestBody = CustomerRequestHandler._buildRequestBody(requestBody);
+		this._requestBody = CustomerRequestHandler
+			.buildRequestBody(requestBody);
 	}
 
 	renderCustomerForm(hint) {
-		this._renderForm({}, { hint: hint });
+		this._renderForm({}, { hint });
 	}
 
 	renderCustomerError(errorHint, logMessage, err) {
@@ -23,37 +24,37 @@ class CustomerRequestHandler extends RequestHandler {
 	}
 
 	postCustomer() {
-		const postBody = RequestHandler._processRequestBody(this._requestBody);
+		const postBody = RequestHandler.processRequestBody(this._requestBody);
 		postBody.customersince = new Date().toISOString();
 
 		return makePostRequest('/customers', postBody);
 	}
 
-	static _buildRequestBody(requestBody) {
+	static buildRequestBody(requestBody) {
 		return {
-			firstName: {
-				value: requestBody['first-name'],
-				canBeNull: false
+			'address': {
+				'canBeNull': false,
+				'value': requestBody.address
 			},
-			lastName: {
-				value: requestBody['last-name'],
-				canBeNull: false
+			'city': {
+				'canBeNull': false,
+				'value': requestBody.city
 			},
-			postalCode: {
-				value: requestBody['postal-code'],
-				canBeNull: false
+			'firstName': {
+				'canBeNull': false,
+				'value': requestBody['first-name']
 			},
-			address: {
-				value: requestBody.address,
-				canBeNull: false
+			'lastName': {
+				'canBeNull': false,
+				'value': requestBody['last-name']
 			},
-			city: {
-				value: requestBody.city,
-				canBeNull: false
+			'phoneNumber': {
+				'canBeNull': true,
+				'value': requestBody['phone-number']
 			},
-			phoneNumber: {
-				value: requestBody['phone-number'],
-				canBeNull: true
+			'postalCode': {
+				'canBeNull': false,
+				'value': requestBody['postal-code']
 			}
 		};
 	}

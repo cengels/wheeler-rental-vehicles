@@ -1,46 +1,46 @@
 module.exports = {
-	FrontPage: {
-		name: 'front-page-view',
-		route: '/'
+	'AboutPage': {
+		'name': 'about-view',
+		'route': '/about'
 	},
-	FeaturesPage: {
-		name: 'features-view',
-		route: '/features'
+	'CalcForm': {
+		'name': 'calc-form',
+		'route': '/calc'
 	},
-	LiteSignUpPage: {
-		name: 'lite-sign-up-view',
-		route: '/sign-up/lite'
+	'ContactPage': {
+		'name': 'contact-view',
+		'route': '/contact'
 	},
-	RegularSignUpPage: {
-		name: 'regular-sign-up-view',
-		route: '/sign-up/regular'
+	'CustomerForm': {
+		'name': 'customer-form',
+		'route': '/customer-form'
 	},
-	AboutPage: {
-		name: 'about-view',
-		route: '/about'
+	'Dashboard': {
+		'name': 'dashboard',
+		'route': '/dashboard'
 	},
-	ContactPage: {
-		name: 'contact-view',
-		route: '/contact'
+	'FeaturesPage': {
+		'name': 'features-view',
+		'route': '/features'
 	},
-	CalcForm: {
-		name: 'calc-form',
-		route: '/calc'
+	'FrontPage': {
+		'name': 'front-page-view',
+		'route': '/'
 	},
-	CustomerForm: {
-		name: 'customer-form',
-		route: '/customer-form'
+	'LiteSignUpPage': {
+		'name': 'lite-sign-up-view',
+		'route': '/sign-up/lite'
 	},
-	RentalForm: {
-		name: 'rental-form',
-		route: '/rental'
+	'RegularSignUpPage': {
+		'name': 'regular-sign-up-view',
+		'route': '/sign-up/regular'
 	},
-	VehicleForm: {
-		name: 'vehicle-form',
-		route: '/vehicle-form'
+	'RentalForm': {
+		'name': 'rental-form',
+		'route': '/rental'
 	},
-	Dashboard: {
-		name: 'dashboard',
-		route: '/dashboard'
+	'VehicleForm': {
+		'name': 'vehicle-form',
+		'route': '/vehicle-form'
 	}
 };

@@ -4,28 +4,33 @@ const { makeDeleteRequest } = require('./Request');
 class VehicleDeleteRequestHandler extends VehicleRequestHandler {
 	constructor(res, viewObject, requestBody) {
 		super(res, viewObject, requestBody);
-		this._requestBody = VehicleDeleteRequestHandler._buildDeleteRequestBody(requestBody);
+		this._requestBody = VehicleDeleteRequestHandler
+			.buildDeleteRequestBody(requestBody);
 	}
 
 	renderVehicleError(errorHint, logMessage, err) {
 		const hint = this.generateErrorHint(errorHint, logMessage, err);
-		this.renderVehicleForm({ hintDelete: hint });
+		this.renderVehicleForm({ 'hintDelete': hint });
 	}
 
 	renderVehicleSuccess(successHint) {
 		const hint = this.generateSuccessHint(successHint);
-		this.renderVehicleForm({ hintDelete: hint });
+		this.renderVehicleForm({ 'hintDelete': hint });
 	}
 
 	deleteVehicle() {
-		return makeDeleteRequest('/vehicles/' + this._requestBody.vehicleId.value);
+		/* eslint-disable */
+		return makeDeleteRequest(
+			`/vehicles/${this._requestBody.vehicleId.value}`
+		);
+		/* eslint-enable */
 	}
 
-	static _buildDeleteRequestBody(requestBody) {
+	static buildDeleteRequestBody(requestBody) {
 		return {
-			vehicleId: {
-				value: requestBody.vehicleid,
-				canBeNull: false
+			'vehicleId': {
+				'canBeNull': false,
+				'value': requestBody.vehicleid
 			}
 		};
 	}

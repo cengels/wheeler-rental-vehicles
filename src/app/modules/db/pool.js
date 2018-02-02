@@ -6,7 +6,13 @@ const options = config.get('db');
 
 const DATE_OID = 1082;
 
-types.setTypeParser(DATE_OID, (val) => val === null ? null : val);
+types.setTypeParser(
+	DATE_OID,
+	// eslint-disable-next-line no-confusing-arrow
+	val => val === null
+		? null
+		: val
+);
 
 const pool = new Pool(options);
 

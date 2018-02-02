@@ -33,18 +33,60 @@
 			"error",
 			{
 				"ignore": [0, 1],
-				"enforceConst": true
+				"enforceConst": true,
+				"ignoreArrayIndexes": true
 			}
+		],
+		"no-underscore-dangle": [
+			"error",
+			{ "allowAfterThis": true }
+		],
+		"no-extra-parens": [
+			"error",
+			"all",
+			{ "nestedBinaryExpressions": false }
+		],
+		"operator-linebreak": [
+			"error",
+			"before",
+			{ "overrides": { "=": "after" } }
+		],
+		"arrow-body-style": [
+			"error",
+			"as-needed",
+			{ "requireReturnForObjectLiteral": true }
+		],
+		"max-params": [
+			"error",
+			{ "max": 4 }
+		],
+		"id-length": [
+			"error",
+			{ "exceptions": [
+				"i",
+				"j"
+			] }
+		],
+		"object-curly-newline": [
+			"error",
+			{ "consistent": true }
+		],
+		"object-property-newline": [
+			"error",
+			{ "allowMultiplePropertiesPerLine": true }
 		],
 		"semi": ["error", "always"],
 		"dot-location": ["error", "property"],
 		"no-tabs": "off",
+		"no-process-env": "off",
 		"arrow-parens": "off",
 		"padded-blocks": "off",
 		"eol-last": "off",
+		"implicit-arrow-linebreak": "off",
 		"func-style": "off",
 		"space-before-function-paren": ["error", "never"],
 		"no-ternary": "off",
-		"one-var": "off"
+		"one-var": "off",
+		"object-curly-spacing": ["error", "always"]
 	}
 }

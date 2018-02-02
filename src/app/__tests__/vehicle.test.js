@@ -1,63 +1,117 @@
 const Car = require('../modules/vehicles/Car');
 const Truck = require('../modules/vehicles/Truck');
 
+// eslint-disable-next-line max-statements
 describe('Vehicle Tests', () => {
-	const car = new Car('WHO-CARES-420', 60000, 12000, true);
-	const carMaintenanceThreshold = new Car('WHO-CARES-420', 60000, 29000, true);
-	const truck = new Truck('WHO-CARES-420', 60000, 12000, 1500, true);
-	const truckTooHeavy = new Truck('WHO-CARES-420', 60000, 12000, 2000, true);
+	const LICENSE_PLATE = 'WHO-CARES-420';
+	const MILEAGE = 60000;
+	const LOW_CARGO_LOAD = 1500;
+	const HIGH_CARGO_LOAD = 2000;
+	const LOW_MILES_SINCE_MAINTENANCE = 12000;
+	const HIGH_MILES_SINCE_MAINTENANCE = 29000;
+
+	const car = new Car({
+		'availableForRent': true,
+		'licensePlate': LICENSE_PLATE,
+		'mileage': MILEAGE,
+		'milesSinceMaintenance': LOW_MILES_SINCE_MAINTENANCE
+	});
+
+	const carMaintenanceThreshold = new Car({
+		'availableForRent': true,
+		'licensePlate': LICENSE_PLATE,
+		'mileage': MILEAGE,
+		'milesSinceMaintenance': HIGH_MILES_SINCE_MAINTENANCE
+	});
+
+	const truck = new Truck({
+		'availableForRent': true,
+		'cargoLoad': LOW_CARGO_LOAD,
+		'licensePlate': LICENSE_PLATE,
+		'mileage': MILEAGE,
+		'milesSinceMaintenance': LOW_MILES_SINCE_MAINTENANCE
+	});
+
+	const truckTooHeavy = new Truck({
+		'availableForRent': true,
+		'cargoLoad': HIGH_CARGO_LOAD,
+		'licensePlate': LICENSE_PLATE,
+		'mileage': MILEAGE,
+		'milesSinceMaintenance': LOW_MILES_SINCE_MAINTENANCE
+	});
 
 	describe('Rent Price Tests', () => {
-		it('asserts that renting a random car for 20 days and 3000km costs 2340€', () => {
-			expect(car.getRentPrice(20, 3000)).toBe(2340);
+		const DAYS = 20;
+		const MILES = 3000;
+
+		it('asserts that Car getRentPrice() works', () => {
+			const RETURN_PRICE = 2340;
+
+			expect(car.getRentPrice(DAYS, MILES)).toBe(RETURN_PRICE);
 		});
-		it('asserts that renting a random car for 20 days and 3000km costs 2340€ minus 500€ maintenance', () => {
-			expect(carMaintenanceThreshold.getRentPrice(20, 3000)).toBe(1840);
+		it('asserts that Car getRentPrice() works - maintenance price', () => {
+			const RETURN_PRICE = 1840;
+
+			expect(carMaintenanceThreshold.getRentPrice(DAYS, MILES))
+				.toBe(RETURN_PRICE);
 		});
-		it('asserts that renting a random truck for 20 days and 3000km costs 2740€', () => {
-			expect(truck.getRentPrice(20, 3000)).toBe(2740);
+		it('asserts that Truck getRentPrice() works', () => {
+			const RETURN_PRICE = 2740;
+
+			expect(truck.getRentPrice(DAYS, MILES)).toBe(RETURN_PRICE);
 		});
-		it('asserts that renting a random truck past the weight threshold for 20 days and 3000km costs 3340€', () => {
-			expect(truckTooHeavy.getRentPrice(20, 3000)).toBe(3340);
+		it('asserts that Truck getRentPrice() past weight limit works', () => {
+			const RETURN_PRICE = 3340;
+
+			expect(truckTooHeavy.getRentPrice(DAYS, MILES)).toBe(RETURN_PRICE);
 		});
 	});
 	describe('Getter Tests', () => {
 		it('asserts license plate getter', () => {
-			expect(car.licensePlate).toBe('WHO-CARES-420');
+			expect(car.licensePlate).toBe(LICENSE_PLATE);
 		});
 		it('asserts mileage getter', () => {
-			expect(car.mileage).toBe(60000);
+			expect(car.mileage).toBe(MILEAGE);
 		});
 		it('asserts distanceSinceMaintenance getter', () => {
-			expect(car.distanceSinceMaintenance).toBe(12000);
+			expect(car.distanceSinceMaintenance)
+				.toBe(LOW_MILES_SINCE_MAINTENANCE);
 		});
 		it('asserts availableForRent getter', () => {
 			expect(car.availableForRent).toBeTruthy();
 		});
 		it('asserts maxCargoLoad getter', () => {
-			expect(truck.maxCargoLoad).toBe(1500);
+			expect(truck.maxCargoLoad).toBe(LOW_CARGO_LOAD);
 		});
 	});
 	describe('Setter Tests', () => {
 		it('asserts that car will obtain new license plate', () => {
-			car.licensePlate = '123-FOOBAR';
-			expect(car.licensePlate).toBe('123-FOOBAR');
+			const THIS_LICENSE_PLATE = '123-FOOBAR';
+
+			car.licensePlate = THIS_LICENSE_PLATE;
+			expect(car.licensePlate).toBe(THIS_LICENSE_PLATE);
 		});
 		it('asserts that car will obtain new mileage', () => {
-			car.mileage = 62000;
-			expect(car.mileage).toBe(62000);
+			const THIS_MILEAGE = 62000;
+
+			car.mileage = THIS_MILEAGE;
+			expect(car.mileage).toBe(THIS_MILEAGE);
 		});
 		it('asserts that car will obtain new distanceSinceMaintenance', () => {
-			car.distanceSinceMaintenance = 30000;
-			expect(car.distanceSinceMaintenance).toBe(30000);
+			const THIS_DIST_SINCE = 30000;
+
+			car.distanceSinceMaintenance = THIS_DIST_SINCE;
+			expect(car.distanceSinceMaintenance).toBe(THIS_DIST_SINCE);
 		});
 		it('asserts that car will be set to unavailable for rent', () => {
 			car.availableForRent = false;
 			expect(car.availableForRent).toBeFalsy();
 		});
 		it('asserts that truck will obtain new maxCargoLoad', () => {
-			truck.maxCargoLoad = 1600;
-			expect(truck.maxCargoLoad).toBe(1600);
+			const THIS_CARGO_LOAD = 1600;
+
+			truck.maxCargoLoad = THIS_CARGO_LOAD;
+			expect(truck.maxCargoLoad).toBe(THIS_CARGO_LOAD);
 		});
 	});
 });

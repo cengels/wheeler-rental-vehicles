@@ -2,8 +2,8 @@ const Units = require('./units');
 const User = require('../user');
 
 const ALL_NUMBERS = {
-	CAR: {},
-	TRUCK: {},
+	'CAR': {},
+	'TRUCK': {}
 };
 
 switch (User.system) {

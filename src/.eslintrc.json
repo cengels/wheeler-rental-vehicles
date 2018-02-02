@@ -9,7 +9,7 @@
 		"node"
 	],
 	"extends": [
-		"eslint:recommended",
+		"eslint:all",
 		"plugin:node/recommended"
 	],
 	"parserOptions": {
@@ -24,19 +24,74 @@
 			"tab",
 			{ "SwitchCase": 1 }
 		],
-		"linebreak-style": [
-			"error",
-			"unix"
-		],
+		"linebreak-style": ["error", "unix"],
 		"quotes": [
 			"error",
 			"single",
 			{ "allowTemplateLiterals": true }
 		],
-		"semi": [
+		"no-magic-numbers": [
 			"error",
-			"always"
+			{
+				"ignore": [0, 1],
+				"enforceConst": true,
+				"ignoreArrayIndexes": true
+			}
 		],
-		"node/exports-style": ["error", "module.exports"]
+		"no-underscore-dangle": [
+			"error",
+			{ "allowAfterThis": true }
+		],
+		"no-extra-parens": [
+			"error",
+			"all",
+			{ "nestedBinaryExpressions": false }
+		],
+		"operator-linebreak": [
+			"error",
+			"before",
+			{ "overrides": { "=": "after" } }
+		],
+		"arrow-body-style": [
+			"error",
+			"as-needed",
+			{ "requireReturnForObjectLiteral": true }
+		],
+		"max-params": [
+			"error",
+			{ "max": 4 }
+		],
+		"id-length": [
+			"error",
+			{ "exceptions": [
+				"i",
+				"j"
+			] }
+		],
+		"object-curly-newline": [
+			"error",
+			{ "consistent": true }
+		],
+		"object-property-newline": [
+			"error",
+			{ "allowMultiplePropertiesPerLine": true }
+		],
+		"semi": ["error", "always"],
+		"dot-location": ["error", "property"],
+		"no-process-env": "off",
+		"no-tabs": "off",
+		"arrow-parens": "off",
+		"padded-blocks": "off",
+		"eol-last": "off",
+		"implicit-arrow-linebreak": "off",
+		"func-style": "off",
+		"space-before-function-paren": ["error", "never"],
+		"no-ternary": "off",
+		"one-var": "off",
+		"object-curly-spacing": ["error", "always"],
+		"node/exports-style": ["error", "module.exports"],
+		"node/no-extraneous-import": "error",
+		"node/no-missing-import": "error",
+		"node/no-unpublished-import": "error"
 	}
 }

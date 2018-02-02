@@ -9,93 +9,148 @@ class CalcRequestHandler extends RequestHandler {
 	constructor(res, viewObject, requestBody) {
 		super(res, viewObject);
 
-		this._requestBody = CalcRequestHandler._buildRequestBody(requestBody);
-		this._responseBody = RequestHandler._processRequestBody(this._requestBody);
+		this._requestBody = CalcRequestHandler
+			.buildRequestBody(requestBody);
+		this._responseBody = RequestHandler
+			.processRequestBody(this._requestBody);
+		this._NUMBER_OF_DECIMALS = 2;
 	}
 
 	renderPrice() {
-		makeGetRequest('/vehicles/' + this._requestBody.vehicleId.value)
-			.then(vehicle => this._getVehicleInstance(vehicle))
+		makeGetRequest(`/vehicles/${this._requestBody.vehicleId.value}`)
+			.then(vehicle => this.getVehicleInstance(vehicle))
 			.then(vehicleInstance => {
-				this._responseBody.customerPrice = this._getCustomerPrice(vehicleInstance);
-				this._responseBody.maintenancePrice = this._getMaintenancePrice(vehicleInstance);
+				this._responseBody.customerPrice = this
+					.getCustomerPrice(vehicleInstance);
+				this._responseBody.maintenancePrice = this
+					.getMaintenancePrice(vehicleInstance);
 				this.renderCalcForm();
 			})
-			.catch(err => this.renderCalcError(StatusMessages.Errors.UNKNOWN, 'Error calculating price.', err));
+			.catch(err => this.renderCalcError(
+				StatusMessages.Errors.UNKNOWN,
+				'Error calculating price.',
+				err
+			));
 	}
 
 	renderCalcForm(hint) {
 		return this._getVehicles()
-			.then(() => this._renderForm(this._responseBody, { hint: hint }))
-			.catch(err => logger.serverError('Failed to render form', err.stack));
+			.then(() => this._renderForm(
+				this._responseBody,
+				{ hint }
+			))
+			.catch(err => logger.serverError(
+				'Failed to render form',
+				err.stack
+			));
 	}
 
 	renderCalcError(errorHint, logMessage, err) {
 		return this._getVehicles()
 			.then(() => {
-				const hint = this.generateErrorHint(errorHint, logMessage, err);
+				const hint = this.generateErrorHint(
+					errorHint,
+					logMessage,
+					err
+				);
 				this.renderCalcForm(hint);
 			})
-			.catch(err => logger.serverError('Failed to render form', err.stack));
+			.catch(error => logger.serverError(
+				'Failed to render form',
+				error.stack
+			));
 	}
 
-	static _buildRequestBody(requestBody) {
+	static buildRequestBody(requestBody) {
 		return {
-			vehicleId: {
-				value: requestBody.vehicleid,
-				canBeNull: false
+			'days': {
+				'canBeNull': false,
+				'value': requestBody.days
 			},
-			days: {
-				value: requestBody.days,
-				canBeNull: false
+			'distance': {
+				'canBeNull': false,
+				'value': requestBody.distance
 			},
-			distance: {
-				value: requestBody.distance,
-				canBeNull: false
+			'vehicleId': {
+				'canBeNull': false,
+				'value': requestBody.vehicleid
 			}
 		};
 	}
 
-	_getVehicleInstance(vehicle) {
-		this._vehicle = vehicle[0];
+	getVehicleInstance(vehicle) {
+		[this._vehicle] = vehicle;
 
-		return makeGetRequest('/models/' + this._vehicle.modelid)
-			.then(model => makeGetRequest('/types/' + model[0].typeid))
+		return makeGetRequest(`/models/${this._vehicle.modelid}`)
+			.then(model => makeGetRequest(`/types/${model[0].typeid}`))
 			.then(type => this._makeNewVehicleInstance(type))
-			.catch(err => logger.serverError('Error constructing vehicle object.', err.stack));
+			.catch(err => logger.serverError(
+				'Error constructing vehicle object.',
+				err.stack
+			));
 	}
 
 	_getVehicles() {
 		return makeGetRequest('/vehicles')
-			.then(res => this._responseBody.vehicles = res)
-			.catch(err => logger.serverError('Failed to fetch vehicles', err.stack));
+			.then(res => {
+				this._responseBody.vehicles = res;
+			})
+			.catch(err => logger.serverError(
+				'Failed to fetch vehicles',
+				err.stack
+			));
 	}
 
 	_makeNewVehicleInstance(type) {
-		const { licenseplate, mileage, milessincemaintenance, maximumcargoload, available } = this._vehicle;
+		const {
+			'available': availableForRent,
+			'licenseplate': licensePlate,
+			'maximumcargoload': MAX_CARGO_LOAD,
+			mileage,
+			'milessincemaintenance': milesSinceMaintenance
+		} = this._vehicle;
 
 		switch (type[0].name) {
 			case 'Truck':
-				return new Truck(licenseplate, mileage, milessincemaintenance, maximumcargoload, available);
+				return new Truck({
+					MAX_CARGO_LOAD,
+					availableForRent,
+					licensePlate,
+					mileage,
+					milesSinceMaintenance
+				});
 			case 'Car':
-				return new Car(licenseplate, mileage, milessincemaintenance, available);
+				return new Car({
+					availableForRent,
+					licensePlate,
+					mileage,
+					milesSinceMaintenance
+				});
 			default:
-				logger.userError('Invalid vehicle type', type[0]);
-				break;
+				return logger.userError(
+					'Invalid vehicle type',
+					type[0]
+				);
 		}
 	}
 
-	_getCustomerPrice(vehicleInstance) {
+	getCustomerPrice(vehicleInstance) {
+		// eslint-disable-next-line prefer-template
 		return vehicleInstance
-			.getCustomerPrice(this._requestBody.days.value, this._requestBody.distance.value)
-			.toFixed(2)
+			.getCustomerPrice(
+				this._requestBody.days.value,
+				this._requestBody.distance.value
+			)
+			.toFixed(this._NUMBER_OF_DECIMALS)
 			.toString() + ' €';
 	}
 
-	_getMaintenancePrice(vehicleInstance) {
+	getMaintenancePrice(vehicleInstance) {
+		// eslint-disable-next-line prefer-template
 		return vehicleInstance
-			.getMaintenancePrice(this._requestBody.distance.value)
-			.toFixed(2)
+			.getMaintenancePrice(this._requestBody.distance
+				.value)
+			.toFixed(this._NUMBER_OF_DECIMALS)
 			.toString() + ' €';
 	}
 }

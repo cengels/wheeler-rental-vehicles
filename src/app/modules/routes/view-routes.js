@@ -8,7 +8,7 @@ const dashboard = require('../views/dashboard');
 
 module.exports = (router) => {
 	return {
-		allFrontEndViews: () => {
+		'allFrontEndViews': () => {
 			mainPages.frontPageView(router, Views.FrontPage);
 			mainPages.featuresView(router, Views.FeaturesPage);
 			mainPages.liteSignUpView(router, Views.LiteSignUpPage);
@@ -16,10 +16,10 @@ module.exports = (router) => {
 			mainPages.aboutView(router, Views.AboutPage);
 			mainPages.contactView(router, Views.ContactPage);
 		},
-		dashboardView: () => dashboard(router, Views.Dashboard),
-		rentalFormView: () => rentalForm(router, Views.RentalForm),
-		calcPriceView: () => calc(router, Views.CalcForm),
-		vehicleFormView: () => vehicleForm(router, Views.VehicleForm),
-		customerFormView: () => customerForm(router, Views.CustomerForm)
+		'calcPriceView': () => calc(router, Views.CalcForm),
+		'customerFormView': () => customerForm(router, Views.CustomerForm),
+		'dashboardView': () => dashboard(router, Views.Dashboard),
+		'rentalFormView': () => rentalForm(router, Views.RentalForm),
+		'vehicleFormView': () => vehicleForm(router, Views.VehicleForm)
 	};
 };

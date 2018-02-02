@@ -7,20 +7,31 @@ class RentRequestHandler extends RequestHandler {
 	constructor(res, viewObject, requestBody) {
 		super(res, viewObject);
 
-		this._requestBody = RentRequestHandler._buildRequestBody(requestBody);
+		this._requestBody = RentRequestHandler
+			.buildRequestBody(requestBody);
 	}
 
 	renderRentForm(hint) {
-		RentRequestHandler._getVehiclesRentalsCustomers()
+		RentRequestHandler
+			.getVehiclesRentalsCustomers()
 			.then(result => {
-				const rentedVehicles = VehicleRequestHandler._filterRentedVehicles(result[1], result[0]);
+				const rentedVehicles = VehicleRequestHandler
+					.filterRentedVehicles(result[1], result[0]);
+
 				this._responseBody = {
-					vehicles: rentedVehicles,
-					customers: result[2]
+					'customers': result[2],
+					'vehicles': rentedVehicles
 				};
-				this._renderForm(this._responseBody, { hint: hint });
+
+				this._renderForm(
+					this._responseBody,
+					{ hint }
+				);
 			})
-			.catch(err => logger.serverError('Failed to render form', err.stack));
+			.catch(err => logger.serverError(
+				'Failed to render form',
+				err.stack
+			));
 	}
 
 	renderRentError(errorHint, logMessage, err) {
@@ -34,25 +45,29 @@ class RentRequestHandler extends RequestHandler {
 	}
 
 	postRental() {
-		const postBody = RequestHandler._processRequestBody(this._requestBody);
-		postBody['rentedsince'] = new Date().toISOString();
+		const postBody = RequestHandler.processRequestBody(this._requestBody);
+		postBody.rentedsince = new Date().toISOString();
 
 		return makePostRequest('/rentals', postBody);
 	}
 
-	static _getVehiclesRentalsCustomers() {
-		return makeGetRequests('/vehicles?available=true', '/rentals', '/customers');
+	static getVehiclesRentalsCustomers() {
+		return makeGetRequests(
+			'/vehicles?available=true',
+			'/rentals',
+			'/customers'
+		);
 	}
 
-	static _buildRequestBody(requestBody) {
+	static buildRequestBody(requestBody) {
 		return {
-			vehicleId: {
-				value: requestBody.vehicleid,
-				canBeNull: false
+			'customerId': {
+				'canBeNull': false,
+				'value': requestBody.customerid
 			},
-			customerId: {
-				value: requestBody.customerid,
-				canBeNull: false
+			'vehicleId': {
+				'canBeNull': false,
+				'value': requestBody.vehicleid
 			}
 		};
 	}

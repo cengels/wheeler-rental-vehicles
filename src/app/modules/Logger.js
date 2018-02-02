@@ -3,30 +3,42 @@ const moment = require('moment');
 const config = require('../../../config');
 
 const pyFormat = winston.format.printf(info => {
-	const vars = info.parameters ? `  ${info.parameters}` : '';
-	const timestamp = moment(info.timestamp).format('YYYY-MM-DD hh:mm:ss');
+	const vars = info.parameters
+		? `  ${info.parameters}`
+		: '';
+	const timestamp = moment(info.timestamp)
+		.format('YYYY-MM-DD hh:mm:ss');
+	// eslint-disable-next-line max-len
 	return `${timestamp}  [${info.filename}]  ${info.level.toUpperCase()}:  ${info.message}${vars}`;
 });
 
 const logger = winston.createLogger({
-	level: 'info',
-	format: winston.format.combine(
+	'format': winston.format.combine(
 		winston.format.timestamp(),
 		pyFormat
 	),
-	levels: {
-		critical: 0,
-		serverError: 1,
-		userError: 2,
-		warn: 3,
-		info: 4,
-		debug: 5,
-		error: 6
+	'level': 'info',
+	'levels': {
+		/* eslint-disable */
+		'critical': 0,
+		'serverError': 1,
+		'userError': 2,
+		'warn': 3,
+		'info': 4,
+		'debug': 5,
+		'error': 6
+		/* eslint-enable */
 	},
 
-	// log files do not need to exist, but the directory *must exist*, else winston will not log to file
-	transports: [
-		new winston.transports.File({ filename: config.get('log:file_winston'), maxsize: 1000 })
+	/*
+	 * Log files do not need to exist, but the directory
+	 * *must exist*, else winston will not log to file
+	 */
+	'transports': [
+		new winston.transports.File({
+			'filename': config.get('log:file_winston'),
+			'maxsize': 1000
+		})
 	]
 });
 
@@ -34,23 +46,29 @@ if (process.env.NODE_ENV !== 'production') {
 	logger.add(new winston.transports.Console());
 }
 
-module.exports = (filename) => {
+module.exports = (fullPath) => {
 	const levels = Object.keys(logger.levels);
-	filename = filename.split('/');
-	filename = filename[filename.length - 1];
+	const filePathArray = fullPath.split('/');
+	const filename = filePathArray[filePathArray.length - 1];
 
-	return levels.reduce((o, key) => ({ ...o, [key]: (msg, ...vars) => {
-		switch (vars.constructor) {
+	// eslint-disable-next-line
+	return levels.reduce((obj, key) => ({ ...obj, [key]: (msg, ...params) => {
+		let parameters = [];
+
+		switch (params.constructor) {
 			case Object:
-				vars = JSON.stringify(vars);
+				parameters = JSON.stringify(params);
 				break;
 			case Array:
-				vars = vars.map(item => {
-					if (typeof item === 'object' && item.constructor !== Array) {
+				parameters = params.map(item => {
+					if (
+						typeof item === 'object'
+						&& item.constructor !== Array
+					) {
 						return JSON.stringify(item);
-					} else {
-						return item;
 					}
+
+					return item;
 				}).join(', ');
 				break;
 			default:
@@ -58,9 +76,10 @@ module.exports = (filename) => {
 		}
 
 		return logger[key]({
-			filename: filename,
-			message: msg,
-			parameters: vars
+			filename,
+			'message': msg,
+			parameters
 		});
-	}}), {});
+		// eslint-disable-next-line
+	} }), {});
 };

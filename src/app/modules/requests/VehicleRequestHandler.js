@@ -6,13 +6,14 @@ class VehicleRequestHandler extends RequestHandler {
 	constructor(res, viewObject, requestBody) {
 		super(res, viewObject);
 
-		this._requestBody = VehicleRequestHandler._buildRequestBody(requestBody);
+		this._requestBody = VehicleRequestHandler
+			.buildRequestBody(requestBody);
 	}
 
 	renderVehicleForm(hintObject) {
 		const hints = {
-			hintCreate: '',
-			hintDelete: ''
+			'hintCreate': '',
+			'hintDelete': ''
 		};
 
 		if (hintObject) {
@@ -20,31 +21,40 @@ class VehicleRequestHandler extends RequestHandler {
 			hints.hintDelete = hintObject.hintDelete || '';
 		}
 
-		VehicleRequestHandler._getModelsColorsRentalsVehicles()
+		VehicleRequestHandler.getModelsColorsRentalsVehicles()
 			.then(result => {
-				const rentedVehicles = VehicleRequestHandler._filterRentedVehicles(result[2], result[3]);
+				const rentedVehicles = VehicleRequestHandler
+					.filterRentedVehicles(result[2], result[3]);
 				this._responseBody = {
-					models: result[0],
-					colors: result[1],
-					vehicles: rentedVehicles
+					'colors': result[1],
+					'models': result[0],
+					'vehicles': rentedVehicles
 				};
 				this._renderForm(this._responseBody, hints);
 			})
-			.catch(err => logger.serverError('Failed to render form', err.stack));
+			.catch(err => logger.serverError(
+				'Failed to render form',
+				err.stack
+			));
 	}
 
 	renderVehicleError(errorHint, logMessage, err) {
-		const hint = this.generateErrorHint(errorHint, logMessage, err);
-		this.renderVehicleForm({ hintCreate: hint });
+		const hint = this.generateErrorHint(
+			errorHint,
+			logMessage,
+			err
+		);
+		this.renderVehicleForm({ 'hintCreate': hint });
 	}
 
 	renderVehicleSuccess(successHint) {
 		const hint = this.generateSuccessHint(successHint);
-		this.renderVehicleForm({ hintCreate: hint });
+		this.renderVehicleForm({ 'hintCreate': hint });
 	}
 
 	postVehicle() {
-		const postBody = RequestHandler._processRequestBody(this._requestBody);
+		const postBody = RequestHandler
+			.processRequestBody(this._requestBody);
 		postBody.mileage = 0;
 		postBody.milessincemaintenance = 0;
 		postBody.available = true;
@@ -52,32 +62,34 @@ class VehicleRequestHandler extends RequestHandler {
 		return makePostRequest('/vehicles', postBody);
 	}
 
-	static _getModelsColorsRentalsVehicles() {
+	static getModelsColorsRentalsVehicles() {
 		return makeGetRequests('/models', '/colors', '/rentals', '/vehicles');
 	}
 
-	static _filterRentedVehicles(rentals, vehicles) {
+	static filterRentedVehicles(rentals, vehicles) {
 		const rentedVehicleIDs = rentals.map(rental => rental.vehicleid);
-		return vehicles.filter(vehicle => rentedVehicleIDs.indexOf(vehicle.vehicleid) < 0);
+		return vehicles
+			.filter(vehicle => rentedVehicleIDs
+				.indexOf(vehicle.vehicleid) < 0);
 	}
 
-	static _buildRequestBody(requestBody) {
+	static buildRequestBody(requestBody) {
 		return {
-			modelId: {
-				value: requestBody.modelid,
-				canBeNull: false
+			'colorId': {
+				'canBeNull': false,
+				'value': requestBody.colorid
 			},
-			colorId: {
-				value: requestBody.colorid,
-				canBeNull: false
+			'licensePlate': {
+				'canBeNull': false,
+				'value': requestBody['license-plate']
 			},
-			licensePlate: {
-				value: requestBody['license-plate'],
-				canBeNull: false
+			'modelId': {
+				'canBeNull': false,
+				'value': requestBody.modelid
 			},
-			year: {
-				value: requestBody.year,
-				canBeNull: false
+			'year': {
+				'canBeNull': false,
+				'value': requestBody.year
 			}
 		};
 	}

@@ -9,22 +9,32 @@ class RequestHandler {
 
 	generateSuccessHint(successHint) {
 		logger.info(successHint, this._requestBody);
-		return RequestHandler._generateHint('hint-success', successHint);
+		return RequestHandler.generateHint('hint-success', successHint);
 	}
 
 	generateErrorHint(errorHint, logMessage, err) {
-		logger.userError(logMessage, err ? err : '', this._requestBody);
-		return RequestHandler._generateHint('hint-error', errorHint);
+		logger.userError(
+			logMessage,
+			err
+				? err
+				: '',
+			this._requestBody
+		);
+		return RequestHandler.generateHint(
+			'hint-error',
+			errorHint
+		);
 	}
 
 	inputIsValid() {
-		return Object.values(this._requestBody).every(obj => obj.canBeNull || obj.value !== '');
+		return Object.values(this._requestBody)
+			.every(obj => obj.canBeNull || obj.value !== '');
 	}
 
 	_renderForm(responseBody, hintObject) {
-		let targetView = this._viewObject.name;
-		let targetRoute = this._viewObject.route;
-		let partialsObject;
+		const targetView = this._viewObject.name;
+		const targetRoute = this._viewObject.route;
+		let partialsObject = {};
 
 		if (hintObject) {
 			partialsObject = hintObject;
@@ -36,14 +46,20 @@ class RequestHandler {
 
 		responseBody.route = targetRoute;
 
-		this._res.render(targetView, { data: responseBody, partials: partialsObject });
+		this._res.render(
+			targetView,
+			{
+				'data': responseBody,
+				'partials': partialsObject
+			}
+		);
 	}
 
-	static _generateHint(className, errorHint) {
+	static generateHint(className, errorHint) {
 		return `<div class="${className}">${errorHint}</div>`;
 	}
 
-	static _processRequestBody(requestBody) {
+	static processRequestBody(requestBody) {
 		return Object.keys(requestBody).reduce((object, key) => {
 			object[key] = requestBody[key].value;
 			return object;
