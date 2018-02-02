@@ -7,9 +7,9 @@ class Car extends Vehicle {
 			'MAX_MAINTENANCE_DISTANCE': Numbers.CAR.MAX_MAINTENANCE_DISTANCE,
 			'PRICE_PER_DAY': Numbers.CAR.PRICE_PER_DAY,
 			'availableForRent': props.availableForRent,
-			'distanceSinceMaintenance': props.distanceSinceMaintenance,
 			'licensePlate': props.licensePlate,
-			'mileage': props.mileage
+			'mileage': props.mileage,
+			'milesSinceMaintenance': props.milesSinceMaintenance
 		});
 	}
 }

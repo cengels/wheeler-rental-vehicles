@@ -4,7 +4,7 @@ class Vehicle {
 	constructor(props) {
 		this._licensePlate = props.licensePlate;
 		this._mileage = props.mileage;
-		this._distanceSinceMaintenance = props.distanceSinceMaintenance;
+		this._milesSinceMaintenance = props.milesSinceMaintenance;
 		this._availableForRent = props.availableForRent;
 		this._MAX_MAINTENANCE_DISTANCE = props.MAX_MAINTENANCE_DISTANCE;
 		this._PRICE_PER_DAY = props.PRICE_PER_DAY;
@@ -28,12 +28,12 @@ class Vehicle {
 		this._mileage = value;
 	}
 
-	get distanceSinceMaintenance() {
-		return this._distanceSinceMaintenance;
+	get milesSinceMaintenance() {
+		return this._milesSinceMaintenance;
 	}
 
-	set distanceSinceMaintenance(value) {
-		this._distanceSinceMaintenance = value;
+	set milesSinceMaintenance(value) {
+		this._milesSinceMaintenance = value;
 	}
 
 	get availableForRent() {
@@ -45,17 +45,12 @@ class Vehicle {
 	}
 
 	getRentPrice(days, clockedDistance) {
-		return this.getCustomerPrice(days, clockedDistance)
-			- this.getMaintenancePrice(clockedDistance);
-	}
-
-	getCustomerPrice(days, clockedDistance) {
 		return (days * this._PRICE_PER_DAY)
 			+ (clockedDistance * this._PRICE_PER_MILE);
 	}
 
 	getMaintenancePrice(clockedDistance) {
-		const totalDistanceSinceMaintenance = this._distanceSinceMaintenance
+		const totalDistanceSinceMaintenance = this._milesSinceMaintenance
 			+ clockedDistance;
 
 		if (totalDistanceSinceMaintenance > this._MAX_MAINTENANCE_DISTANCE) {

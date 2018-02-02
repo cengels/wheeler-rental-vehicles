@@ -137,7 +137,7 @@ class CalcRequestHandler extends RequestHandler {
 	getCustomerPrice(vehicleInstance) {
 		// eslint-disable-next-line prefer-template
 		return vehicleInstance
-			.getCustomerPrice(
+			.getRentPrice(
 				this._requestBody.days.value,
 				this._requestBody.distance.value
 			)

@@ -49,11 +49,14 @@ describe('Vehicle Tests', () => {
 
 			expect(car.getRentPrice(DAYS, MILES)).toBe(RETURN_PRICE);
 		});
-		it('asserts that Car getRentPrice() works - maintenance price', () => {
-			const RETURN_PRICE = 1840;
+		it('asserts that Car getMaintenancePrice() works', () => {
+			const RETURN_PRICE = 2340;
+			const MAINTENANCE_PRICE = 500;
 
 			expect(carMaintenanceThreshold.getRentPrice(DAYS, MILES))
 				.toBe(RETURN_PRICE);
+			expect(carMaintenanceThreshold.getMaintenancePrice(MILES))
+				.toBe(MAINTENANCE_PRICE);
 		});
 		it('asserts that Truck getRentPrice() works', () => {
 			const RETURN_PRICE = 2740;
@@ -73,8 +76,8 @@ describe('Vehicle Tests', () => {
 		it('asserts mileage getter', () => {
 			expect(car.mileage).toBe(MILEAGE);
 		});
-		it('asserts distanceSinceMaintenance getter', () => {
-			expect(car.distanceSinceMaintenance)
+		it('asserts milesSinceMaintenance getter', () => {
+			expect(car.milesSinceMaintenance)
 				.toBe(LOW_MILES_SINCE_MAINTENANCE);
 		});
 		it('asserts availableForRent getter', () => {
@@ -97,11 +100,11 @@ describe('Vehicle Tests', () => {
 			car.mileage = THIS_MILEAGE;
 			expect(car.mileage).toBe(THIS_MILEAGE);
 		});
-		it('asserts that car will obtain new distanceSinceMaintenance', () => {
+		it('asserts that car will obtain new milesSinceMaintenance', () => {
 			const THIS_DIST_SINCE = 30000;
 
-			car.distanceSinceMaintenance = THIS_DIST_SINCE;
-			expect(car.distanceSinceMaintenance).toBe(THIS_DIST_SINCE);
+			car.milesSinceMaintenance = THIS_DIST_SINCE;
+			expect(car.milesSinceMaintenance).toBe(THIS_DIST_SINCE);
 		});
 		it('asserts that car will be set to unavailable for rent', () => {
 			car.availableForRent = false;
