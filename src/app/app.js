@@ -44,8 +44,8 @@ const handlebarsConfig = {
 		getProps,
 		returnDropdown
 	},
-	'layoutsDir': path.resolve(__dirname, '/views/layouts'),
-	'partialsDir': path.resolve(__dirname, '/views/partials')
+	'layoutsDir': path.join(__dirname, '/views/layouts'),
+	'partialsDir': path.join(__dirname, '/views/partials')
 };
 
 const searchDirectory = process.env.NODE_ENV === 'production'
@@ -64,7 +64,7 @@ router.use(expressValidator());
 router.use('/public', express.static(STATIC_FILE_PATH));
 router.engine('handlebars', handlebars(handlebarsConfig));
 router.set('view engine', 'handlebars');
-router.set('views', path.resolve(__dirname, '/views'));
+router.set('views', path.join(__dirname, '/views'));
 
 newApiRoute('/vehicles', HTTP.GET, HTTP.POST, HTTP.DELETE);
 newApiRoute('/vehicles/:vehicleId', HTTP.GET, HTTP.DELETE);
