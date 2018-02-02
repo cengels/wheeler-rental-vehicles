@@ -11,7 +11,7 @@ pool.connect()
 					'Unexpected error filling database with mock data',
 					err.stack
 				))
-				.finally(() => client.release());
+				.then(() => client.release());
 		}
 
 		return createTables(client)
@@ -19,7 +19,7 @@ pool.connect()
 				'Unexpected error creating tables',
 				err.stack
 			))
-			.finally(() => client.release());
+			.then(() => client.release());
 	})
 	.catch((err) => logger.serverError(
 		'Failed to connect to database',

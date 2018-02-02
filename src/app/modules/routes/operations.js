@@ -45,10 +45,8 @@ const sendForeignKeyError = (res, err) => {
 	logger.userError(err.detail);
 
 	res.status(Status.BAD_REQUEST)
-		.send(
-			'DELETE operation failed.',
-			`${match[1]} ${match[2]} is still in use by ${err.table}.`
-		);
+		.send('DELETE operation failed.'
+			+ `${match[1]} ${match[2]} is still in use by ${err.table}.`);
 };
 
 module.exports = {

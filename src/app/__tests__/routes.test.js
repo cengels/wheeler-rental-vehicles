@@ -1,8 +1,11 @@
 // eslint-disable-line max-lines
 
-const HTTP = require('../definitions/http-verbs');
 const Status = require('../definitions/status');
-const httpRequest = require('../modules/requests/Request');
+const {
+	makeGetRequest,
+	makePostRequest,
+	makeDeleteRequest
+} = require('../modules/requests/Request');
 
 const originalTables = {
 	'colors': [
@@ -158,22 +161,30 @@ const originalTables = {
 	'rentals': [
 		{
 			'customerid': 1,
+			'milesdriven': null,
 			'rentedsince': '2017-05-11',
+			'returndate': null,
 			'vehicleid': 3
 		},
 		{
 			'customerid': 3,
+			'milesdriven': 150,
 			'rentedsince': '2017-09-22',
+			'returndate': '2017-11-21',
 			'vehicleid': 4
 		},
 		{
 			'customerid': 4,
+			'milesdriven': 50,
 			'rentedsince': '2017-11-01',
+			'returndate': '2017-12-05',
 			'vehicleid': 5
 		},
 		{
 			'customerid': 1,
+			'milesdriven': null,
 			'rentedsince': '2017-09-05',
+			'returndate': null,
 			'vehicleid': 1
 		}
 	],
@@ -263,77 +274,77 @@ describe('Integration Tests', () => {
 	describe('GET Tests', () => {
 		it('GET: all colors', () => {
 			expect.assertions(1);
-			return expect(httpRequest(HTTP.GET, '/colors'))
+			return expect(makeGetRequest('/colors'))
 				.resolves.toEqual(originalTables.colors);
 		});
 		it('GET: single color', () => {
 			expect.assertions(1);
-			return expect(httpRequest(HTTP.GET, '/colors/5'))
+			return expect(makeGetRequest('/colors/5'))
 				.resolves.toEqual([originalTables.colors[4]]);
 		});
 		it('GET: all makes', () => {
 			expect.assertions(1);
-			return expect(httpRequest(HTTP.GET, '/makes'))
+			return expect(makeGetRequest('/makes'))
 				.resolves.toEqual(originalTables.makes);
 		});
 		it('GET: single make', () => {
 			expect.assertions(1);
-			return expect(httpRequest(HTTP.GET, '/makes/3'))
+			return expect(makeGetRequest('/makes/3'))
 				.resolves.toEqual([originalTables.makes[2]]);
 		});
 		it('GET: all types', () => {
 			expect.assertions(1);
-			return expect(httpRequest(HTTP.GET, '/types'))
+			return expect(makeGetRequest('/types'))
 				.resolves.toEqual(originalTables.types);
 		});
 		it('GET: single type', () => {
 			expect.assertions(1);
-			return expect(httpRequest(HTTP.GET, '/types/2'))
+			return expect(makeGetRequest('/types/2'))
 				.resolves.toEqual([originalTables.types[1]]);
 		});
 		it('GET: all models', () => {
 			expect.assertions(1);
-			return expect(httpRequest(HTTP.GET, '/models'))
+			return expect(makeGetRequest('/models'))
 				.resolves.toEqual(originalTables.models);
 		});
 		it('GET: single model', () => {
 			expect.assertions(1);
-			return expect(httpRequest(HTTP.GET, '/models/5'))
+			return expect(makeGetRequest('/models/5'))
 				.resolves.toEqual([originalTables.models[4]]);
 		});
 		it('GET: all customers', () => {
 			expect.assertions(1);
-			return expect(httpRequest(HTTP.GET, '/customers'))
+			return expect(makeGetRequest('/customers'))
 				.resolves.toEqual(originalTables.customers);
 		});
 		it('GET: single customer', () => {
 			expect.assertions(1);
-			return expect(httpRequest(HTTP.GET, '/customers/3'))
+			return expect(makeGetRequest('/customers/3'))
 				.resolves.toEqual([originalTables.customers[2]]);
 		});
 		it('GET: all vehicles', () => {
 			expect.assertions(1);
-			return expect(httpRequest(HTTP.GET, '/vehicles'))
+			return expect(makeGetRequest('/vehicles'))
 				.resolves.toEqual(originalTables.vehicles);
 		});
 		it('GET: single vehicle', () => {
 			expect.assertions(1);
-			return expect(httpRequest(HTTP.GET, '/vehicles/1'))
+			return expect(makeGetRequest('/vehicles/1'))
 				.resolves.toEqual([originalTables.vehicles[0]]);
 		});
 		it('GET: all rentals', () => {
 			expect.assertions(1);
-			return expect(httpRequest(HTTP.GET, '/rentals'))
+			return expect(makeGetRequest('/rentals'))
 				.resolves.toEqual(originalTables.rentals);
 		});
 		it('GET: single rental through both customerId and vehicleId', () => {
 			expect.assertions(1);
-			return expect(httpRequest(HTTP.GET, '/rentals/1/3'))
+			return expect(makeGetRequest('/rentals/1/3'))
 				.resolves.toEqual([originalTables.rentals[0]]);
 		});
 		it('GET: all rentals from one customer', () => {
 			expect.assertions(1);
-			return expect(httpRequest(HTTP.GET, '/rentals?customerid=1'))
+			return expect(makeGetRequest('/rentals?customerid=1'))
 				.resolves.toEqual([
 					originalTables.rentals[0],
 					originalTables.rentals[3]
@@ -350,8 +361,8 @@ describe('Integration Tests', () => {
 				dataObject
 			);
 			expect.assertions(1);
-			return httpRequest(HTTP.POST, '/colors', dataObject)
-				.then(() => expect(httpRequest(HTTP.GET, '/colors/13'))
+			return makePostRequest('/colors', dataObject)
+				.then(() => expect(makeGetRequest('/colors/13'))
 					.resolves.toEqual([expectedDataObject]));
 		});
 		it('POST: adding a new make', () => {
@@ -362,8 +373,8 @@ describe('Integration Tests', () => {
 				dataObject
 			);
 			expect.assertions(1);
-			return httpRequest(HTTP.POST, '/makes', dataObject)
-				.then(() => expect(httpRequest(HTTP.GET, '/makes/17'))
+			return makePostRequest('/makes', dataObject)
+				.then(() => expect(makeGetRequest('/makes/17'))
 					.resolves.toEqual([expectedDataObject]));
 		});
 		it('POST: adding a new type', () => {
@@ -374,8 +385,8 @@ describe('Integration Tests', () => {
 				dataObject
 			);
 			expect.assertions(1);
-			return httpRequest(HTTP.POST, '/types', dataObject)
-				.then(() => expect(httpRequest(HTTP.GET, '/types/4'))
+			return makePostRequest('/types', dataObject)
+				.then(() => expect(makeGetRequest('/types/4'))
 					.resolves.toEqual([expectedDataObject]));
 		});
 		it('POST: adding a new model', () => {
@@ -393,8 +404,8 @@ describe('Integration Tests', () => {
 				dataObject
 			);
 			expect.assertions(1);
-			return httpRequest(HTTP.POST, '/models', dataObject)
-				.then(() => expect(httpRequest(HTTP.GET, '/models/11'))
+			return makePostRequest('/models', dataObject)
+				.then(() => expect(makeGetRequest('/models/11'))
 					.resolves.toEqual([expectedDataObject]));
 		});
 		it('POST: adding a new customer', () => {
@@ -413,8 +424,8 @@ describe('Integration Tests', () => {
 				dataObject
 			);
 			expect.assertions(1);
-			return httpRequest(HTTP.POST, '/customers', dataObject)
-				.then(() => expect(httpRequest(HTTP.GET, '/customers/5'))
+			return makePostRequest('/customers', dataObject)
+				.then(() => expect(makeGetRequest('/customers/5'))
 					.resolves.toEqual([expectedDataObject]));
 		});
 		it('POST: adding a new vehicle', () => {
@@ -433,20 +444,22 @@ describe('Integration Tests', () => {
 				dataObject
 			);
 			expect.assertions(1);
-			return httpRequest(HTTP.POST, '/vehicles', dataObject)
-				.then(() => expect(httpRequest(HTTP.GET, '/vehicles/8'))
+			return makePostRequest('/vehicles', dataObject)
+				.then(() => expect(makeGetRequest('/vehicles/8'))
 					.resolves.toEqual([expectedDataObject]));
 		});
 		it('POST: adding a new rental', () => {
 			const dataObject = {
 				'customerid': 4,
+				'milesdriven': null,
 				'rentedsince': '2017-11-02',
+				'returndate': null,
 				'vehicleid': 6
 			};
 
 			expect.assertions(1);
-			return httpRequest(HTTP.POST, '/rentals', dataObject)
-				.then(() => expect(httpRequest(HTTP.GET, '/rentals/4/6'))
+			return makePostRequest('/rentals', dataObject)
+				.then(() => expect(makeGetRequest('/rentals/4/6'))
 					.resolves.toEqual([dataObject]));
 		});
 	});
@@ -454,51 +467,51 @@ describe('Integration Tests', () => {
 	describe('DELETE Tests', () => {
 		it('DELETE: deleting a color', () => {
 			expect.assertions(1);
-			return httpRequest(HTTP.DELETE, '/colors/10')
-				.then(() => expect(httpRequest(HTTP.GET, '/colors/10'))
+			return makeDeleteRequest('/colors/10')
+				.then(() => expect(makeGetRequest('/colors/10'))
 					.resolves.toEqual([]));
 		});
 		it('DELETE: deleting a make', () => {
 			expect.assertions(1);
-			return httpRequest(HTTP.DELETE, '/makes/12')
-				.then(() => expect(httpRequest(HTTP.GET, '/makes/12'))
+			return makeDeleteRequest('/makes/12')
+				.then(() => expect(makeGetRequest('/makes/12'))
 					.resolves.toEqual([]));
 		});
 		it('DELETE: deleting a type', () => {
 			expect.assertions(1);
-			return httpRequest(HTTP.DELETE, '/types/3')
-				.then(() => expect(httpRequest(HTTP.GET, '/types/3'))
+			return makeDeleteRequest('/types/3')
+				.then(() => expect(makeGetRequest('/types/3'))
 					.resolves.toEqual([]));
 		});
 		it('DELETE: deleting a model', () => {
 			expect.assertions(1);
-			return httpRequest(HTTP.DELETE, '/models/7')
-				.then(() => expect(httpRequest(HTTP.GET, '/models/7'))
+			return makeDeleteRequest('/models/7')
+				.then(() => expect(makeGetRequest('/models/7'))
 					.resolves.toEqual([]));
 		});
 		it('DELETE: deleting a customer', () => {
 			expect.assertions(1);
-			return httpRequest(HTTP.DELETE, '/customers/1')
-				.then(() => expect(httpRequest(HTTP.GET, '/customers/1'))
+			return makeDeleteRequest('/customers/1')
+				.then(() => expect(makeGetRequest('/customers/1'))
 					.resolves.toEqual([]));
 		});
 		it('DELETE: deleting a vehicle', () => {
 			expect.assertions(1);
-			return httpRequest(HTTP.DELETE, '/vehicles/3')
-				.then(() => expect(httpRequest(HTTP.GET, '/vehicles/3'))
+			return makeDeleteRequest('/vehicles/3')
+				.then(() => expect(makeGetRequest('/vehicles/3'))
 					.resolves.toEqual([]));
 		});
 		it('DELETE: deleting a rental', () => {
 			expect.assertions(1);
-			return httpRequest(HTTP.DELETE, '/rentals/1/2')
-				.then(() => expect(httpRequest(HTTP.GET, '/rentals/1/2'))
+			return makeDeleteRequest('/rentals/1/2')
+				.then(() => expect(makeGetRequest('/rentals/1/2'))
 					.resolves.toEqual([]));
 		});
 	});
 	describe('Error Handling', () => {
 		it('DELETE: returns error when attempting to delete key in use', () => {
 			expect.assertions(1);
-			return httpRequest(HTTP.DELETE, '/models/8')
+			return makeDeleteRequest('/models/8')
 				.catch(err => expect(err.statusCode)
 					.toEqual(Status.BAD_REQUEST));
 		});
